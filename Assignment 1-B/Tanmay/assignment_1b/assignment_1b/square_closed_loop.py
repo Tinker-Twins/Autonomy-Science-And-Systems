@@ -68,8 +68,8 @@ class RobotController(Node):
         self.ctrl_msg = Twist() # Robot control commands (twist)
         # Set goal pose
         self.wp_index = 0 # Current waypoint index
-        self.goal_pose_x = [5.0, 8.0, 8.0 ,5.0 ,5.0] # Posotion of all waypoints along x-axis
-        self.goal_pose_y = [5.0, 5.0, 8.0 ,8.0 ,5.0] # Posotion of all waypoints along y-axis
+        self.goal_pose_x = [5.0, 8.0, 8.0 ,5.0 ,5.0] # Position of all waypoints along x-axis
+        self.goal_pose_y = [5.0, 5.0, 8.0 ,8.0 ,5.0] # Position of all waypoints along y-axis
         self.goal_pose_theta = [0.0, pi/2, pi, -pi/2, 0.0] # Orientation of all waypoints about z-axis
     
     ########################
@@ -79,8 +79,8 @@ class RobotController(Node):
     def robot_feedback_callback(self, message):
         '''Robot feedback (pose) callback'''
         self.robot_pose = message # Capture incomming message (Pose)
-        self.robot_pose.x = message.x # Extract posotion along x-axis
-        self.robot_pose.y = message.y # Extract posotion along y-axis
+        self.robot_pose.x = message.x # Extract position along x-axis
+        self.robot_pose.y = message.y # Extract position along y-axis
         self.robot_pose.theta = message.theta # Extract orientation about z-axis
         self.robot_flag = True # Set robot flag to feedback available
         #print('Goal Pose  : x = {}, y = {}, theta = {}'.format(round(self.goal_pose.x, 1), round(self.goal_pose.y, 1), round(self.goal_pose.theta, 1)))
@@ -127,8 +127,8 @@ class RobotController(Node):
 
     def set_robot_controls(self, pos_tol=0.1, rot_tol=0.1):
         '''Set robot controls (twist) based on deviation from goal'''
-        self.goal_pose.x = self.goal_pose_x[self.wp_index] # Posotion of current waypoint along x-axis
-        self.goal_pose.y = self.goal_pose_y[self.wp_index] # Posotion of current waypoint along y-axis
+        self.goal_pose.x = self.goal_pose_x[self.wp_index] # Position of current waypoint along x-axis
+        self.goal_pose.y = self.goal_pose_y[self.wp_index] # Position of current waypoint along y-axis
         self.goal_pose.theta = self.goal_pose_theta[self.wp_index] # Orientation of current waypoint about z-axis
         if self.get_position_error() > pos_tol: # Go to goal
             self.goal_flag = False # Set goal flag to not reached

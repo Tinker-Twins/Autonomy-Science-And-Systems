@@ -67,8 +67,8 @@ class RobotController(Node):
         self.goal_flag = False # Flag to check if set goal is reached
         self.ctrl_msg = Twist() # Robot control commands (twist)
         # Set goal pose
-        self.goal_pose.x = 1.0 # Posotion along x-axis
-        self.goal_pose.y = 1.0 # Posotion along y-axis
+        self.goal_pose.x = 1.0 # Position along x-axis
+        self.goal_pose.y = 1.0 # Position along y-axis
         self.goal_pose.theta = 0.0 # Orientation about z-axis
     
     ########################
@@ -78,8 +78,8 @@ class RobotController(Node):
     def robot_feedback_callback(self, message):
         '''Robot feedback (pose) callback'''
         self.robot_pose = message # Capture incomming message (Pose)
-        self.robot_pose.x = message.x # Extract posotion along x-axis
-        self.robot_pose.y = message.y # Extract posotion along y-axis
+        self.robot_pose.x = message.x # Extract position along x-axis
+        self.robot_pose.y = message.y # Extract position along y-axis
         self.robot_pose.theta = message.theta # Extract orientation about z-axis
         self.robot_flag = True # Set robot flag to feedback available
         #print('Goal Pose  : x = {}, y = {}, theta = {}'.format(round(self.goal_pose.x, 1), round(self.goal_pose.y, 1), round(self.goal_pose.theta, 1)))

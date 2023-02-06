@@ -6,6 +6,8 @@ This repository is a part of course AuE-8230 "Autonomy: Science and Systems" at 
 
 **[Assignment 1-A](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%201-A):** This directory hosts individual submissions of the comparative study and critical analysis of [ROS-1](https://wiki.ros.org/noetic), [ROS-2](https://docs.ros.org/en/foxy/) and [ROS-I](https://rosindustrial.org/).
 
-**[Mini Assignment 1](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Mini%20Assignment%201):** This directory hosts individual submissions of picture-proofs of ROS-1 and ROS-2 installations.
+**[Mini Assignment 1](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Mini%20Assignment%201):** This directory hosts individual submissions of picture-proofs of ROS-1 Noetic and ROS-2 Foxy installations.
 
-**[Mini Assignment 2](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Mini%20Assignment%202):** This directory hosts individual submissions of video-proofs of ROS-1 and ROS-2 installations.
+**[Mini Assignment 2](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Mini%20Assignment%202):** This directory hosts individual submissions of video-proofs of ROS-1 Noetic and ROS-2 Foxy installations.
+
+**[Assignment 1-B](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%201-B):** This directory hosts individual submissions of the [TurtleSim](https://docs.ros.org/en/foxy/Tutorials/Beginner-CLI-Tools/Introducing-Turtlesim/Introducing-Turtlesim.html) exercises using ROS-2 Foxy.

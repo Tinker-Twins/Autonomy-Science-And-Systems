@@ -1,4 +1,4 @@
-# Assignment 1-A : TurtleSim
+# Assignment 1-B : TurtleSim
 **Author:** Chinmay Samak
 
 ## Disclaimer:

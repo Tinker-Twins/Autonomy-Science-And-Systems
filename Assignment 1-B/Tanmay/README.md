@@ -48,11 +48,19 @@ The dedicated ROS2 package [`assignment_1b`](https://github.com/Tinker-Twins/Aut
     ```bash
     $ ros2 launch assignment_1b go_to_goal.launch.py
     ```
-3. Open loop square:
+3. Open-loop square:
     ```bash
     $ ros2 launch assignment_1b open_loop_square.launch.py
     ```
-4. Closed loop square:
+4. Closed-loop square:
     ```bash
     $ ros2 launch assignment_1b closed_loop_square.launch.py
     ```
+## Results:
+The [`media`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%201-B/Tanmay/media) directory hosts pictures and videos of the implementations.
+
+| ![Go in circle](media/go_in_circle.gif) | ![Go to goal](media/go_to_goal.gif) |
+|:------------------:|:-------------------:|
+| Go in circle | Go to goal |
+| ![Open-loop square](media/square_open_loop.gif) | ![Closed-loop square](media/square_closed_loop.gif) |
+| Open-loop square | Closed-loop square |

@@ -38,3 +38,21 @@ The dedicated ROS2 package [`assignment_1b`](https://github.com/Tinker-Twins/Aut
     $ echo "source ~/ROS2_WS/install/setup.bash" >> ~/.bashrc
     $ source ~/.bashrc
     ```
+
+## Execution:
+1. Go in circle:
+    ```bash
+    $ ros2 launch assignment_1b go_in_circle.launch.py
+    ```
+2. Go to goal:
+    ```bash
+    $ ros2 launch assignment_1b go_to_goal.launch.py
+    ```
+3. Open loop square:
+    ```bash
+    $ ros2 launch assignment_1b open_loop_square.launch.py
+    ```
+4. Closed loop square:
+    ```bash
+    $ ros2 launch assignment_1b closed_loop_square.launch.py
+    ```

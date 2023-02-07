@@ -47,16 +47,16 @@ The ROS2 package [`assignment_1b`](https://github.com/Tinker-Twins/Autonomy-Scie
     ```bash
     $ ros2 launch assignment_1b open_loop_circle.launch.py
     ```
-    ![Open Loop Circle](media/open_loop_circle.png)
+    ![Open Loop Circle](media/open_loop_circle.gif)
 
 2. Open-Loop Square:
     ```bash
     $ ros2 launch assignment_1b open_loop_square.launch.py
     ```
-    ![Open-Loop Square](media/open_loop_square.png)
+    ![Open-Loop Square](media/open_loop_square.gif)
     
 3. Closed-Loop Square:
     ```bash
     $ ros2 launch assignment_1b closed_loop_square.launch.py
     ```
-    ![Closed-Loop Square](media/closed_loop_square.png)
+    ![Closed-Loop Square](media/closed_loop_square.gif)

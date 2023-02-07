@@ -2,12 +2,10 @@
 
 This repository is a part of course AuE-8230 "Autonomy: Science and Systems" at CU-ICAR (Spring 2023).
 
-**[Group](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Group):** Group details for the course during Spring 2023.
+## Repository Structure
 
-**[Assignment 1-A](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%201-A):** Individual submissions of the comparative study and critical analysis of [ROS-1](https://wiki.ros.org/noetic), [ROS-2](https://docs.ros.org/en/foxy/) and [ROS-I](https://rosindustrial.org/).
-
-**[Mini Assignment 1](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Mini%20Assignment%201):** Individual submissions of picture-proofs of ROS-1 Noetic and ROS-2 Foxy installations.
-
-**[Mini Assignment 2](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Mini%20Assignment%202):** Individual submissions of video-proofs of ROS-1 Noetic and ROS-2 Foxy installations.
-
-**[Assignment 1-B](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%201-B):** Individual submissions of the [TurtleSim](https://docs.ros.org/en/foxy/Tutorials/Beginner-CLI-Tools/Introducing-Turtlesim/Introducing-Turtlesim.html) exercises using ROS-2 Foxy.
+* **[Group](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Group):** Group details for the course during Spring 2023.
+* **[Assignment 1-A](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%201-A):** Individual submissions of the comparative study and critical analysis of [ROS-1](https://wiki.ros.org/noetic), [ROS-2](https://docs.ros.org/en/foxy/) and [ROS-I](https://rosindustrial.org/).
+* **[Mini Assignment 1](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Mini%20Assignment%201):** Individual submissions of picture-proofs of ROS-1 Noetic and ROS-2 Foxy installations.
+* **[Mini Assignment 2](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Mini%20Assignment%202):** Individual submissions of video-proofs of ROS-1 Noetic and ROS-2 Foxy installations.
+* **[Assignment 1-B](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%201-B):** Individual submissions of the [TurtleSim](https://docs.ros.org/en/foxy/Tutorials/Beginner-CLI-Tools/Introducing-Turtlesim/Introducing-Turtlesim.html) exercises using ROS-2 Foxy.

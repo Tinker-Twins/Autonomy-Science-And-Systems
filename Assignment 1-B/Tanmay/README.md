@@ -24,7 +24,7 @@ The dedicated ROS2 package [`assignment_1b`](https://github.com/Tinker-Twins/Aut
     ```bash
     $ mkdir -p ~/ROS2_WS/src/
     ```
-3. Move the `Autonomy-Science-And-Systems` repository to the source space (`src`) of your `ROS2_WS`.
+3. Move the `Autonomy-Science-And-Systems/Assignment 1-B/Tanmay/assignment_1b/` subdirectory to the source space (`src`) of your `ROS2_WS`.
     ```bash
     $ mv ~/Autonomy-Science-And-Systems/Assignment\ 1-B/Tanmay/assignment_1b/ ~/ROS2_WS/src/
     ```

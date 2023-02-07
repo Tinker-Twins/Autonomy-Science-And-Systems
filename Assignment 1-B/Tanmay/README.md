@@ -11,10 +11,10 @@ The dedicated ROS2 package [`assignment_1b`](https://github.com/Tinker-Twins/Aut
 - [`square_open_loop.py`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%201-B/Tanmay/assignment_1b/assignment_1b/square_open_loop.py) executes an open loop controller to make the robot (turtle) go in a square whose side length is 2 units, for one complete loop, with a linear velocity of 0.2 m/s and an angular velocity of 0.2 rad/s.
 - [`square_closed_loop.py`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%201-B/Tanmay/assignment_1b/assignment_1b/square_closed_loop.py) executes a closed loop controller to make the robot (turtle) go in a square whose vertices are defined by the coordinates (5.0, 5.0), (8.0, 5.0), (8.0, 8.0) and (5.0, 8.0) from its initial pose ~(5.5, 5.5) for one complete loop.
 
-# Dependencies:
+## Dependencies:
 - ROS2 - Tested with ROS2 Foxy Fitzroy on Ubuntu Focal Fossa (20.04)
 
-# Setup:
+## Setup:
 
 1. Clone this repository:
     ```bash

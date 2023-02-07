@@ -30,7 +30,7 @@ package_name = 'assignment_1b'
 
 setup(
     name=package_name,
-    version='0.0.0',
+    version='0.1.0',
     packages=[package_name],
     data_files=[
         ('share/ament_index/resource_index/packages',
@@ -40,10 +40,10 @@ setup(
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='tsamak',
-    maintainer_email='tsamak@todo.todo',
-    description='TODO: Package description',
-    license='TODO: License declaration',
+    maintainer='Tanmay Samak',
+    maintainer_email='tsamak@clemson.edu',
+    description='Assignment 1B for the course AuE-8230 "Autonomy: Science and Systems" at CU-ICAR (Spring 2023)',
+    license='BSD',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [

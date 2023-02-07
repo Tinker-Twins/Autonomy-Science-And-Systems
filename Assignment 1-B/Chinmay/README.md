@@ -12,3 +12,32 @@ The ROS2 package [`assignment_1b`](https://github.com/Tinker-Twins/Autonomy-Scie
 
 ## Dependencies:
 - ROS2 Foxy Fitzroy on Ubuntu 20.04 Focal Fossa
+
+## Build:
+
+1. Make a directory `ROS2_WS` to act as your ROS2 workspace.
+    ```bash
+    $ mkdir -p ~/ROS2_WS/src/
+    ```
+2. Clone this repository:
+    ```bash
+    $ git clone https://github.com/Tinker-Twins/Autonomy-Science-And-Systems.git
+    ```
+3. Move my `assignment_1b` ROS2 package to the source space (`src`) of your `ROS2_WS`.
+    ```bash
+    $ mv ~/Autonomy-Science-And-Systems/Assignment\ 1-B/Chinmay/assignment_1b/ ~/ROS2_WS/src/
+    ```
+4. [Optional] Remove the unnecessary files.
+    ```bash
+    $ sudo rm -r Autonomy-Science-And-Systems
+    ```
+5. Build the packages.
+    ```bash
+    $ cd ~/ROS2_WS
+    $ colcon build
+    ```
+6. Source the `setup.bash` file of your `ROS2_WS`.
+    ```bash
+    $ echo "source ~/ROS2_WS/install/setup.bash" >> ~/.bashrc
+    $ source ~/.bashrc
+    ```

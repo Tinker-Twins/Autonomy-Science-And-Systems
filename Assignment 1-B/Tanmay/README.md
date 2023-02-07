@@ -50,11 +50,11 @@ The dedicated ROS2 package [`assignment_1b`](https://github.com/Tinker-Twins/Aut
     ```
 3. Open-loop square:
     ```bash
-    $ ros2 launch assignment_1b open_loop_square.launch.py
+    $ ros2 launch assignment_1b square_open_loop.launch.py
     ```
 4. Closed-loop square:
     ```bash
-    $ ros2 launch assignment_1b closed_loop_square.launch.py
+    $ ros2 launch assignment_1b square_closed_loop.launch.py
     ```
 ## Results:
 The [`media`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%201-B/Tanmay/media) directory hosts pictures and videos of the implementations.

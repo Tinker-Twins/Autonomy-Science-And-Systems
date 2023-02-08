@@ -44,3 +44,18 @@ The ROS2 package [`assignment_1c`](https://github.com/Tinker-Twins/Autonomy-Scie
     $ echo "source ~/ROS2_WS/install/setup.bash" >> ~/.bashrc
     $ source ~/.bashrc
     ```
+
+## Execute:
+1. Open-Loop Circle (twist commands specified by the user):
+    ```bash
+    $ ros2 launch assignment_1c circle.launch.py lin_vel:=0.15 ang_vel:=0.15
+    ```
+2. Open-Loop Square (twist commands specified by the user):
+    ```bash
+    $ ros2 launch assignment_1c square.launch.py lin_vel:=0.15 ang_vel:=0.15
+    ```    
+3. Open-Loop Move (square or circle maneuver with twist commands specified by the user):
+    ```bash
+    $ ros2 launch assignment_1c move.launch.py maneuver:=circle lin_vel:=0.15 ang_vel:=0.15
+    $ ros2 launch assignment_1c move.launch.py maneuver:=square lin_vel:=0.15 ang_vel:=0.15
+    ```

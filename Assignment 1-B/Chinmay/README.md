@@ -43,7 +43,7 @@ The ROS2 package [`assignment_1b`](https://github.com/Tinker-Twins/Autonomy-Scie
     ```
 
 ## Run:
-1. Open Loop Circle:
+1. Open-Loop Circle:
     ```bash
     $ ros2 launch assignment_1b open_loop_circle.launch.py
     ```

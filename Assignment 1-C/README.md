@@ -15,3 +15,32 @@ The ROS2 package [`assignment_1c`](https://github.com/Tinker-Twins/Autonomy-Scie
 - [TurtleBot3 Simulations Packages](https://github.com/ROBOTIS-GIT/turtlebot3_simulations/tree/foxy-devel) - Included with this repository
 - [TurtleBot3 Messages Package](https://github.com/ROBOTIS-GIT/turtlebot3_msgs/tree/foxy-devel) - Included with this repository
 - [TurtleBot3 Dynamixel SDK Packages](https://github.com/ROBOTIS-GIT/DynamixelSDK/tree/foxy-devel) - Included with this repository
+
+## Build:
+
+1. Make a directory `ROS2_WS` to act as your ROS2 workspace.
+    ```bash
+    $ mkdir -p ~/ROS2_WS/src/
+    ```
+2. Clone this repository:
+    ```bash
+    $ git clone https://github.com/Tinker-Twins/Autonomy-Science-And-Systems.git
+    ```
+3. Move `assignment_1c` directory with required ROS2 packages to the source space (`src`) of your `ROS2_WS`.
+    ```bash
+    $ mv ~/Autonomy-Science-And-Systems/Assignment\ 1-C/assignment_1c/ ~/ROS2_WS/src/
+    ```
+4. [Optional] Remove the unnecessary files.
+    ```bash
+    $ sudo rm -r Autonomy-Science-And-Systems
+    ```
+5. Build the packages.
+    ```bash
+    $ cd ~/ROS2_WS
+    $ colcon build
+    ```
+6. Source the `setup.bash` file of your `ROS2_WS`.
+    ```bash
+    $ echo "source ~/ROS2_WS/install/setup.bash" >> ~/.bashrc
+    $ source ~/.bashrc
+    ```

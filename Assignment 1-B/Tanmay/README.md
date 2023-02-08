@@ -48,11 +48,11 @@ The dedicated ROS2 package [`assignment_1b`](https://github.com/Tinker-Twins/Aut
     ```bash
     $ ros2 launch assignment_1b go_to_goal.launch.py
     ```
-3. Open-loop square:
+3. Open loop square:
     ```bash
     $ ros2 launch assignment_1b square_open_loop.launch.py
     ```
-4. Closed-loop square:
+4. Closed loop square:
     ```bash
     $ ros2 launch assignment_1b square_closed_loop.launch.py
     ```
@@ -62,5 +62,5 @@ The [`media`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/
 | ![Go in circle](media/go_in_circle.gif) | ![Go to goal](media/go_to_goal.gif) |
 |:------------------:|:-------------------:|
 | Go in circle | Go to goal |
-| ![Open-loop square](media/square_open_loop.gif) | ![Closed-loop square](media/square_closed_loop.gif) |
-| Open-loop square | Closed-loop square |
+| ![Open loop square](media/square_open_loop.gif) | ![Closed loop square](media/square_closed_loop.gif) |
+| Open loop square | Closed loop square |

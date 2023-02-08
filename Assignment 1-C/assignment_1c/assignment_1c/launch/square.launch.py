@@ -49,4 +49,10 @@ def generate_launch_description():
             emulate_tty=True,
             output='screen',
         ),
+        Node(
+            package='rviz2',
+            executable='rviz2',
+            name='odometry_rviz',
+            arguments=['-d', [FindPackageShare("assignment_1c"), '/rviz', '/assignment_1c.rviz',]]
+        ),
     ])

@@ -54,8 +54,16 @@ def generate_launch_description():
         emulate_tty=True,
         output='screen',
         )
+    
+    rviz_node = Node(
+            package='rviz2',
+            executable='rviz2',
+            name='odometry_rviz',
+            arguments=['-d', [FindPackageShare("assignment_1c"), '/rviz', '/assignment_1c.rviz',]]
+        )
 
     ld.add_action(turtlebot3_node)
+    ld.add_action(rviz_node)
     ld.add_action(maneuver_arg)
     ld.add_action(lin_vel_arg)
     ld.add_action(ang_vel_arg)

@@ -11,7 +11,7 @@ The ROS2 package [`assignment_1b`](https://github.com/Tinker-Twins/Autonomy-Scie
 - [`closed_loop_square.py`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%201-B/Chinmay/assignment_1b/assignment_1b/closed_loop_square.py) makes the turtle move in a square of 3x3 m defined by the following vertices: (5,5) --> (8,5) --> (8,8) --> (5,8) --> (5,5). The coordinates are loaded as parameters from the [`launch`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%201-B/Chinmay/assignment_1b/launch/closed_loop_square.launch.py) file. The script is setup to run for one complete traversal of the square in a closed-loop manner (velocity control).
 
 ## Dependencies:
-- ROS2 Foxy Fitzroy on Ubuntu 20.04 Focal Fossa
+- [ROS2 Foxy Fitzroy](https://docs.ros.org/en/foxy/Installation/Alternatives/Ubuntu-Development-Setup.html) on [Ubuntu 20.04 Focal Fossa](https://releases.ubuntu.com/focal/)
 
 ## Build:
 

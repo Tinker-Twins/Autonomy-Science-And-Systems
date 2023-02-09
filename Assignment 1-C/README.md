@@ -62,13 +62,13 @@ The ROS2 package [`assignment_1c`](https://github.com/Tinker-Twins/Autonomy-Scie
 ## Results:
 The [`media`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%201-C/media) directory hosts pictures and videos of the implementations.
 
-1. Open-Loop Circle
+1. Open-Loop Circle:
 
 | ![Slow Circle](media/circle_slow.gif) | ![Medium Circle](media/circle_medium.gif) | ![Fast Circle](media/circle_fast.gif) |
 |:-------------------------------------:|:-----------------------------------------:|:-------------------------------------:|
 | Slow (`lin_vel` = 0.25, `ang_vel` = 0.25) | Medium (`lin_vel` = 0.50, `ang_vel` = 0.50) | Fast (`lin_vel` = 0.75, `ang_vel` = 0.75) |
 
-2. Open-Loop Square
+2. Open-Loop Square:
 
 | ![Slow Circle](media/square_slow.gif) | ![Medium Circle](media/square_medium.gif) | ![Fast Circle](media/square_fast.gif) |
 |:-------------------------------------:|:-----------------------------------------:|:-------------------------------------:|

@@ -39,7 +39,7 @@ def generate_launch_description():
             ])
         )
     
-    maneuver_arg = DeclareLaunchArgument('maneuver', default_value='square', description='Maneuver (circle/square) that the robot must perform.')
+    maneuver_arg = DeclareLaunchArgument('maneuver', default_value='circle', description='Maneuver (circle/square) that the robot must perform.')
     lin_vel_arg = DeclareLaunchArgument('lin_vel', default_value='0.3', description='Linear velocity of the robot (m/s).')
     ang_vel_arg = DeclareLaunchArgument('ang_vel', default_value='0.3', description='Angular velocity of the robot (rad/s).')
 

@@ -36,8 +36,8 @@ def generate_launch_description():
                     FindPackageShare("turtlebot3_gazebo"), '/launch', '/empty_world.launch.py',
                     ])
             ),
-        DeclareLaunchArgument('lin_vel', default_value='0.3', description='Linear velocity of the robot (m/s).'),
-        DeclareLaunchArgument('ang_vel', default_value='0.3', description='Angular velocity of the robot (rad/s).'),
+        DeclareLaunchArgument('lin_vel', default_value='0.1', description='Linear velocity of the robot (m/s).'),
+        DeclareLaunchArgument('ang_vel', default_value='0.1', description='Angular velocity of the robot (rad/s).'),
         Node(
             package='assignment_1c',
             executable='circle',

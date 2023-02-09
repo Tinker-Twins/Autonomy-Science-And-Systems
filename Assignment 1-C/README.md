@@ -59,3 +59,5 @@ The ROS2 package [`assignment_1c`](https://github.com/Tinker-Twins/Autonomy-Scie
     $ ros2 launch assignment_1c move.launch.py maneuver:=circle lin_vel:=0.15 ang_vel:=0.15
     $ ros2 launch assignment_1c move.launch.py maneuver:=square lin_vel:=0.15 ang_vel:=0.15
     ```
+## Results:
+The [`media`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%201-C/media) directory hosts pictures and videos of the implementations.

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 #
 # Copyright 2019 ROBOTIS CO., LTD.
+# Copyright Tinker Twins
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,7 +15,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# Authors: Darby Lim
+# Authors: Darby Lim, Tinker Twins
 
 import os
 
@@ -27,6 +28,7 @@ from launch.substitutions import LaunchConfiguration
 from launch.substitutions import ThisLaunchFileDir
 from launch_ros.actions import Node
 
+os.system('ros2 topic pub -1 /pose_relocalization geometry_msgs/Point') # Reset odometry to avoid unstable estimates
 
 def generate_launch_description():
     TURTLEBOT3_MODEL = os.environ['TURTLEBOT3_MODEL']

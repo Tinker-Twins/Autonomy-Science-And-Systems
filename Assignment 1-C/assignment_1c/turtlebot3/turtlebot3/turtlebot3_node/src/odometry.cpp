@@ -1,4 +1,5 @@
 // Copyright 2019 ROBOTIS CO., LTD.
+// Copyright Tinker Twins
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,7 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-// Author: Darby Lim
+// Author: Darby Lim, Tinker Twins
 
 #include "turtlebot3_node/odometry.hpp"
 
@@ -104,6 +105,11 @@ Odometry::Odometry(
       qos,
       std::bind(&Odometry::joint_state_callback, this, std::placeholders::_1));
   }
+
+  pose_relocalization_state_sub_ = nh_->create_subscription<geometry_msgs::msg::Point>(
+    "pose_relocalization",
+    qos,
+    std::bind(&Odometry::pose_relocalization_callback, this, std::placeholders::_1));
 }
 
 void Odometry::joint_state_callback(const sensor_msgs::msg::JointState::SharedPtr joint_state_msg)
@@ -162,7 +168,7 @@ void Odometry::publish(const rclcpp::Time & now)
   odom_msg->twist.twist.linear.x = robot_vel_[0];
   odom_msg->twist.twist.angular.z = robot_vel_[2];
 
-  // TODO(Will Son): Find more accurate covariance.
+  // TODO: Find more accurate covariance.
   // odom_msg->pose.covariance[0] = 0.05;
   // odom_msg->pose.covariance[7] = 0.05;
   // odom_msg->pose.covariance[14] = 1.0e-9;
@@ -272,4 +278,12 @@ bool Odometry::calculate_odometry(const rclcpp::Duration & duration)
 
   last_theta = theta;
   return true;
+}
+
+
+void Odometry::pose_relocalization_callback(const geometry_msgs::msg::Point::SharedPtr point)
+{
+  robot_pose_[0] = point->x;
+  robot_pose_[1] = point->y;
+  robot_pose_[2] = point->z;
 }

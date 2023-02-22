@@ -1,4 +1,5 @@
 // Copyright 2019 ROBOTIS CO., LTD.
+// Copyright Tinker Twins
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,12 +13,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-// Author: Darby Lim
+// Author: Darby Lim, Tinker Twins
 
 #ifndef TURTLEBOT3_NODE__ODOMETRY_HPP_
 #define TURTLEBOT3_NODE__ODOMETRY_HPP_
 
 #include <geometry_msgs/msg/transform_stamped.hpp>
+#include <geometry_msgs/msg/point.hpp>
 #include <message_filters/subscriber.h>
 #include <message_filters/sync_policies/approximate_time.h>
 #include <message_filters/synchronizer.h>
@@ -45,6 +47,8 @@ public:
     const double wheels_separation,
     const double wheels_radius);
   virtual ~Odometry() {}
+  std::array<double, 3> robot_pose_; 
+  
 
 private:
   bool calculate_odometry(const rclcpp::Duration & duration);
@@ -58,6 +62,8 @@ private:
     const std::shared_ptr<sensor_msgs::msg::JointState const> & joint_state_msg,
     const std::shared_ptr<sensor_msgs::msg::Imu const> & imu_msg);
 
+  void pose_relocalization_callback(const geometry_msgs::msg::Point::SharedPtr point);
+
   void publish(const rclcpp::Time & now);
 
   std::shared_ptr<rclcpp::Node> nh_;
@@ -65,6 +71,7 @@ private:
 
   rclcpp::Publisher<nav_msgs::msg::Odometry>::SharedPtr odom_pub_;
   rclcpp::Subscription<sensor_msgs::msg::JointState>::SharedPtr joint_state_sub_;
+  rclcpp::Subscription<geometry_msgs::msg::Point>::SharedPtr pose_relocalization_state_sub_;
 
   std::shared_ptr<
     message_filters::Subscriber<sensor_msgs::msg::JointState>> msg_ftr_joint_state_sub_;
@@ -88,9 +95,9 @@ private:
 
   std::array<double, 2> diff_joint_positions_;
   double imu_angle_;
-
-  std::array<double, 3> robot_pose_;
   std::array<double, 3> robot_vel_;
+
+  
 };
 }  // namespace turtlebot3
 }  // namespace robotis

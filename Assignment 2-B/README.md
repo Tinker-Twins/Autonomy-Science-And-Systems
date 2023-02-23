@@ -74,12 +74,12 @@ The [`media`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/
 
 1. Open-Loop Circle:
 
-| ![Slow Circle](media/circle_slow.gif) | ![Medium Circle](media/circle_medium.gif) | ![Fast Circle](media/circle_fast.gif) |
+| ![Slow Circle](media/circle_slow_robot.gif) ![Slow Circle](media/circle_slow_rviz.gif) | ![Medium Circle](media/circle_medium_robot.gif) ![Medium Circle](media/circle_medium_rviz.gif) | ![Fast Circle](media/circle_fast_robot.gif) ![Fast Circle](media/circle_fast_rviz.gif) |
 |:-------------------------------------:|:-----------------------------------------:|:-------------------------------------:|
 | Slow (`lin_vel` = 0.05, `ang_vel` = 0.2) | Medium (`lin_vel` = 0.10, `ang_vel` = 0.4) | Fast (`lin_vel` = 0.15, `ang_vel` = 0.6) |
 
 2. Open-Loop Square:
 
-| ![Slow Circle](media/square_slow.gif) | ![Medium Circle](media/square_medium.gif) | ![Fast Circle](media/square_fast.gif) |
+| ![Slow Square](media/square_slow_robot.gif) ![Slow Square](media/square_slow_rviz.gif) | ![Medium Square](media/square_medium_robot.gif) ![Medium Square](media/square_medium_rviz.gif) | ![Fast Square](media/square_fast_robot.gif) ![Fast Square](media/square_fast_rviz.gif) |
 |:-------------------------------------:|:-----------------------------------------:|:-------------------------------------:|
 | Slow (`lin_vel` = 0.05, `ang_vel` = 0.2) | Medium (`lin_vel` = 0.10, `ang_vel` = 0.4) | Fast (`lin_vel` = 0.15, `ang_vel` = 0.6) |

@@ -67,7 +67,7 @@ class RobotController(Node):
     def robot_controller_callback(self):
         LIN_VEL = self.get_parameter('lin_vel').value # Linear velocity parameter (m/s)
         ANG_VEL = self.get_parameter('ang_vel').value # Angular velocity parameter (rad/s)
-        LIN_DIS = 1.0 # Square side length (m)
+        LIN_DIS = 0.5 # Square side length (m)
         ANG_DIS = pi/2 # Square side length (m)
         LIN_TIM = LIN_DIS/LIN_VEL # Base time duration for linear motion (s)
         ANG_TIM = ANG_DIS/ANG_VEL # Base time duration for angular motion (s)

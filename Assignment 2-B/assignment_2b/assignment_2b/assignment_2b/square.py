@@ -67,15 +67,15 @@ class RobotController(Node):
     def robot_controller_callback(self):
         LIN_VEL = self.get_parameter('lin_vel').value # Linear velocity parameter (m/s)
         ANG_VEL = self.get_parameter('ang_vel').value # Angular velocity parameter (rad/s)
-        LIN_DIS = 0.5 # Square side length (m)
+        LIN_DIS = 1.0 # Square side length (m)
         ANG_DIS = pi/2 # Square side length (m)
         LIN_TIM = LIN_DIS/LIN_VEL # Base time duration for linear motion (s)
         ANG_TIM = ANG_DIS/ANG_VEL # Base time duration for angular motion (s)
         DELAY = 4.0 # Time delay (s)
         if self.get_clock().now() - self.start_time > Duration(seconds=DELAY):
-            # Robot going to 1st vertex by moving 2 m with LIN_VEL m/s velocity
+            # Robot going to 1st vertex by moving LIN_DIS m with LIN_VEL m/s velocity
             if self.get_clock().now() - self.start_time < Duration(seconds=DELAY+LIN_TIM):
-                print('Robot going to 1st vertex by moving 2 m with {} m/s velocity'.format(LIN_VEL))
+                print('Robot going to 1st vertex by moving {} m with {} m/s velocity'.format(LIN_DIS, LIN_VEL))
                 self.ctrl_msg.linear.x = LIN_VEL
                 self.ctrl_msg.angular.z = 0.0
             # Robot preparing for 2nd vertex by rotating 90 degrees with ANG_VEL rad/s velocity
@@ -83,9 +83,9 @@ class RobotController(Node):
                 print('Robot preparing for 2nd vertex by rotating 90 degrees with {} rad/s velocity'.format(ANG_VEL))
                 self.ctrl_msg.linear.x = 0.0
                 self.ctrl_msg.angular.z = ANG_VEL
-            # Robot going to 2nd vertex by moving 2 m with LIN_VEL m/s velocity
+            # Robot going to 2nd vertex by moving LIN_DIS m with LIN_VEL m/s velocity
             if self.get_clock().now() - self.start_time > Duration(seconds=DELAY+LIN_TIM+ANG_TIM) and self.get_clock().now() - self.start_time <= Duration(seconds=DELAY+2*LIN_TIM+ANG_TIM):
-                print('Robot going to 2nd vertex by moving 2 m with {} m/s velocity'.format(LIN_VEL))
+                print('Robot going to 2nd vertex by moving {} m with {} m/s velocity'.format(LIN_DIS, LIN_VEL))
                 self.ctrl_msg.linear.x = LIN_VEL
                 self.ctrl_msg.angular.z = 0.0
             # Robot preparing for 3rd vertex by rotating 90 degrees with ANG_VEL rad/s velocity
@@ -93,9 +93,9 @@ class RobotController(Node):
                 print('Robot preparing for 3rd vertex by rotating 90 degrees with {} rad/s velocity'.format(ANG_VEL))
                 self.ctrl_msg.linear.x = 0.0
                 self.ctrl_msg.angular.z = ANG_VEL
-            # Robot going to 3rd vertex by moving 2 m with LIN_VEL m/s velocity
+            # Robot going to 3rd vertex by moving LIN_DIS m with LIN_VEL m/s velocity
             if self.get_clock().now() - self.start_time > Duration(seconds=DELAY+2*LIN_TIM+2*ANG_TIM) and self.get_clock().now() - self.start_time <= Duration(seconds=DELAY+3*LIN_TIM+2*ANG_TIM):
-                print('Robot going to 3rd vertex by moving 2 m with {} m/s velocity'.format(LIN_VEL))
+                print('Robot going to 3rd vertex by moving {} m with {} m/s velocity'.format(LIN_DIS, LIN_VEL))
                 self.ctrl_msg.linear.x = LIN_VEL
                 self.ctrl_msg.angular.z = 0.0
             # Robot preparing for 4th vertex by rotating 90 degrees with ANG_VEL rad/s velocity
@@ -103,9 +103,9 @@ class RobotController(Node):
                 print('Robot preparing for 4th vertex by rotating 90 degrees with {} rad/s velocity'.format(ANG_VEL))
                 self.ctrl_msg.linear.x = 0.0
                 self.ctrl_msg.angular.z = ANG_VEL
-            # Robot going to 4th vertex by moving 2 m with LIN_VEL m/s velocity
+            # Robot going to 4th vertex by moving LIN_DIS m with LIN_VEL m/s velocity
             if self.get_clock().now() - self.start_time > Duration(seconds=DELAY+3*LIN_TIM+3*ANG_TIM) and self.get_clock().now() - self.start_time <= Duration(seconds=DELAY+4*LIN_TIM+3*ANG_TIM):
-                print('Robot going to 4th vertex by moving 2 m with {} m/s velocity'.format(LIN_VEL))
+                print('Robot going to 4th vertex by moving {} m with {} m/s velocity'.format(LIN_DIS, LIN_VEL))
                 self.ctrl_msg.linear.x = LIN_VEL
                 self.ctrl_msg.angular.z = 0.0
             # Robot resetting to initial configuration by rotating 90 degrees with ANG_VEL rad/s velocity

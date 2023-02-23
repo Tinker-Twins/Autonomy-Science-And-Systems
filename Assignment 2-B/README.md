@@ -29,7 +29,7 @@ The ROS2 package [`assignment_2b`](https://github.com/Tinker-Twins/Autonomy-Scie
     ```
 3. Move `assignment_2b` directory with required ROS2 packages to the source space (`src`) of your `ROS2_WS`.
     ```bash
-    $ mv ~/Autonomy-Science-And-Systems/Assignment\ 1-C/assignment_2b/ ~/ROS2_WS/src/
+    $ mv ~/Autonomy-Science-And-Systems/Assignment\ 2-B/assignment_2b/ ~/ROS2_WS/src/
     ```
 4. [Optional] Remove the unnecessary files.
     ```bash

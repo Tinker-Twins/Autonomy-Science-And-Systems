@@ -1,4 +1,4 @@
-# Assignment 2-B : TurtleBot3 Open-Loop Control
+# Assignment 2-B : TurtleBot3 Teleop and Open-Loop Control Analysis
 **Authors:** Chinmay Samak and Tanmay Samak
 
 ## Disclaimer:

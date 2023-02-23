@@ -5,6 +5,9 @@
 I certify that all the work and writing that I contributed to here is my own and not acquired from external sources. I have cited sources appropriately and paraphrased correctly. I have not shared my writing with other students (for individual assignments) and other students outside my group (for group assignments), nor have I acquired any written portion of this document from past or present students.
 
 ## Description:
+The ROS2 package [`turtlebot3_teleop`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%202-B/assignment_2b/turtlebot3/turtlebot3/turtlebot3_teleop) for this assignment hosts the following [Python script](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%202-B/assignment_2b/turtlebot3/turtlebot3/turtlebot3_teleop/turtlebot3_teleop/script):
+- [`teleop_keyboard.py`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%202-B/assignment_2b/turtlebot3/turtlebot3/turtlebot3_teleop/turtlebot3_teleop/script/teleop_keyboard.py) accepts keyboard inputs and modifies the commanded linear and angular velocities (twist) of the robot based on the key pressed.
+
 The ROS2 package [`assignment_2b`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%202-B/assignment_2b/assignment_2b) for this assignment hosts the following [Python scripts](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%202-B/assignment_2b/assignment_2b/assignment_2b):
 - [`circle.py`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%202-B/assignment_2b/assignment_2b/assignment_2b/circle.py) makes the robot move in a circle with a specified constant twist command. The radius of the circle being traversed is governed by the ratio of linear and angular velocities provided to the robot. The script is setup to wait 4 seconds for simulation to initialize properly and then run for one complete traversal of the robot around the circle in an open-loop manner.
 - [`square.py`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%202-B/assignment_2b/assignment_2b/assignment_2b/square.py) makes the robot move in a square of 2x2 m with a specified constant twist command. The script is setup to to wait 4 seconds for simulation to initialize properly and then run for one complete traversal of the robot around the square in an open-loop manner.
@@ -64,15 +67,19 @@ The ROS2 package [`assignment_2b`](https://github.com/Tinker-Twins/Autonomy-Scie
     ```bash
     $ ros2 launch turtlebot3_bringup robot.launch.py
     ```
-3. Open-Loop Circle (twist commands specified by the user):
+3. Teleoperation using Keyboard:
+    ```bash
+    $ ros2 run turtlebot3_teleop teleop_keyboard
+    ```
+4. Open-Loop Circle (twist commands specified by the user):
     ```bash
     $ ros2 launch assignment_2b circle.launch.py lin_vel:=0.15 ang_vel:=0.15
     ```
-4. Open-Loop Square (twist commands specified by the user):
+5. Open-Loop Square (twist commands specified by the user):
     ```bash
     $ ros2 launch assignment_2b square.launch.py lin_vel:=0.15 ang_vel:=0.15
     ```    
-5. Open-Loop Move (square or circle maneuver with twist commands specified by the user):
+6. Open-Loop Move (square or circle maneuver with twist commands specified by the user):
     ```bash
     $ ros2 launch assignment_2b move.launch.py maneuver:=circle lin_vel:=0.15 ang_vel:=0.15
     $ ros2 launch assignment_2b move.launch.py maneuver:=square lin_vel:=0.15 ang_vel:=0.15

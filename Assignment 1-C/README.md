@@ -79,4 +79,4 @@ The [`media`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/
 |:-------------------------------------:|:-----------------------------------------:|:-------------------------------------:|
 | Slow (`lin_vel` = 0.25, `ang_vel` = 0.25) | Medium (`lin_vel` = 0.50, `ang_vel` = 0.50) | Fast (`lin_vel` = 0.75, `ang_vel` = 0.75) |
 
-**Note:** The physical TurtleBot3 has a maximum travel speed of 0.22 m/s and maximum rotational speed of 2.84 rad/s. The simulated TurtleBot3 was operated at higher limits to analyze the effect of simulation dynamics on the performance of the open-loop controllers designed.
+**Note:** The physical TurtleBot3 Burger has a maximum travel speed of 0.22 m/s and maximum rotational speed of 2.84 rad/s. The simulated TurtleBot3 was operated at higher limits to analyze the effect of simulation dynamics on the performance of the open-loop controllers designed.

@@ -104,3 +104,5 @@ The [`media`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/
 | ![Slow Square](media/square_slow_robot.gif) ![Slow Square](media/square_slow_rviz.gif) | ![Medium Square](media/square_medium_robot.gif) ![Medium Square](media/square_medium_rviz.gif) | ![Fast Square](media/square_fast_robot.gif) ![Fast Square](media/square_fast_rviz.gif) |
 |:-------------------------------------:|:-----------------------------------------:|:-------------------------------------:|
 | Slow (`lin_vel` = 0.05, `ang_vel` = 0.2) | Medium (`lin_vel` = 0.10, `ang_vel` = 0.4) | Fast (`lin_vel` = 0.15, `ang_vel` = 0.6) |
+
+**Note:** Due to space constraints, the `lin_vel`and `ang_vel` parameters for `circle` maneuver were chosen such that the resulting diameter of the trajectory would amount 0.5 m; and in case of `square` maneuver, the side length of the square was set to be 0.5 m.

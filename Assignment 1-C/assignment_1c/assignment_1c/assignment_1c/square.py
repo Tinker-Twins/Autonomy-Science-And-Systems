@@ -52,7 +52,7 @@ class RobotController(Node):
         history=QoSHistoryPolicy.RMW_QOS_POLICY_HISTORY_KEEP_LAST, # Keep/store only up to last N samples
         depth=10 # Queue size/depth of 10 (only honored if the “history” policy was set to “keep last”)
         )
-        self.robot_ctrl_pub = self.create_publisher(Twist, '/cmd_vel', qos_profile) # Publisher which will publish Twist message to the topic 'turtle1/cmd_vel' adhering to 'qos_profile' QoS profile
+        self.robot_ctrl_pub = self.create_publisher(Twist, '/cmd_vel', qos_profile) # Publisher which will publish Twist message to the topic '/cmd_vel' adhering to 'qos_profile' QoS profile
         timer_period = 0.001 # Node execution time period (seconds)
         self.timer = self.create_timer(timer_period, self.robot_controller_callback) # Define timer to execute 'robot_controller_callback()' every 'timer_period' seconds
         self.ctrl_msg = Twist() # Robot control commands (twist)

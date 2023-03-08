@@ -87,13 +87,13 @@ The [`media`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/
 
 1. Simulation:
 
-| ![Slow Square](media/square_slow_robot.gif) ![Slow Square](media/square_slow_rviz.gif) | ![Medium Square](media/square_medium_robot.gif) ![Medium Square](media/square_medium_rviz.gif) | ![Fast Square](media/square_fast_robot.gif) ![Fast Square](media/square_fast_rviz.gif) |
+| ![Emergency Braking](media/emergency_braking.gif) | ![Wall Following](media/wall_following.gif) | ![Obstacle Avoidance](media/obstacle_avoidance.gif) |
 |:-------------------------------------:|:-----------------------------------------:|:-------------------------------------:|
-| Slow (`lin_vel` = 0.05, `ang_vel` = 0.2) | Medium (`lin_vel` = 0.10, `ang_vel` = 0.4) | Fast (`lin_vel` = 0.15, `ang_vel` = 0.6) |
+| Emergency Braking | Wall Following | Obstacle Avoidance |
 
 
 2. Real World:
 
-| ![Teleop Robot](media/teleop_robot.gif) | ![Teleop Terminal](media/teleop_terminal.gif) |
+| ![Collision Avoidance Robot](media/collision_avoidance_robot.gif) | ![Collision Avoidance Terminal](media/collision_avoidance_rviz.gif) |
 |:-------------------------------------:|:-----------------------------------------:|
 | Physical TurtleBot3 Burger | Remote PC Terminal Window |

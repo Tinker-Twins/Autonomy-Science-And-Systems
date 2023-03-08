@@ -83,7 +83,7 @@ class RobotController(Node):
 
     def __init__(self):
         # Information and debugging
-        info = '\nMake the robot follow walls by maintaining equal distance from them.\n'
+        info = '\nMake the robot avoid collision with obstacles by maintaining a safe distance from them.\n'
         print(info)
         # ROS2 infrastructure
         super().__init__('robot_controller') # Create a node with name 'robot_controller'

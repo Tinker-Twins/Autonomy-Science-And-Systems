@@ -35,9 +35,9 @@ The ROS2 package [`assignment_3a`](https://github.com/Tinker-Twins/Autonomy-Scie
     ```bash
     $ git clone https://github.com/Tinker-Twins/Autonomy-Science-And-Systems.git
     ```
-3. Move `assignment_2b` directory with required ROS2 packages to the source space (`src`) of your `ROS2_WS`.
+3. Move `assignment_3a` directory with required ROS2 packages to the source space (`src`) of your `ROS2_WS`.
     ```bash
-    $ mv ~/Autonomy-Science-And-Systems/Assignment\ 2-B/assignment_2b/ ~/ROS2_WS/src/
+    $ mv ~/Autonomy-Science-And-Systems/Assignment\ 3-A/assignment_3a/ ~/ROS2_WS/src/
     ```
 4. [Optional] Remove the unnecessary files.
     ```bash
@@ -55,31 +55,32 @@ The ROS2 package [`assignment_3a`](https://github.com/Tinker-Twins/Autonomy-Scie
     ```
 
 ## Execute:
+### Simulation:
+1. Emergency Braking:
+    ```bash
+    $ ros2 launch assignment_3a emergency_braking.launch.py
+    ```
+2. Wall Following:
+    ```bash
+    $ ros2 launch assignment_3a wall_following.launch.py
+    ```
+3. Obstacle Avoidance:
+    ```bash
+    $ ros2 launch assignment_3a obstacle_avoidance.launch.py
+    ```
+### Real World:
 1. Connect to the TurtleBot3 SBC via Secure Shell Protocol (SSH):
     ```bash
     $ sudo ssh <username>@<ip.address.of.turtlebot3>
-    $ sudo ssh ubuntu@192.168.1.87
+    $ sudo ssh ubuntu@192.168.43.48
     ```
 2. Bringup TurtleBot3:
     ```bash
     $ ros2 launch turtlebot3_bringup robot.launch.py
-    ```
-3. Teleoperation using Keyboard:
-    ```bash
-    $ ros2 run turtlebot3_teleop teleop_keyboard
-    ```
-4. Open-Loop Circle (twist commands specified by the user):
-    ```bash
-    $ ros2 launch assignment_2b circle.launch.py lin_vel:=0.15 ang_vel:=0.15
-    ```
-5. Open-Loop Square (twist commands specified by the user):
-    ```bash
-    $ ros2 launch assignment_2b square.launch.py lin_vel:=0.15 ang_vel:=0.15
-    ```    
+    ```   
 6. Open-Loop Move (square or circle maneuver with twist commands specified by the user):
     ```bash
-    $ ros2 launch assignment_2b move.launch.py maneuver:=circle lin_vel:=0.15 ang_vel:=0.15
-    $ ros2 launch assignment_2b move.launch.py maneuver:=square lin_vel:=0.15 ang_vel:=0.15
+    $ ros2 launch assignment_3a collision_avoidance.launch.py
     ```
 ## Results:
 The [`media`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%202-B/media) directory hosts pictures and videos of the implementations.

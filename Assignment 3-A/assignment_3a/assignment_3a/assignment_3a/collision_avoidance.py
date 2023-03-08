@@ -30,6 +30,7 @@ from rclpy.node import Node # Node class for Python nodes
 from geometry_msgs.msg import Twist # Twist (linear and angular velocities) message class
 from sensor_msgs.msg import LaserScan # Twist (linear and angular velocities) message class
 from rclpy.qos import QoSProfile, QoSReliabilityPolicy, QoSHistoryPolicy # Ouality of Service (tune communication between nodes)
+from rclpy.qos import qos_profile_sensor_data # Ouality of Service for sensor data, using best effort reliability and small queue depth
 from rclpy.duration import Duration # Time duration class
 
 # Python mudule imports
@@ -86,19 +87,14 @@ class RobotController(Node):
         print(info)
         # ROS2 infrastructure
         super().__init__('robot_controller') # Create a node with name 'robot_controller'
-        qos_profile_sub = QoSProfile( # Ouality of Service profile
-        reliability=QoSReliabilityPolicy.RMW_QOS_POLICY_RELIABILITY_BEST_EFFORT, # Best effort communication
-        history=QoSHistoryPolicy.RMW_QOS_POLICY_HISTORY_KEEP_LAST, # Keep/store only up to last N samples
-        depth=10 # Queue size/depth of 10 (only honored if the “history” policy was set to “keep last”)
-        )
-        qos_profile_pub = QoSProfile( # Ouality of Service profile
+        qos_profile = QoSProfile( # Ouality of Service profile
         reliability=QoSReliabilityPolicy.RMW_QOS_POLICY_RELIABILITY_RELIABLE, # Reliable (not best effort) communication
         history=QoSHistoryPolicy.RMW_QOS_POLICY_HISTORY_KEEP_LAST, # Keep/store only up to last N samples
         depth=10 # Queue size/depth of 10 (only honored if the “history” policy was set to “keep last”)
         )
-        self.robot_scan_sub = self.create_subscription(LaserScan, '/scan', self.robot_laserscan_callback, qos_profile_sub) # Subscriber which will subscribe to LaserScan message on the topic '/scan' adhering to 'qos_profile' QoS profile
+        self.robot_scan_sub = self.create_subscription(LaserScan, '/scan', self.robot_laserscan_callback, qos_profile_sensor_data) # Subscriber which will subscribe to LaserScan message on the topic '/scan' adhering to 'qos_profile' QoS profile
         self.robot_scan_sub # Prevent unused variable warning
-        self.robot_ctrl_pub = self.create_publisher(Twist, '/cmd_vel', qos_profile_pub) # Publisher which will publish Twist message to the topic '/cmd_vel' adhering to 'qos_profile' QoS profile
+        self.robot_ctrl_pub = self.create_publisher(Twist, '/cmd_vel', qos_profile) # Publisher which will publish Twist message to the topic '/cmd_vel' adhering to 'qos_profile' QoS profile
         timer_period = 0.001 # Node execution time period (seconds)
         self.timer = self.create_timer(timer_period, self.robot_controller_callback) # Define timer to execute 'robot_controller_callback()' every 'timer_period' seconds
         self.laserscan = [] # Initialize variable to capture the laserscan

@@ -96,4 +96,4 @@ The [`media`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/
 
 | ![Collision Avoidance Robot](media/collision_avoidance_robot.gif) | ![Collision Avoidance Terminal](media/collision_avoidance_rviz.gif) |
 |:-------------------------------------:|:-----------------------------------------:|
-| Physical TurtleBot3 Burger | Remote PC Terminal Window |
+| Collision Avoidance - TurtleBot3 | Collision Avoidance - Remote PC |

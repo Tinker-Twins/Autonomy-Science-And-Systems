@@ -1,4 +1,4 @@
-# Assignment 2-A : TurtleBot3 Burger Teardown
+# Assignment 2-A: TurtleBot3 Burger Teardown
 **Authors:** Tanmay Samak and Chinmay Samak
 
 ## Disclaimer:

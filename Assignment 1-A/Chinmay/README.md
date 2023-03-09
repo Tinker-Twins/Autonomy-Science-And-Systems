@@ -1,4 +1,4 @@
-# Assignment 1-A : Comparative Study of ROS-1, ROS-2 and ROS-I
+# Assignment 1-A: Comparative Study of ROS-1, ROS-2 and ROS-I
 **Author:** Chinmay Samak
 
 ## Disclaimer:

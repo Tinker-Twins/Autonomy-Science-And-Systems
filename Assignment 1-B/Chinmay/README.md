@@ -1,4 +1,4 @@
-# Assignment 1-B : TurtleSim Control
+# Assignment 1-B: TurtleSim Control
 **Author:** Chinmay Samak
 
 ## Disclaimer:

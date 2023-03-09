@@ -1,4 +1,4 @@
-# Assignment 3-A : TurtleBot3 Emergency Braking, Wall Following and Obstacle Avoidance
+# Assignment 3-A: TurtleBot3 Emergency Braking, Wall Following and Obstacle Avoidance
 **Authors:** Chinmay Samak and Tanmay Samak
 
 ## Disclaimer:

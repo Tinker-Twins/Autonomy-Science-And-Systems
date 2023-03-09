@@ -1,4 +1,4 @@
-# Mini Assignment 3 : TurtleBot3 Acknowledgement
+# Mini Assignment 3: TurtleBot3 Acknowledgement
 **Authors:** Chinmay Samak and Tanmay Samak
 
 ## Disclaimer:

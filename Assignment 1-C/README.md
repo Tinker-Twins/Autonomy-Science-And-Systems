@@ -1,4 +1,4 @@
-# Assignment 1-C : TurtleBot3 Open-Loop Control
+# Assignment 1-C: TurtleBot3 Open-Loop Control
 **Authors:** Chinmay Samak and Tanmay Samak
 
 ## Disclaimer:

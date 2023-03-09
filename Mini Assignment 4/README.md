@@ -48,7 +48,6 @@ In short, we need to find five parameters, known as distortion coefficients give
 </p>
 
 #### Camera Intrinsic Parameters
-
 <p align="justify">
 Intrinsic parameters are specific to a camera. They include information like focal length <img src="https://render.githubusercontent.com/render/math?math=(f_x%2Cf_y)"> and optical center <img src="https://render.githubusercontent.com/render/math?math=(c_x%2Cc_y)">. The focal length and optical center can be used to create a camera matrix, which can be used to remove distortion due to the lens of a specific camera. The camera matrix is unique to a specific camera, so once calculated, it can be reused on other images captured by the same camera. It is expressed as a <img src="https://render.githubusercontent.com/render/math?math=3%20%5Ctimes%203"> matrix:
 </p>
@@ -58,7 +57,6 @@ Intrinsic parameters are specific to a camera. They include information like foc
 </p>
 
 #### Camera Extrinsic Parameters
-
 <p align="justify">
 Extrinsic parameters correspond to rotation matrix and translation vector, <img src="https://latex.codecogs.com/svg.image?R"> and <img src="https://latex.codecogs.com/svg.image?T"> respectively, which transform 3D coordinates of a point in world frame to camera coordinate system.
     
@@ -68,6 +66,11 @@ The resultant projective mapping <img src="https://latex.codecogs.com/svg.image?
 <img src="https://latex.codecogs.com/svg.image?\begin{bmatrix}u&space;\\v&space;\\\end{bmatrix}&space;=&space;K\begin{bmatrix}R&space;&&space;T&space;\\\end{bmatrix}\begin{bmatrix}x&space;\\y&space;\\z&space;\\\end{bmatrix}&space;=M\begin{bmatrix}x&space;\\y&space;\\z&space;\\\end{bmatrix}">
 </p>
 </p>
+
+#### Resources
+- https://github.com/Tinker-Twins/Camera-Calibration
+- https://en.wikipedia.org/wiki/Camera_resectioning
+- https://docs.opencv.org/4.x/dc/dbb/tutorial_py_calibration.html
 
 ## Dependencies:
 - [TurtleBot3 Burger Robot Hardware](https://www.robotis.us/turtlebot-3-burger-us/) with [TurtleBot3 SBC Image](https://emanual.robotis.com/docs/en/platform/turtlebot3/sbc_setup/)

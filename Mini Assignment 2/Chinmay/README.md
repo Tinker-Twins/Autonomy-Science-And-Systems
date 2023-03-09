@@ -1,4 +1,4 @@
-# Mini Assignment 2 : ROS-1/ROS-2 Installation
+# Mini Assignment 2: ROS-1/ROS-2 Installation
 **Author:** Chinmay Samak
 
 ## Disclaimer:

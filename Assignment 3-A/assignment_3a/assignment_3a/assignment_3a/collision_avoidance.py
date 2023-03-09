@@ -136,7 +136,10 @@ class RobotController(Node):
             else:
                 if left_scan_min <= 0.5 or right_scan_min <= 0.5:
                     LIN_VEL = 0.0 # Linear velocity (m/s)
-                    ANG_VEL = self.pid_lat.control(right_scan_min, tstamp) # Angular velocity (rad/s)
+                    if right_scan_min <= left_scan_min:
+                        ANG_VEL = self.pid_lat.control(right_scan_min, tstamp) # Angular velocity (rad/s)
+                    else:
+                        ANG_VEL = -self.pid_lat.control(left_scan_min, tstamp) # Angular velocity (rad/s)
                 else:
                     LIN_VEL = self.pid_lon.control(min(3.5, self.laserscan[0]), tstamp) # Linear velocity (m/s) from PID controller
                     ANG_VEL = 0.0 # Angular velocity (rad/s)

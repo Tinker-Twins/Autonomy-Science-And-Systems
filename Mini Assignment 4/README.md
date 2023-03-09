@@ -76,6 +76,9 @@ The resultant projective mapping <img src="https://latex.codecogs.com/svg.image?
 - [TurtleBot3 Burger Robot Hardware](https://www.robotis.us/turtlebot-3-burger-us/) with [TurtleBot3 SBC Image](https://emanual.robotis.com/docs/en/platform/turtlebot3/sbc_setup/)
 - [ROS2 Foxy Fitzroy](https://docs.ros.org/en/foxy/Installation/Alternatives/Ubuntu-Development-Setup.html) on [Ubuntu 20.04 Focal Fossa](https://releases.ubuntu.com/focal/)
 - [Camera Packages](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Mini%20Assignment%204/camera_calibration) - Included with this repository
+- [Camera Calibration Parsers](https://github.com/ros-perception/image_common/tree/foxy/camera_calibration_parsers) - Installable via apt `$ sudo apt install ros-foxy-camera-calibration-parsers`
+- [Camera Info Manager](https://github.com/ros-perception/image_common/tree/foxy/camera_info_manager) - Installable via apt `$ sudo apt install ros-foxy-camera-info-manager`
+- [Launch Testing](https://index.ros.org/p/launch_testing_ament_cmake/#foxy) - Installable via apt `$ sudo apt install ros-foxy-launch-testing-ament-cmake`
 
 ## Build:
 1. Make a directory `ROS2_WS` to act as your ROS2 workspace.

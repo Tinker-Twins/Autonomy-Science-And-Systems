@@ -11,7 +11,7 @@ Camera calibration computes the following parameters:
     * Focal length
     * Optical centers
 * Camera Extrinsic Parameters (linear exptinsic parameters)
-    * Rotation vector
+    * Rotation matrix
     * Translation vector
 
 #### Distortion Coefficients

@@ -71,6 +71,7 @@ The resultant projective mapping <img src="https://latex.codecogs.com/svg.image?
 - https://github.com/Tinker-Twins/Camera-Calibration
 - https://en.wikipedia.org/wiki/Camera_resectioning
 - https://docs.opencv.org/4.x/dc/dbb/tutorial_py_calibration.html
+- https://dsp.stackexchange.com/questions/6055/how-does-resizing-an-image-affect-the-intrinsic-camera-matrix
 
 ## Dependencies:
 - [TurtleBot3 Burger Robot Hardware](https://www.robotis.us/turtlebot-3-burger-us/) with [TurtleBot3 SBC Image](https://emanual.robotis.com/docs/en/platform/turtlebot3/sbc_setup/)

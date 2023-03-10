@@ -132,3 +132,5 @@ $ ros2 run camera_calibration cameracalibrator --camera_name arducam --size=8x6 
 The [`results`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Mini%20Assignment%204/results) directory hosts the camera calibration data including sampled frames as well as intrinsic and extrinsic camera parameters.
 
 The [`media`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Mini%20Assignment%204/media) directory hosts pictures and videos of the implementation.
+
+![Camera Calibration](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Mini%20Assignment%204/media/camera_calibration.gif)

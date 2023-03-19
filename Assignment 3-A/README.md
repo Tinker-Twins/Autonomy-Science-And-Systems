@@ -78,7 +78,7 @@ The ROS2 package [`assignment_3a`](https://github.com/Tinker-Twins/Autonomy-Scie
     ```bash
     $ ros2 launch turtlebot3_bringup robot.launch.py
     ```   
-6. Open-Loop Move (square or circle maneuver with twist commands specified by the user):
+3. Collision Avoidance:
     ```bash
     $ ros2 launch assignment_3a collision_avoidance.launch.py
     ```

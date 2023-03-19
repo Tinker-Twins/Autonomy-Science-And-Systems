@@ -80,16 +80,20 @@ The ROS2 package [`assignment_3a`](https://github.com/Tinker-Twins/Autonomy-Scie
 ### Real World:
 1. Connect to the TurtleBot3 SBC via Secure Shell Protocol (SSH):
     ```bash
-    $ sudo ssh <username>@<ip.address.of.turtlebot3>
-    $ sudo ssh ubuntu@192.168.43.48
+    user@computer:~$ sudo ssh <username>@<ip.address.of.turtlebot3>
+    user@computer:~$ sudo ssh ubuntu@192.168.43.48
     ```
 2. Bringup TurtleBot3:
     ```bash
-    $ ros2 launch turtlebot3_bringup robot.launch.py
+    ubuntu@ubuntu:~$ ros2 launch turtlebot3_bringup robot.launch.py
+    ubuntu@ubuntu:~$ ros2 launch v4l2_camera camera.launch.py
     ```   
-6. Open-Loop Move (square or circle maneuver with twist commands specified by the user):
+3. AprilTag Detection:
     ```bash
-    $ ros2 launch assignment_3a collision_avoidance.launch.py
+    user@computer:~$ ros2 run image_transport republish compressed raw --ros-args --remap in/compressed:=image/compressed --remap out:=image/uncompressed
+    user@computer:~$ ros2 run rqt_image_view rqt_image_view
+    user@computer:~$ ros2 run apriltag_ros apriltag_node --ros-args -r image_rect:=/image/uncompressed -r camera_info:=/camera_info --params-file `ros2 pkg prefix apriltag_ros`/share/apriltag_ros/cfg/tags_36h11.yaml
+    user@computer:~$ ros2 topic echo /detections
     ```
 ## Results:
 The [`media`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%203-B/media) directory hosts pictures and videos of the implementations.

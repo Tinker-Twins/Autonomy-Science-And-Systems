@@ -85,6 +85,12 @@ $ ros2 param get /camera_node image_size
 $ # Set parameter
 $ ros2 param set /camera_node image_size [320,240]
 ```
+
+**Note:** The following command can be used to check supported resolutions i.e. `image_size` of a particular video device:
+```bash
+$ sudo v4l2-ctl -d /dev/video0 --list-formats-ex
+```
+
 ## Reference:
 
 https://gitlab.com/boldhearts/ros2_v4l2_camera \

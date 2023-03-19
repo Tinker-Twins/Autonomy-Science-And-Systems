@@ -44,9 +44,9 @@ The ROS2 package [`assignment_3a`](https://github.com/Tinker-Twins/Autonomy-Scie
     ```bash
     $ git clone https://github.com/Tinker-Twins/Autonomy-Science-And-Systems.git
     ```
-3. Move `assignment_3a` directory with required ROS2 packages to the source space (`src`) of your `ROS2_WS`.
+3. Move `assignment_3b` directory with required ROS2 packages to the source space (`src`) of your `ROS2_WS`.
     ```bash
-    $ mv ~/Autonomy-Science-And-Systems/Assignment\ 3-A/assignment_3a/ ~/ROS2_WS/src/
+    $ mv ~/Autonomy-Science-And-Systems/Assignment\ 3-B/assignment_3b/ ~/ROS2_WS/src/
     ```
 4. [Optional] Remove the unnecessary files.
     ```bash
@@ -92,7 +92,7 @@ The ROS2 package [`assignment_3a`](https://github.com/Tinker-Twins/Autonomy-Scie
     $ ros2 launch assignment_3a collision_avoidance.launch.py
     ```
 ## Results:
-The [`media`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%203-A/media) directory hosts pictures and videos of the implementations.
+The [`media`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%203-B/media) directory hosts pictures and videos of the implementations.
 
 1. Simulation:
 

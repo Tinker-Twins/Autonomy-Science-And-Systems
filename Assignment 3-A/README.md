@@ -71,16 +71,16 @@ The ROS2 package [`assignment_3a`](https://github.com/Tinker-Twins/Autonomy-Scie
 ### Real World:
 1. Connect to the TurtleBot3 SBC via Secure Shell Protocol (SSH):
     ```bash
-    $ sudo ssh <username>@<ip.address.of.turtlebot3>
-    $ sudo ssh ubuntu@192.168.43.48
+    user@computer:~$ sudo ssh <username>@<ip.address.of.turtlebot3>
+    user@computer:~$ sudo ssh ubuntu@192.168.43.48
     ```
 2. Bringup TurtleBot3:
     ```bash
-    $ ros2 launch turtlebot3_bringup robot.launch.py
+    ubuntu@ubuntu:~$ ros2 launch turtlebot3_bringup robot.launch.py
     ```   
 3. Collision Avoidance:
     ```bash
-    $ ros2 launch assignment_3a collision_avoidance.launch.py
+    user@computer:~$ ros2 launch assignment_3a collision_avoidance.launch.py
     ```
 ## Results:
 The [`media`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%203-A/media) directory hosts pictures and videos of the implementations.

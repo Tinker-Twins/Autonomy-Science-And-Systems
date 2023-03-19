@@ -60,29 +60,29 @@ The ROS2 package [`assignment_2b`](https://github.com/Tinker-Twins/Autonomy-Scie
 ## Execute:
 1. Connect to the TurtleBot3 SBC via Secure Shell Protocol (SSH):
     ```bash
-    $ sudo ssh <username>@<ip.address.of.turtlebot3>
-    $ sudo ssh ubuntu@192.168.1.87
+    user@computer:~$ sudo ssh <username>@<ip.address.of.turtlebot3>
+    user@computer:~$ sudo ssh ubuntu@192.168.1.87
     ```
 2. Bringup TurtleBot3:
     ```bash
-    $ ros2 launch turtlebot3_bringup robot.launch.py
+    ubuntu@ubuntu:~$ ros2 launch turtlebot3_bringup robot.launch.py
     ```
 3. Teleoperation using Keyboard:
     ```bash
-    $ ros2 run turtlebot3_teleop teleop_keyboard
+    user@computer:~$ ros2 run turtlebot3_teleop teleop_keyboard
     ```
 4. Open-Loop Circle (twist commands specified by the user):
     ```bash
-    $ ros2 launch assignment_2b circle.launch.py lin_vel:=0.15 ang_vel:=0.15
+    user@computer:~$ ros2 launch assignment_2b circle.launch.py lin_vel:=0.15 ang_vel:=0.15
     ```
 5. Open-Loop Square (twist commands specified by the user):
     ```bash
-    $ ros2 launch assignment_2b square.launch.py lin_vel:=0.15 ang_vel:=0.15
+    user@computer:~$ ros2 launch assignment_2b square.launch.py lin_vel:=0.15 ang_vel:=0.15
     ```    
 6. Open-Loop Move (square or circle maneuver with twist commands specified by the user):
     ```bash
-    $ ros2 launch assignment_2b move.launch.py maneuver:=circle lin_vel:=0.15 ang_vel:=0.15
-    $ ros2 launch assignment_2b move.launch.py maneuver:=square lin_vel:=0.15 ang_vel:=0.15
+    user@computer:~$ ros2 launch assignment_2b move.launch.py maneuver:=circle lin_vel:=0.15 ang_vel:=0.15
+    user@computer:~$ ros2 launch assignment_2b move.launch.py maneuver:=square lin_vel:=0.15 ang_vel:=0.15
     ```
 ## Results:
 The [`media`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%202-B/media) directory hosts pictures and videos of the implementations.

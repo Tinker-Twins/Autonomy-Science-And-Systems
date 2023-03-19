@@ -41,7 +41,7 @@ def generate_launch_description():
             ],
         ),
         ExecuteProcess(
-            cmd=[['ros2 param set /camera_node image_size [80,60]']],
+            cmd=[['ros2 param set /camera_node image_size [320,240]']],
             shell=True,
         )
     ])

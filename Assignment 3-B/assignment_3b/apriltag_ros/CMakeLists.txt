@@ -65,6 +65,8 @@ install(TARGETS AprilTagNode
 
 install(DIRECTORY cfg/ DESTINATION share/${PROJECT_NAME}/cfg)
 
+install(DIRECTORY rviz/ DESTINATION share/${PROJECT_NAME}/rviz)
+
 install(DIRECTORY launch DESTINATION share/${PROJECT_NAME})
 
 if(BUILD_TESTING)

@@ -114,7 +114,7 @@ All available/connected camera devices can be listed using:
 ```bash
 $ v4l2-ctl --list-devices
 # v4l-utils can be installed via apt
-# $sudo apt install v4l-utils
+# $ sudo apt install v4l-utils
 ```
 The first port of a device is generally the one over which videocapture is available. [This line](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Mini%20Assignment%204/camera_calibration/v4l2_camera/ros2_v4l2_camera/src/v4l2_camera.cpp#L52) of `v4l2_camera.cpp` can be modified to change/switch camera device (if need be). Rebuild the package to reflect any changes.
 

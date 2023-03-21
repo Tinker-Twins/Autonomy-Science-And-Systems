@@ -65,18 +65,15 @@ The ROS2 package [`assignment_3a`](https://github.com/Tinker-Twins/Autonomy-Scie
 
 ## Execute:
 ### Simulation:
-1. Emergency Braking:
+1. Lane Keeping:
     ```bash
     $ ros2 launch assignment_3a emergency_braking.launch.py
     ```
-2. Wall Following:
+2. AprilTag Tracking:
     ```bash
     $ ros2 launch assignment_3a wall_following.launch.py
     ```
-3. Obstacle Avoidance:
-    ```bash
-    $ ros2 launch assignment_3a obstacle_avoidance.launch.py
-    ```
+
 ### Real World:
 1. Connect to the TurtleBot3 SBC via Secure Shell Protocol (SSH):
     ```bash
@@ -87,8 +84,12 @@ The ROS2 package [`assignment_3a`](https://github.com/Tinker-Twins/Autonomy-Scie
     ```bash
     ubuntu@ubuntu:~$ ros2 launch turtlebot3_bringup robot.launch.py
     ubuntu@ubuntu:~$ ros2 launch v4l2_camera camera.launch.py
-    ```   
-3. AprilTag Detection:
+    ```
+3. Lane Keeping:
+    ```bash
+    user@computer:~$ ros2 launch assignment_3a emergency_braking.launch.py
+    ```
+4. AprilTag Tracking:
 
     **Standalone Executable:**
     ```bash
@@ -102,6 +103,9 @@ The ROS2 package [`assignment_3a`](https://github.com/Tinker-Twins/Autonomy-Scie
     ```
     
     **Launch File:**
+    ```bash
+    user@computer:~$ ros2 launch assignment_3a emergency_braking.launch.py
+    ```
 
 ## Results:
 The [`media`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%203-B/media) directory hosts pictures and videos of the implementations.

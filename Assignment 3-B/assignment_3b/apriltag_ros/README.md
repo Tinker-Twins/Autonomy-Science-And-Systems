@@ -66,7 +66,7 @@ See [tags_36h11.yaml](cfg/tags_36h11.yaml) for an example configuration that pub
 
 The `apriltag_node` executable can be launched with topic remappings and a configuration file:
 ```sh
-ros2 run apriltag_ros apriltag_node --ros-args \
+$ ros2 run apriltag_ros apriltag_node --ros-args \
     -r image_rect:=/camera/image \
     -r camera_info:=/camera/camera_info \
     --params-file `ros2 pkg prefix apriltag_ros`/share/apriltag_ros/cfg/tags_36h11.yaml
@@ -95,5 +95,5 @@ $ ros2 component types apriltag_ros
 
 This `AprilTagNode` component can be loaded with other nodes into a "container node" process where they used shared-memory communication to prevent unnecessary data copies. The example launch file [v4l2_36h11.launch.yml](launch/v4l2_36h11.launch.yml) loads the `AprilTagNode` component together with the `v4l2_camera::V4L2Camera` component from the [`v4l2_camera` package](https://gitlab.com/boldhearts/ros2_v4l2_camera) (`sudo apt install ros-$ROS_DISTRO-v4l2-camera`) into one container and enables `use_intra_process_comms` for both:
 ```sh
-ros2 launch apriltag_ros v4l2_36h11.launch.yml
+$ ros2 launch apriltag_ros v4l2_36h11.launch.yml
 ```

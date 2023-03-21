@@ -76,9 +76,8 @@ ros2 run apriltag_ros apriltag_node --ros-args \
 
 For more efficient intraprocess communication, a composable node is provided:
 ```sh
-$ ros2 component types
-apriltag_ros
-  AprilTagNode
+$ ros2 component types apriltag_ros
+>> AprilTagNode
 ```
 
 This `AprilTagNode` component can be loaded with other nodes into a "container node" process where they used shared-memory communication to prevent unnecessary data copies. The example launch file [v4l2_36h11.launch.yml](launch/v4l2_36h11.launch.yml) loads the `AprilTagNode` component together with the `v4l2_camera::V4L2Camera` component from the [`v4l2_camera` package](https://gitlab.com/boldhearts/ros2_v4l2_camera) (`sudo apt install ros-$ROS_DISTRO-v4l2-camera`) into one container and enables `use_intra_process_comms` for both:

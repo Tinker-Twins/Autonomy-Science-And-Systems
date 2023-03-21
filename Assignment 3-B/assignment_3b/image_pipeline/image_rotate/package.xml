@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>image_rotate</name>
+  <version>2.3.0</version>
+  <description>
+    <p>
+      Contains a node that rotates an image stream in a way that minimizes
+      the angle between a vector in some arbitrary frame and a vector in the
+      camera frame. The frame of the outgoing image is published by the node.
+    </p>
+    <p>
+      This node is intended to allow camera images to be visualized in an
+      orientation that is more intuitive than the hardware-constrained
+      orientation of the physical camera. This is particularly helpful, for
+      example, to show images from the PR2's forearm cameras with a
+      consistent up direction, despite the fact that the forearms need to
+      rotate in arbitrary ways during manipulation.
+    </p>
+    <p>
+      It is not recommended to use the output from this node for further
+      computation, as it interpolates the source image, introduces black
+      borders, and does not output a camera_info.
+    </p>
+  </description>
+
+  <maintainer email="vincent.rabaud@gmail.com">Vincent Rabaud</maintainer>
+  <maintainer email="whitleysoftwareservices@gmail.com">Joshua Whitley</maintainer>
+  <maintainer email="jacob@openrobotics.org">Jacob Perron</maintainer>
+
+  <license>BSD</license>
+  <url type="website">https://index.ros.org/p/image_rotate/github-ros-perception-image_pipeline/</url>
+  <url type="bugtracker">https://github.com/ros-perception/image_pipeline/issues</url>
+  <url type="repository">https://github.com/ros-perception/image_pipeline</url>
+  <author>Blaise Gassend</author>
+
+  <buildtool_depend>ament_cmake_auto</buildtool_depend>
+
+  <build_depend>class_loader</build_depend>
+
+  <depend>cv_bridge</depend>
+  <depend>image_transport</depend>
+  <depend>rclcpp</depend>
+  <depend>rclcpp_components</depend>
+  <depend>tf2</depend>
+  <depend>tf2_geometry_msgs</depend>
+  <depend>tf2_ros</depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

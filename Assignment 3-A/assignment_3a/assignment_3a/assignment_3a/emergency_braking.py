@@ -28,7 +28,7 @@
 import rclpy # ROS2 client library (rcl) for Python (built on rcl C API)
 from rclpy.node import Node # Node class for Python nodes
 from geometry_msgs.msg import Twist # Twist (linear and angular velocities) message class
-from sensor_msgs.msg import LaserScan # Twist (linear and angular velocities) message class
+from sensor_msgs.msg import LaserScan # LaserScan (LIDAR range measurements) message class
 from rclpy.qos import QoSProfile, QoSReliabilityPolicy, QoSHistoryPolicy # Ouality of Service (tune communication between nodes)
 from rclpy.duration import Duration # Time duration class
 

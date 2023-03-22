@@ -83,7 +83,7 @@ The ROS2 package [`assignment_3a`](https://github.com/Tinker-Twins/Autonomy-Scie
     user@computer:~$ ros2 launch assignment_3a collision_avoidance.launch.py
     ```
 ## Results:
-The [`media`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%203-A/media) directory hosts pictures and videos of the implementations.
+The [`media`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%203-A/media) directory hosts pictures and videos of all the implementations.
 
 1. Simulation:
 

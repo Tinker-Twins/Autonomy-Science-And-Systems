@@ -25,10 +25,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'emergency_braking = assignment_3b.emergency_braking:main', # Python script (virtual)
-            'wall_following = assignment_3b.wall_following:main', # Python script (virtual)
-            'obstacle_avoidance = assignment_3b.obstacle_avoidance:main', # Python script (virtual)
-            'collision_avoidance = assignment_3b.collision_avoidance:main', # Python script (reality)
+            'lane_keeping = assignment_3b.lane_keeping:main', # Python script
+            'apriltag_tracking = assignment_3b.apriltag_tracking:main', # Python script
         ],
     },
 )

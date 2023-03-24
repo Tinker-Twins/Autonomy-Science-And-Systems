@@ -28,15 +28,15 @@
 import rclpy # ROS2 client library (rcl) for Python (built on rcl C API)
 from rclpy.node import Node # Node class for Python nodes
 from geometry_msgs.msg import Twist # Twist (linear and angular velocities) message class
-from sensor_msgs.msg import LaserScan # Twist (linear and angular velocities) message class
+from sensor_msgs.msg import Image # Image (camera frame) message class
 from rclpy.qos import QoSProfile, QoSReliabilityPolicy, QoSHistoryPolicy # Ouality of Service (tune communication between nodes)
-from rclpy.qos import qos_profile_sensor_data # Ouality of Service for sensor data, using best effort reliability and small queue depth
 from rclpy.duration import Duration # Time duration class
 
 # Python mudule imports
 import queue # FIFO queue
 import time # Tracking time
-from math import inf # Common mathematical constant
+import cv2 # OpenCV
+from cv_bridge import CvBridge, CvBridgeError # OpenCV bridge for ROS2
 
 # PID controller class
 class PIDController:
@@ -83,7 +83,7 @@ class RobotController(Node):
 
     def __init__(self):
         # Information and debugging
-        info = '\nMake the robot avoid collision with obstacles by maintaining a safe distance from them.\n'
+        info = '\nMake the robot avoid obstacles by maintaining a safe distance from them.\n'
         print(info)
         # ROS2 infrastructure
         super().__init__('robot_controller') # Create a node with name 'robot_controller'
@@ -92,62 +92,62 @@ class RobotController(Node):
         history=QoSHistoryPolicy.RMW_QOS_POLICY_HISTORY_KEEP_LAST, # Keep/store only up to last N samples
         depth=10 # Queue size/depth of 10 (only honored if the “history” policy was set to “keep last”)
         )
-        self.robot_scan_sub = self.create_subscription(LaserScan, '/scan', self.robot_laserscan_callback, qos_profile_sensor_data) # Subscriber which will subscribe to LaserScan message on the topic '/scan' adhering to 'qos_profile' QoS profile
-        self.robot_scan_sub # Prevent unused variable warning
+        self.robot_image_sub = self.create_subscription(Image, '/camera/image_raw', self.robot_image_callback, qos_profile) # Subscriber which will subscribe to Image message on the topic '/camera/image_raw' adhering to 'qos_profile' QoS profile
+        self.robot_image_sub # Prevent unused variable warning
         self.robot_ctrl_pub = self.create_publisher(Twist, '/cmd_vel', qos_profile) # Publisher which will publish Twist message to the topic '/cmd_vel' adhering to 'qos_profile' QoS profile
         timer_period = 0.001 # Node execution time period (seconds)
         self.timer = self.create_timer(timer_period, self.robot_controller_callback) # Define timer to execute 'robot_controller_callback()' every 'timer_period' seconds
-        self.laserscan = [] # Initialize variable to capture the laserscan
+        self.cv_bridge = CvBridge() # Initialize object to capture and convert the image
         self.ctrl_msg = Twist() # Robot control commands (twist)
         self.start_time = self.get_clock().now() # Record current time in seconds
         self.pid_lat = PIDController(0.2, 0.01, 0.2, 10) # Lateral PID controller object initialized with kP, kI, kD, kS
         self.pid_lon = PIDController(0.1, 0.001, 0.05, 10) # Longitudinal PID controller object initialized with kP, kI, kD, kS
-        self.scan_available = False # Flag to check if laserscan is available
 
     ########################
     '''Callback functions'''
     ########################
 
-    def robot_laserscan_callback(self, msg):
-        self.laserscan = msg.ranges # Capture most recent laserscan
-        for ls in range(len(self.laserscan)): # Real robot gives 0 instead of inf for non-returning laserscan
-            if self.laserscan[ls] == 0:
-                self.laserscan[ls] = inf
-        self.scan_available = True # Set flag to laserscan is available
+    def robot_image_callback(self, msg):
+        try:
+            self.cv_image = self.cv_bridge.imgmsg_to_cv2(msg, desired_encoding="bgr8") # Capture and convert most recent image 'msg' to OpenCV image with 'bgr8' encoding
+        except CvBridgeError as error:
+             print(error)
 
     def robot_controller_callback(self):
         DELAY = 4.0 # Time delay (s)
-        if self.get_clock().now() - self.start_time > Duration(seconds=DELAY) and self.scan_available:
-            left_scan_min = min(self.laserscan[0:30]) # Minimum of laserscan from left sector
-            right_scan_min = min(self.laserscan[330:360]) # Minimum of laserscan from right sector
-            tstamp = time.time() # Current timestamp (s)
-            if right_scan_min - left_scan_min > 0.5:
-                if left_scan_min >= 0.5:
-                    LIN_VEL = self.pid_lon.control(min(3.5, self.laserscan[0]), tstamp) # Linear velocity (m/s) from PID controller
-                else:
-                    LIN_VEL = 0.0 # Linear velocity (m/s)
-                ANG_VEL = -self.pid_lat.control(left_scan_min, tstamp) # Angular velocity (rad/s)
-            elif left_scan_min - right_scan_min > 0.5:
-                if right_scan_min >= 0.5:
-                    LIN_VEL = self.pid_lon.control(min(3.5, self.laserscan[0]), tstamp) # Linear velocity (m/s) from PID controller
-                else:
-                    LIN_VEL = 0.0 # Linear velocity (m/s)
-                ANG_VEL = self.pid_lat.control(right_scan_min, tstamp) # Angular velocity (rad/s)
-            else:
-                if left_scan_min <= 0.5 or right_scan_min <= 0.5:
-                    LIN_VEL = 0.0 # Linear velocity (m/s)
-                    if right_scan_min <= left_scan_min:
-                        ANG_VEL = self.pid_lat.control(right_scan_min, tstamp) # Angular velocity (rad/s)
-                    else:
-                        ANG_VEL = -self.pid_lat.control(left_scan_min, tstamp) # Angular velocity (rad/s)
-                else:
-                    LIN_VEL = self.pid_lon.control(min(3.5, self.laserscan[0]), tstamp) # Linear velocity (m/s) from PID controller
-                    ANG_VEL = 0.0 # Angular velocity (rad/s)
-            self.ctrl_msg.linear.x = LIN_VEL # Set linear velocity
-            self.ctrl_msg.angular.z = ANG_VEL # Set angular velocity
-            self.robot_ctrl_pub.publish(self.ctrl_msg) # Publish robot controls message
-            print('Distance to closest obstacle is {} m'.format(round(min(left_scan_min, right_scan_min), 4)))
-            #print('Robot moving with {} m/s and {} rad/s'.format(LIN_VEL, ANG_VEL))
+        if self.get_clock().now() - self.start_time > Duration(seconds=DELAY):
+            cv2.imshow("Camera Frame", self.cv_image)
+            cv2.waitKey(1)
+            # left_scan_min = min(self.laserscan[0:30]) # Minimum of laserscan from left sector
+            # right_scan_min = min(self.laserscan[330:360]) # Minimum of laserscan from right sector
+            # tstamp = time.time() # Current timestamp (s)
+            # if right_scan_min - left_scan_min > 0.5:
+            #     if left_scan_min >= 0.5:
+            #         LIN_VEL = self.pid_lon.control(min(3.5, self.laserscan[0]), tstamp) # Linear velocity (m/s) from PID controller
+            #     else:
+            #         LIN_VEL = 0.0 # Linear velocity (m/s)
+            #     ANG_VEL = -self.pid_lat.control(left_scan_min, tstamp) # Angular velocity (rad/s)
+            # elif left_scan_min - right_scan_min > 0.5:
+            #     if right_scan_min >= 0.5:
+            #         LIN_VEL = self.pid_lon.control(min(3.5, self.laserscan[0]), tstamp) # Linear velocity (m/s) from PID controller
+            #     else:
+            #         LIN_VEL = 0.0 # Linear velocity (m/s)
+            #     ANG_VEL = self.pid_lat.control(right_scan_min, tstamp) # Angular velocity (rad/s)
+            # else:
+            #     if left_scan_min <= 0.5 or right_scan_min <= 0.5:
+            #         LIN_VEL = 0.0 # Linear velocity (m/s)
+            #         if right_scan_min <= left_scan_min:
+            #             ANG_VEL = self.pid_lat.control(right_scan_min, tstamp) # Angular velocity (rad/s)
+            #         else:
+            #             ANG_VEL = -self.pid_lat.control(left_scan_min, tstamp) # Angular velocity (rad/s)
+            #     else:
+            #         LIN_VEL = self.pid_lon.control(min(3.5, self.laserscan[0]), tstamp) # Linear velocity (m/s) from PID controller
+            #         ANG_VEL = 0.0 # Angular velocity (rad/s)
+            # self.ctrl_msg.linear.x = LIN_VEL # Set linear velocity
+            # self.ctrl_msg.angular.z = ANG_VEL # Set angular velocity
+            # self.robot_ctrl_pub.publish(self.ctrl_msg) # Publish robot controls message
+            # print('Distance to closest obstacle is {} m'.format(round(min(left_scan_min, right_scan_min), 4)))
+            # #print('Robot moving with {} m/s and {} rad/s'.format(LIN_VEL, ANG_VEL))
         else:
             print('Initializing...')
 

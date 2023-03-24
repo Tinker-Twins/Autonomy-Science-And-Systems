@@ -62,13 +62,13 @@ def generate_launch_description():
             PythonLaunchDescriptionSource([turtlebot3_gazebo_launch, '/robot_state_publisher.launch.py']),
             launch_arguments={'use_sim_time': use_sim_time}.items(),
         ),
-        # Node(
-        #     package='assignment_3b',
-        #     executable='emergency_braking',
-        #     name='emergency_braking_node',
-        #     emulate_tty=True,
-        #     output='screen',
-        # ),
+        Node(
+            package='assignment_3b',
+            executable='lane_keeping',
+            name='lane_keeping_node',
+            emulate_tty=True,
+            output='screen',
+        ),
         Node(
             package='rviz2',
             executable='rviz2',

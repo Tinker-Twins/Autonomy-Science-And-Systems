@@ -123,15 +123,15 @@ class RobotController(Node):
             lower_yellow = np.array([20, 100, 100]) # Lower HSV threshold for yellow color
             upper_yellow = np.array([50, 255, 255]) # Upper HSV threshold for yellow color
             mask = cv2.inRange(hsv, lower_yellow, upper_yellow) # Threshold the HSV image to mask everything but yellow color
-            m = cv2.moments(mask, False) # Calculate moments of binary image
+            m = cv2.moments(mask, False) # Calculate moments (weighted average of image pixel intensities) of binary image
             try:
                 cx, cy = m['m10']/m['m00'], m['m01']/m['m00'] # Calculate centroid of the blob using moments
             except ZeroDivisionError:
                 cx, cy = height/2, width/2 # Calculate centroid of the blob as image center
-            cv2.circle(mask,(int(cx), int(cy)), 10,(0,0,255), -1) # Add centroid to masked frame
-            cv2.imshow("Camera Frame", self.cv_image) # Show camera frame
-            cv2.imshow("Masked Frame", mask) # Show masked frame
-            cv2.waitKey(1)
+            # cv2.circle(mask,(int(cx), int(cy)), 10,(0,0,255), -1) # Add centroid to masked frame
+            # cv2.imshow("Camera Frame", self.cv_image) # Show camera frame
+            # cv2.imshow("Masked Frame", mask) # Show masked frame
+            # cv2.waitKey(1)
             # Planning
             error = (height/2 - cx + 10)/175 # Calculate error (deviation) from lane center
             tstamp = time.time() # Current timestamp (s)
@@ -141,7 +141,7 @@ class RobotController(Node):
             self.ctrl_msg.linear.x = LIN_VEL # Set linear velocity
             self.ctrl_msg.angular.z = ANG_VEL # Set angular velocity
             self.robot_ctrl_pub.publish(self.ctrl_msg) # Publish robot controls message
-            print('Deviation from lane center {} pixels'.format(error))
+            print('Deviation from lane center {}'.format(error))
             #print('Robot moving with {} m/s and {} rad/s'.format(LIN_VEL, ANG_VEL))
         else:
             print('Initializing...')

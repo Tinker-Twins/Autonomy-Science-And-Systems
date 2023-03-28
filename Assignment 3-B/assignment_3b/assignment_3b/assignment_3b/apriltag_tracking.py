@@ -28,9 +28,12 @@
 import rclpy # ROS2 client library (rcl) for Python (built on rcl C API)
 from rclpy.node import Node # Node class for Python nodes
 from geometry_msgs.msg import Twist # Twist (linear and angular velocities) message class
-from sensor_msgs.msg import LaserScan # Twist (linear and angular velocities) message class
+from tf2_msgs.msg import TFMessage # Transforms message class
 from rclpy.qos import QoSProfile, QoSReliabilityPolicy, QoSHistoryPolicy # Ouality of Service (tune communication between nodes)
 from rclpy.duration import Duration # Time duration class
+from tf2_ros.transform_listener import TransformListener # Transform (tf2) listener
+from tf2_ros.buffer import Buffer # Transform buffer
+from tf2_ros import TransformException # Transform exception
 
 # Python mudule imports
 import queue # FIFO queue
@@ -90,56 +93,40 @@ class RobotController(Node):
         history=QoSHistoryPolicy.RMW_QOS_POLICY_HISTORY_KEEP_LAST, # Keep/store only up to last N samples
         depth=10 # Queue size/depth of 10 (only honored if the “history” policy was set to “keep last”)
         )
-        self.robot_scan_sub = self.create_subscription(LaserScan, '/scan', self.robot_laserscan_callback, qos_profile) # Subscriber which will subscribe to LaserScan message on the topic '/scan' adhering to 'qos_profile' QoS profile
-        self.robot_scan_sub # Prevent unused variable warning
         self.robot_ctrl_pub = self.create_publisher(Twist, '/cmd_vel', qos_profile) # Publisher which will publish Twist message to the topic '/cmd_vel' adhering to 'qos_profile' QoS profile
         timer_period = 0.001 # Node execution time period (seconds)
         self.timer = self.create_timer(timer_period, self.robot_controller_callback) # Define timer to execute 'robot_controller_callback()' every 'timer_period' seconds
-        self.laserscan = [] # Initialize variable to capture the laserscan
         self.ctrl_msg = Twist() # Robot control commands (twist)
         self.start_time = self.get_clock().now() # Record current time in seconds
-        self.pid_lat = PIDController(0.2, 0.01, 0.2, 10) # Lateral PID controller object initialized with kP, kI, kD, kS
-        self.pid_lon = PIDController(0.1, 0.001, 0.05, 10) # Longitudinal PID controller object initialized with kP, kI, kD, kS
+        self.pid_lon = PIDController(0.06, 0.001, 0.05, 10) # Longitudinal PID controller object initialized with kP, kI, kD, kS
+        self.pid_lat = PIDController(2.5, 0.01, 0.2, 10) # Lateral PID controller object initialized with kP, kI, kD, kS
+        self.tf_buffer = Buffer() # # Transform buffer
+        self.tf_listener = TransformListener(self.tf_buffer, self) # Transform listener
 
-    ########################
-    '''Callback functions'''
-    ########################
-
-    def robot_laserscan_callback(self, msg):
-        self.laserscan = msg.ranges # Capture most recent laserscan
+    #######################
+    '''Callback function'''
+    #######################
 
     def robot_controller_callback(self):
         DELAY = 4.0 # Time delay (s)
         if self.get_clock().now() - self.start_time > Duration(seconds=DELAY):
-            left_scan_min = min(self.laserscan[0:30]) # Minimum of laserscan from left sector
-            right_scan_min = min(self.laserscan[330:360]) # Minimum of laserscan from right sector
+            to_frame_rel = 'camera'
+            from_frame_rel = 'tag36h11_0'
+            try:
+                tf2_msg = self.tf_buffer.lookup_transform(to_frame_rel, from_frame_rel, rclpy.time.Time())
+            except TransformException as e:
+                # self.get_logger().info(f'Could not transform {to_frame_rel} to {from_frame_rel}: {e}')
+                print('No AprilTag marker found, looking for one...')
+                return
+            lon_error = tf2_msg.transform.translation.z # Calculate longitudinal error w.r.t. AprilTag marker
+            lat_error = -tf2_msg.transform.translation.x # Calculate lateral error w.r.t. AprilTag marker
             tstamp = time.time() # Current timestamp (s)
-            if right_scan_min - left_scan_min > 0.5:
-                if left_scan_min >= 0.5:
-                    LIN_VEL = self.pid_lon.control(min(3.5, self.laserscan[0]), tstamp) # Linear velocity (m/s) from PID controller
-                else:
-                    LIN_VEL = 0.0 # Linear velocity (m/s)
-                ANG_VEL = -self.pid_lat.control(left_scan_min, tstamp) # Angular velocity (rad/s)
-            elif left_scan_min - right_scan_min > 0.5:
-                if right_scan_min >= 0.5:
-                    LIN_VEL = self.pid_lon.control(min(3.5, self.laserscan[0]), tstamp) # Linear velocity (m/s) from PID controller
-                else:
-                    LIN_VEL = 0.0 # Linear velocity (m/s)
-                ANG_VEL = self.pid_lat.control(right_scan_min, tstamp) # Angular velocity (rad/s)
-            else:
-                if left_scan_min <= 0.5 or right_scan_min <= 0.5:
-                    LIN_VEL = 0.0 # Linear velocity (m/s)
-                    if right_scan_min <= left_scan_min:
-                        ANG_VEL = self.pid_lat.control(right_scan_min, tstamp) # Angular velocity (rad/s)
-                    else:
-                        ANG_VEL = -self.pid_lat.control(left_scan_min, tstamp) # Angular velocity (rad/s)
-                else:
-                    LIN_VEL = self.pid_lon.control(min(3.5, self.laserscan[0]), tstamp) # Linear velocity (m/s) from PID controller
-                    ANG_VEL = 0.0 # Angular velocity (rad/s)
+            LIN_VEL = self.pid_lon.control(lon_error, tstamp) # Linear velocity (m/s)
+            ANG_VEL = self.pid_lat.control(lat_error, tstamp) # Angular velocity (rad/s)
             self.ctrl_msg.linear.x = LIN_VEL # Set linear velocity
             self.ctrl_msg.angular.z = ANG_VEL # Set angular velocity
             self.robot_ctrl_pub.publish(self.ctrl_msg) # Publish robot controls message
-            print('Distance to closest obstacle is {} m'.format(round(min(left_scan_min, right_scan_min), 4)))
+            print('Deviation from AprilTag marker {}, {}'.format(round(lon_error, 4), round(lat_error, 4)))
             #print('Robot moving with {} m/s and {} rad/s'.format(LIN_VEL, ANG_VEL))
         else:
             print('Initializing...')

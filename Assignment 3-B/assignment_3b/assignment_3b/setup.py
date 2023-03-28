@@ -26,6 +26,7 @@ setup(
     entry_points={
         'console_scripts': [
             'lane_keeping = assignment_3b.lane_keeping:main', # Python script
+            'lane_following = assignment_3b.lane_following:main', # Python script
             'apriltag_tracking = assignment_3b.apriltag_tracking:main', # Python script
         ],
     },

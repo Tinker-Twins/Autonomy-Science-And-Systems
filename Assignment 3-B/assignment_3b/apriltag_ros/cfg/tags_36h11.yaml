@@ -17,6 +17,6 @@
 
         # optional list of tags to target detection
         tag:
-            ids: [0, 1]                       # tag IDs to be detected
-            frames: [tag36h11_0, tag36h11_1]  # optional frame names for each tag ID | default: tag<family>:<id> (e.g. "tag36h11:0")
-            sizes: [0.0762, 0.0762]           # optional tag-specific edge sizes
+            ids: [0]              # tag IDs to be detected
+            frames: [tag36h11_0]  # optional frame names for each tag ID | default: tag<family>:<id> (e.g. "tag36h11:0")
+            sizes: [0.0762]       # optional tag-specific edge sizes

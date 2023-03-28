@@ -37,6 +37,7 @@ import queue # FIFO queue
 import time # Tracking time
 import cv2 # OpenCV
 from cv_bridge import CvBridge, CvBridgeError # OpenCV bridge for ROS2
+import numpy as np # Numpy
 
 # PID controller class
 class PIDController:
@@ -83,7 +84,7 @@ class RobotController(Node):
 
     def __init__(self):
         # Information and debugging
-        info = '\nMake the robot avoid obstacles by maintaining a safe distance from them.\n'
+        info = '\nMake the robot perform lane keeping operation.\n'
         print(info)
         # ROS2 infrastructure
         super().__init__('robot_controller') # Create a node with name 'robot_controller'
@@ -100,8 +101,7 @@ class RobotController(Node):
         self.cv_bridge = CvBridge() # Initialize object to capture and convert the image
         self.ctrl_msg = Twist() # Robot control commands (twist)
         self.start_time = self.get_clock().now() # Record current time in seconds
-        self.pid_lat = PIDController(0.2, 0.01, 0.2, 10) # Lateral PID controller object initialized with kP, kI, kD, kS
-        self.pid_lon = PIDController(0.1, 0.001, 0.05, 10) # Longitudinal PID controller object initialized with kP, kI, kD, kS
+        self.pid_controller = PIDController(0.15, 0.01, 0.2, 10) # PID controller object initialized with kP, kI, kD, kS
 
     ########################
     '''Callback functions'''
@@ -116,38 +116,33 @@ class RobotController(Node):
     def robot_controller_callback(self):
         DELAY = 4.0 # Time delay (s)
         if self.get_clock().now() - self.start_time > Duration(seconds=DELAY):
-            cv2.imshow("Camera Frame", self.cv_image)
+            # Perception
+            height, width, channels = self.cv_image.shape # Get image shape (height, width, channels)
+            crop = self.cv_image[int((height/2)+50):int((height/2)+60)][1:int(width)] # Crop unwanted parts of the image
+            hsv = cv2.cvtColor(crop, cv2.COLOR_BGR2HSV) # Convert from RGB to HSV color space
+            lower_yellow = np.array([20, 100, 100]) # Lower HSV threshold for yellow color
+            upper_yellow = np.array([50, 255, 255]) # Upper HSV threshold for yellow color
+            mask = cv2.inRange(hsv, lower_yellow, upper_yellow) # Threshold the HSV image to mask everything but yellow color
+            m = cv2.moments(mask, False) # Calculate moments of binary image
+            try:
+                cx, cy = m['m10']/m['m00'], m['m01']/m['m00'] # Calculate centroid of the blob using moments
+            except ZeroDivisionError:
+                cx, cy = height/2, width/2 # Calculate centroid of the blob as image center
+            cv2.circle(mask,(int(cx), int(cy)), 10,(0,0,255), -1) # Add centroid to masked frame
+            cv2.imshow("Camera Frame", self.cv_image) # Show camera frame
+            cv2.imshow("Masked Frame", mask) # Show masked frame
             cv2.waitKey(1)
-            # left_scan_min = min(self.laserscan[0:30]) # Minimum of laserscan from left sector
-            # right_scan_min = min(self.laserscan[330:360]) # Minimum of laserscan from right sector
-            # tstamp = time.time() # Current timestamp (s)
-            # if right_scan_min - left_scan_min > 0.5:
-            #     if left_scan_min >= 0.5:
-            #         LIN_VEL = self.pid_lon.control(min(3.5, self.laserscan[0]), tstamp) # Linear velocity (m/s) from PID controller
-            #     else:
-            #         LIN_VEL = 0.0 # Linear velocity (m/s)
-            #     ANG_VEL = -self.pid_lat.control(left_scan_min, tstamp) # Angular velocity (rad/s)
-            # elif left_scan_min - right_scan_min > 0.5:
-            #     if right_scan_min >= 0.5:
-            #         LIN_VEL = self.pid_lon.control(min(3.5, self.laserscan[0]), tstamp) # Linear velocity (m/s) from PID controller
-            #     else:
-            #         LIN_VEL = 0.0 # Linear velocity (m/s)
-            #     ANG_VEL = self.pid_lat.control(right_scan_min, tstamp) # Angular velocity (rad/s)
-            # else:
-            #     if left_scan_min <= 0.5 or right_scan_min <= 0.5:
-            #         LIN_VEL = 0.0 # Linear velocity (m/s)
-            #         if right_scan_min <= left_scan_min:
-            #             ANG_VEL = self.pid_lat.control(right_scan_min, tstamp) # Angular velocity (rad/s)
-            #         else:
-            #             ANG_VEL = -self.pid_lat.control(left_scan_min, tstamp) # Angular velocity (rad/s)
-            #     else:
-            #         LIN_VEL = self.pid_lon.control(min(3.5, self.laserscan[0]), tstamp) # Linear velocity (m/s) from PID controller
-            #         ANG_VEL = 0.0 # Angular velocity (rad/s)
-            # self.ctrl_msg.linear.x = LIN_VEL # Set linear velocity
-            # self.ctrl_msg.angular.z = ANG_VEL # Set angular velocity
-            # self.robot_ctrl_pub.publish(self.ctrl_msg) # Publish robot controls message
-            # print('Distance to closest obstacle is {} m'.format(round(min(left_scan_min, right_scan_min), 4)))
-            # #print('Robot moving with {} m/s and {} rad/s'.format(LIN_VEL, ANG_VEL))
+            # Planning
+            error = (height/2 - cx + 10)/175 # Calculate error (deviation) from lane center
+            tstamp = time.time() # Current timestamp (s)
+            # Control
+            LIN_VEL = 0.22 # Linear velocity (m/s)
+            ANG_VEL = self.pid_controller.control(error, tstamp) # Angular velocity (rad/s)
+            self.ctrl_msg.linear.x = LIN_VEL # Set linear velocity
+            self.ctrl_msg.angular.z = ANG_VEL # Set angular velocity
+            self.robot_ctrl_pub.publish(self.ctrl_msg) # Publish robot controls message
+            print('Deviation from lane center {} pixels'.format(error))
+            #print('Robot moving with {} m/s and {} rad/s'.format(LIN_VEL, ANG_VEL))
         else:
             print('Initializing...')
 

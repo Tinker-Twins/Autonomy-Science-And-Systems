@@ -107,13 +107,12 @@ The [`media`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/
 
 1. Simulation:
 
-| ![Emergency Braking](media/emergency_braking.gif) | ![Wall Following](media/wall_following.gif) | ![Obstacle Avoidance](media/obstacle_avoidance.gif) |
-|:-------------------------------------:|:-----------------------------------------:|:-------------------------------------:|
-| Emergency Braking | Wall Following | Obstacle Avoidance |
-
+![Lane Keeping](media/lane_keeping.gif)
 
 2. Real World:
 
-| ![Collision Avoidance Robot](media/collision_avoidance_robot.gif) | ![Collision Avoidance Terminal](media/collision_avoidance_rviz.gif) |
+| ![Lane Following Robot](media/lane_following_robot.gif) | ![Lane Following RViz](media/lane_following_rviz.gif) |
 |:-------------------------------------:|:-----------------------------------------:|
-| Collision Avoidance - TurtleBot3 | Collision Avoidance - Remote PC |
+| Lane Following - TurtleBot3 | Lane Following - Remote PC |
+| ![AprilTag Tracking Robot](media/apriltag_tracking_robot.gif) | ![AprilTag Tracking RViz](media/apriltag_tracking_rviz.gif) |
+| AprilTag Tracking - TurtleBot3 | AprilTag Tracking - Remote PC |

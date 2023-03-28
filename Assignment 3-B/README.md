@@ -65,9 +65,9 @@ The ROS2 package [`assignment_3a`](https://github.com/Tinker-Twins/Autonomy-Scie
 
 ## Execute:
 ### Simulation:
-    ```bash
-    $ ros2 launch assignment_3b lane_keeping.launch.py
-    ```
+```bash
+$ ros2 launch assignment_3b lane_keeping.launch.py
+```
 
 ### Real World:
 1. Connect to the TurtleBot3 SBC via Secure Shell Protocol (SSH):

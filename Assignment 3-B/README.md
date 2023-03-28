@@ -65,13 +65,8 @@ The ROS2 package [`assignment_3a`](https://github.com/Tinker-Twins/Autonomy-Scie
 
 ## Execute:
 ### Simulation:
-1. Lane Keeping:
     ```bash
-    $ ros2 launch assignment_3a emergency_braking.launch.py
-    ```
-2. AprilTag Tracking:
-    ```bash
-    $ ros2 launch assignment_3a wall_following.launch.py
+    $ ros2 launch assignment_3b lane_keeping.launch.py
     ```
 
 ### Real World:
@@ -85,11 +80,16 @@ The ROS2 package [`assignment_3a`](https://github.com/Tinker-Twins/Autonomy-Scie
     ubuntu@ubuntu:~$ ros2 launch turtlebot3_bringup robot.launch.py
     ubuntu@ubuntu:~$ ros2 launch v4l2_camera camera.launch.py
     ```
-3. Lane Keeping:
+3. Lane Following:
     ```bash
-    user@computer:~$ ros2 launch assignment_3a emergency_braking.launch.py
+    user@computer:~$ ros2 launch assignment_3b lane_following.launch.py
     ```
 4. AprilTag Tracking:
+
+    **Launch File:**
+    ```bash
+    user@computer:~$ ros2 launch assignment_3b apriltag_tracking.launch.py
+    ```
 
     **Standalone Executable:**
     ```bash
@@ -99,12 +99,7 @@ The ROS2 package [`assignment_3a`](https://github.com/Tinker-Twins/Autonomy-Scie
     # user@computer:~$ ros2 topic echo /camera_info
     # user@computer:~$ ros2 topic echo /detections
     # user@computer:~$ ros2 topic echo /tf
-    user@computer:~$ rviz2 -d `ros2 pkg prefix assignment_3b`/share/assignment_3b/rviz/apriltag.rviz
-    ```
-    
-    **Launch File:**
-    ```bash
-    user@computer:~$ ros2 launch assignment_3a emergency_braking.launch.py
+    user@computer:~$ rviz2 -d `ros2 pkg prefix assignment_3b`/share/assignment_3b/rviz/apriltag_tracking.rviz
     ```
 
 ## Results:

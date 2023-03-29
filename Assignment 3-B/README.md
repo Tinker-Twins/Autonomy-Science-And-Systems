@@ -5,10 +5,16 @@
 I certify that all the work and writing that I contributed to here is my own and not acquired from external sources. I have cited sources appropriately and paraphrased correctly. I have not shared my writing with other students (for individual assignments) and other students outside my group (for group assignments), nor have I acquired any written portion of this document from past or present students.
 
 ## Robot Setup:
+
+<img align="left" style="padding-left: 10px; padding-right: 10px; padding-bottom: 10px" width="175" src="media/setup_robot.png">
+
 - [`turtlebot3_burger.urdf`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%203-B/assignment_3b/turtlebot3/turtlebot3/turtlebot3_description/urdf/turtlebot3_burger.urdf) from [`turtlebot3_description`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%203-B/assignment_3b/turtlebot3/turtlebot3/turtlebot3_description) package was modified [to define the fixed links and joints](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/47ece12be831e78be49e4889f11b2391f7642dcc/Assignment%203-B/assignment_3b/turtlebot3/turtlebot3/turtlebot3_description/urdf/turtlebot3_burger.urdf#L196-L223) (static transforms) for the camera module for simulating TurtleBot3 Burger with a camera in Gazebo simulator.
 - [`model.sdf`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%203-B/assignment_3b/turtlebot3/turtlebot3_simulations/turtlebot3_gazebo/models/turtlebot3_burger/model.sdf) from [`turtlebot3_gazebo`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%203-B/assignment_3b/turtlebot3/turtlebot3_simulations/turtlebot3_gazebo) package was modified [to define links, physical properties](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/47ece12be831e78be49e4889f11b2391f7642dcc/Assignment%203-B/assignment_3b/turtlebot3/turtlebot3_simulations/turtlebot3_gazebo/models/turtlebot3_burger/model.sdf#L318-L370) as well as the [fixed joints](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/47ece12be831e78be49e4889f11b2391f7642dcc/Assignment%203-B/assignment_3b/turtlebot3/turtlebot3_simulations/turtlebot3_gazebo/models/turtlebot3_burger/model.sdf#L419-L435) (static transforms) for the camera module for simulating TurtleBot3 Burger with a camera in Gazebo simulator.
 
 ## Environment Setup:
+
+<img align="left" style="padding-left: 10px; padding-right: 10px; padding-bottom: 10px" width="175" src="media/setup_environment.png">
+
 - [`lane_keeping.world`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%203-B/assignment_3b/assignment_3b/worlds/lane_keeping.world) file was defined to setup the base environment with lane lines on a plane.
 - [`lane_keeping.sdf`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%203-B/assignment_3b/assignment_3b/worlds/lane_keeping.sdf) was defined to spawn the [modified TurtleBot3 Burger with a camera](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%203-B/README.md#robot-setup) in the [`lane_keeping.world`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%203-B/assignment_3b/assignment_3b/worlds/lane_keeping.world) environment.
 

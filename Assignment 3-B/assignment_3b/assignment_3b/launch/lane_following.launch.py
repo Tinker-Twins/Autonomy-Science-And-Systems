@@ -22,19 +22,17 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import os
-from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch_ros.actions import Node
-from launch.actions import DeclareLaunchArgument
-from launch.actions import IncludeLaunchDescription
-from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.substitutions import FindPackageShare
-from launch.substitutions import LaunchConfiguration
 from launch.actions import ExecuteProcess
 
 def generate_launch_description():
     return LaunchDescription([
+        ExecuteProcess(
+            cmd=[['ros2 run image_transport republish compressed raw --ros-args --remap in/compressed:=image/compressed --remap out:=image/uncompressed']],
+            shell=True,
+        ),
         Node(
             package='assignment_3b',
             executable='lane_following',
@@ -46,6 +44,6 @@ def generate_launch_description():
             package='rviz2',
             executable='rviz2',
             name='odometry_rviz',
-            arguments=['-d', [FindPackageShare("assignment_3b"), '/rviz', '/lane_keeping.rviz',]]
+            arguments=['-d', [FindPackageShare("assignment_3b"), '/rviz', '/lane_following.rviz',]]
         ),
     ])

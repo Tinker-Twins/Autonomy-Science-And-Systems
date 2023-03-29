@@ -93,7 +93,7 @@ class RobotController(Node):
         history=QoSHistoryPolicy.RMW_QOS_POLICY_HISTORY_KEEP_LAST, # Keep/store only up to last N samples
         depth=10 # Queue size/depth of 10 (only honored if the “history” policy was set to “keep last”)
         )
-        self.robot_image_sub = self.create_subscription(Image, '/camera/image_raw', self.robot_image_callback, qos_profile) # Subscriber which will subscribe to Image message on the topic '/camera/image_raw' adhering to 'qos_profile' QoS profile
+        self.robot_image_sub = self.create_subscription(Image, 'image/uncompressed', self.robot_image_callback, qos_profile) # Subscriber which will subscribe to Image message on the topic 'image/uncompressed' adhering to 'qos_profile' QoS profile
         self.robot_image_sub # Prevent unused variable warning
         self.robot_ctrl_pub = self.create_publisher(Twist, '/cmd_vel', qos_profile) # Publisher which will publish Twist message to the topic '/cmd_vel' adhering to 'qos_profile' QoS profile
         timer_period = 0.001 # Node execution time period (seconds)
@@ -101,7 +101,7 @@ class RobotController(Node):
         self.cv_bridge = CvBridge() # Initialize object to capture and convert the image
         self.ctrl_msg = Twist() # Robot control commands (twist)
         self.start_time = self.get_clock().now() # Record current time in seconds
-        self.pid_controller = PIDController(0.15, 0.01, 0.2, 10) # PID controller object initialized with kP, kI, kD, kS
+        self.pid_controller = PIDController(0.25, 0.01, 0.2, 10) # PID controller object initialized with kP, kI, kD, kS
 
     ########################
     '''Callback functions'''
@@ -118,11 +118,11 @@ class RobotController(Node):
         if self.get_clock().now() - self.start_time > Duration(seconds=DELAY):
             # Perception
             height, width, channels = self.cv_image.shape # Get image shape (height, width, channels)
-            crop = self.cv_image[int((height/2)+50):int((height/2)+60)][1:int(width)] # Crop unwanted parts of the image
+            crop = self.cv_image[int((height/2)+110):int((height/2)+120)][1:int(width)] # Crop unwanted parts of the image
             hsv = cv2.cvtColor(crop, cv2.COLOR_BGR2HSV) # Convert from RGB to HSV color space
-            lower_yellow = np.array([20, 100, 100]) # Lower HSV threshold for yellow color
-            upper_yellow = np.array([50, 255, 255]) # Upper HSV threshold for yellow color
-            mask = cv2.inRange(hsv, lower_yellow, upper_yellow) # Threshold the HSV image to mask everything but yellow color
+            lower_white = np.array([0, 0, 212]) # Lower HSV threshold for white color
+            upper_white = np.array([131, 255, 255]) # Upper HSV threshold for white color
+            mask = cv2.inRange(hsv, lower_white, upper_white) # Threshold the HSV image to mask everything but white color
             m = cv2.moments(mask, False) # Calculate moments (weighted average of image pixel intensities) of binary image
             try:
                 cx, cy = m['m10']/m['m00'], m['m01']/m['m00'] # Calculate centroid of the blob using moments
@@ -130,13 +130,14 @@ class RobotController(Node):
                 cx, cy = height/2, width/2 # Calculate centroid of the blob as image center
             # cv2.circle(mask,(int(cx), int(cy)), 10,(0,0,255), -1) # Add centroid to masked frame
             # cv2.imshow("Camera Frame", self.cv_image) # Show camera frame
+            # cv2.imshow("Cropped Frame", crop) # Show cropped frame
             # cv2.imshow("Masked Frame", mask) # Show masked frame
             # cv2.waitKey(1)
             # Planning
             error = (height/2 - cx + 10)/175 # Calculate error (deviation) from lane center
             tstamp = time.time() # Current timestamp (s)
             # Control
-            LIN_VEL = 0.22 # Linear velocity (m/s)
+            LIN_VEL = 0.06 # Linear velocity (m/s)
             ANG_VEL = self.pid_controller.control(error, tstamp) # Angular velocity (rad/s)
             self.ctrl_msg.linear.x = LIN_VEL # Set linear velocity
             self.ctrl_msg.angular.z = ANG_VEL # Set angular velocity

@@ -130,6 +130,7 @@ class RobotController(Node):
                 cx, cy = height/2, width/2 # Calculate centroid of the blob as image center
             # cv2.circle(mask,(int(cx), int(cy)), 10,(0,0,255), -1) # Add centroid to masked frame
             # cv2.imshow("Camera Frame", self.cv_image) # Show camera frame
+            # cv2.imshow("Cropped Frame", crop) # Show cropped frame
             # cv2.imshow("Masked Frame", mask) # Show masked frame
             # cv2.waitKey(1)
             # Planning

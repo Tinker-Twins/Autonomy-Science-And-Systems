@@ -4,6 +4,8 @@ This repository is a part of course AuE-8230 "Autonomy: Science and Systems" at 
 
 ## Repository Structure
 
+Each of the following directories has a detailed `README.md` of their own.
+
 * **[Assignment 1-A](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%201-A):** Comparative study of [ROS-1](https://wiki.ros.org/noetic), [ROS-2](https://docs.ros.org/en/foxy/) and [ROS-I](https://rosindustrial.org/).
 * **[Mini Assignment 1](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Mini%20Assignment%201):** Picture-proofs of [ROS-1 Noetic](http://wiki.ros.org/noetic/Installation/Ubuntu) and [ROS-2 Foxy](https://docs.ros.org/en/foxy/Installation/Alternatives/Ubuntu-Development-Setup.html) installations.
 * **[Mini Assignment 2](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Mini%20Assignment%202):** Video-proofs of [ROS-1 Noetic](http://wiki.ros.org/noetic/Installation/Ubuntu) and [ROS-2 Foxy](https://docs.ros.org/en/foxy/Installation/Alternatives/Ubuntu-Development-Setup.html) installations.

@@ -77,7 +77,7 @@ The **recommended (and convenient) way** of performing AprilTag detection is as 
 $ ros2 launch v4l2_camera camera.launch.py
 # $ ros2 launch v4l2_camera camera_view.launch.py
 $ ros2 run image_transport republish compressed raw --ros-args --remap in/compressed:=image/compressed --remap out:=image/uncompressed
-$ ros2 run rqt_image_view rqt_image_view
+# $ ros2 run rqt_image_view rqt_image_view
 $ ros2 run apriltag_ros apriltag_node --ros-args -r image_rect:=/image/uncompressed -r camera_info:=/camera_info --params-file `ros2 pkg prefix apriltag_ros`/share/apriltag_ros/cfg/tags_36h11.yaml
 # $ ros2 topic echo /camera_info
 # $ ros2 topic echo /detections

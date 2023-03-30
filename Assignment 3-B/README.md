@@ -93,21 +93,8 @@ $ ros2 launch assignment_3b lane_keeping.launch.py
     user@computer:~$ ros2 launch assignment_3b lane_following.launch.py
     ```
 4. AprilTag Tracking:
-
-    **Launch File:**
     ```bash
     user@computer:~$ ros2 launch assignment_3b apriltag_tracking.launch.py
-    ```
-
-    **Standalone Executable:**
-    ```bash
-    user@computer:~$ ros2 run image_transport republish compressed raw --ros-args --remap in/compressed:=image/compressed --remap out:=image/uncompressed
-    user@computer:~$ ros2 run rqt_image_view rqt_image_view
-    user@computer:~$ ros2 run apriltag_ros apriltag_node --ros-args -r image_rect:=/image/uncompressed -r camera_info:=/camera_info --params-file `ros2 pkg prefix apriltag_ros`/share/apriltag_ros/cfg/tags_36h11.yaml
-    # user@computer:~$ ros2 topic echo /camera_info
-    # user@computer:~$ ros2 topic echo /detections
-    # user@computer:~$ ros2 topic echo /tf
-    user@computer:~$ rviz2 -d `ros2 pkg prefix assignment_3b`/share/assignment_3b/rviz/apriltag_tracking.rviz
     ```
 
 ## Results:

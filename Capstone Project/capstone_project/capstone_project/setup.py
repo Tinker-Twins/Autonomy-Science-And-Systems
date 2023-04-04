@@ -29,10 +29,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'wall_following = capstone_project.wall_following:main', # Python script
-            'lane_keeping = capstone_project.lane_keeping:main', # Python script
-            'lane_following = capstone_project.lane_following:main', # Python script
-            'apriltag_tracking = capstone_project.apriltag_tracking:main', # Python script
+            'wall_following_sim = capstone_project.wall_following_sim:main', # Python script
+            'wall_following_real = capstone_project.wall_following_real:main', # Python script
         ],
     },
 )

@@ -34,38 +34,11 @@ from launch.substitutions import LaunchConfiguration
 from launch.actions import ExecuteProcess
 
 def generate_launch_description():
-
-    use_sim_time = LaunchConfiguration('use_sim_time', default='True')
-
-    pkg_gazebo_ros = get_package_share_directory('gazebo_ros')
-    pkg_share = get_package_share_directory('capstone_project')
-
-    gazebo = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            os.path.join(pkg_gazebo_ros, 'launch', 'gazebo.launch.py')
-        )
-    )
-
-    turtlebot3_gazebo_launch = os.path.join(get_package_share_directory('turtlebot3_gazebo'), 'launch')
-
     return LaunchDescription([
-        DeclareLaunchArgument(
-            'world',
-            default_value=[os.path.join(pkg_share, 'worlds', 'lane_keeping.sdf')],
-            description='Simulation Description Format (SDFormat/SDF) for Describing Robot and Environment',
-        ),
-        gazebo,
-        ExecuteProcess(
-            cmd=['ros2', 'param', 'set', '/gazebo', 'use_sim_time', use_sim_time],
-            output='screen'),
-        IncludeLaunchDescription(
-            PythonLaunchDescriptionSource([turtlebot3_gazebo_launch, '/robot_state_publisher.launch.py']),
-            launch_arguments={'use_sim_time': use_sim_time}.items(),
-        ),
         Node(
             package='capstone_project',
-            executable='lane_keeping',
-            name='lane_keeping_node',
+            executable='wall_following_real',
+            name='wall_following_real_node',
             emulate_tty=True,
             output='screen',
         ),
@@ -73,6 +46,6 @@ def generate_launch_description():
             package='rviz2',
             executable='rviz2',
             name='odometry_rviz',
-            arguments=['-d', [FindPackageShare("capstone_project"), '/rviz', '/lane_keeping.rviz',]]
+            arguments=['-d', [FindPackageShare("capstone_project"), '/rviz', '/capstone_project_real.rviz',]]
         ),
     ])

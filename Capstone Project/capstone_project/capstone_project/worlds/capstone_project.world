@@ -1,5 +1,5 @@
 <sdf version='1.7'>
-  <world name='auefinals'>
+  <world name='capstone_project'>
     <scene>
       <ambient>0 0 0 1</ambient>
       <shadows>0</shadows>
@@ -111,7 +111,7 @@
         <falloff>0</falloff>
       </spot>
     </light>
-    <state world_name='auefinals'>
+    <state world_name='capstone_project'>
       <sim_time>2077 420000000</sim_time>
       <real_time>242 101473763</real_time>
       <wall_time>1680596684 388860785</wall_time>

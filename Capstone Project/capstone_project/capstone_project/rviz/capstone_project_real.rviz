@@ -6,8 +6,9 @@ Panels:
       Expanded:
         - /Odometry1/Shape1
         - /LIDAR1/Topic1
+        - /Camera1
       Splitter Ratio: 0.5
-    Tree Height: 363
+    Tree Height: 335
   - Class: rviz_common/Selection
     Name: Selection
   - Class: rviz_common/Tool Properties
@@ -83,8 +84,8 @@ Visualization Manager:
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
-        Max Value: 0.20510712265968323
-        Min Value: 0.1702556014060974
+        Max Value: 0.18199999630451202
+        Min Value: 0.18199999630451202
         Value: true
       Axis: Z
       Channel Name: x
@@ -125,7 +126,7 @@ Visualization Manager:
         Durability Policy: Volatile
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /camera/image_raw
+        Value: /image/uncompressed
       Value: true
   Enabled: true
   Global Options:

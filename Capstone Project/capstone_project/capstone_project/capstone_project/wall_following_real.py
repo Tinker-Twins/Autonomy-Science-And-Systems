@@ -100,8 +100,8 @@ class RobotController(Node):
         self.laserscan = [] # Initialize variable to capture the laserscan
         self.ctrl_msg = Twist() # Robot control commands (twist)
         self.start_time = self.get_clock().now() # Record current time in seconds
-        self.pid_lat = PIDController(1.4, 0.01, 1.2, 10) # Lateral PID controller object initialized with kP, kI, kD, kS
-        self.pid_lon = PIDController(0.06, 0.001, 0.05, 10) # Longitudinal PID controller object initialized with kP, kI, kD, kS
+        self.pid_lat = PIDController(0.3, 0.01, 1.2, 10) # Lateral PID controller object initialized with kP, kI, kD, kS
+        self.pid_lon = PIDController(0.05, 0.001, 0.05, 10) # Longitudinal PID controller object initialized with kP, kI, kD, kS
 
     ########################
     '''Callback functions'''
@@ -119,10 +119,10 @@ class RobotController(Node):
             tstamp = time.time() # Current timestamp (s)
             if cte == inf:
                 LIN_VEL = self.pid_lon.control(min(3.5, self.laserscan[0]), tstamp) # Linear velocity (m/s) from longitudinal PID controller
-                ANG_VEL = 0.15 # Angular velocity (rad/s)
+                ANG_VEL = 0.1 # Angular velocity (rad/s)
             elif cte == -inf:
                 LIN_VEL = self.pid_lon.control(min(3.5, self.laserscan[0]), tstamp) # Linear velocity (m/s) from longitudinal PID controller
-                ANG_VEL = -0.15 # Angular velocity (rad/s)
+                ANG_VEL = -0.1 # Angular velocity (rad/s)
             else:
                 LIN_VEL = self.pid_lon.control(min(3.5, self.laserscan[0]), tstamp) # Linear velocity (m/s) from longitudinal PID controller
                 ANG_VEL = min(0.15, self.pid_lat.control(cte, tstamp)) # Angular velocity (rad/s) from lateral PID controller

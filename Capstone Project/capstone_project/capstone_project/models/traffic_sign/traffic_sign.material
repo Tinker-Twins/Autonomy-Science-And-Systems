@@ -1,0 +1,14 @@
+material traffic_sign
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture traffic_sign.png
+      }
+    }
+  }
+}
+

@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<sdf version='1.4'>
+  <model name='turtlebot3_lane'>
+    <static>true</static>
+    <link name='link'>
+      <collision name='collision'>
+        <geometry>
+          <plane>
+            <normal>0 0 1</normal>
+            <size>500 500</size>
+          </plane>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.5</mu>
+              <mu2>.5</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='visual_0'>
+        <pose>0 0 0 0 0 0</pose>
+        <cast_shadows>false</cast_shadows>
+        <geometry>
+          <plane>
+            <normal>0 0 1</normal>
+            <size>20 20</size>
+          </plane>
+        </geometry>
+        <material>
+          <script>
+            <uri>model://turtlebot3_lane/materials/scripts</uri>
+            <uri>model://turtlebot3_lane/materials/textures</uri>
+            <name>path/kobuki</name>
+          </script>
+        </material>
+      </visual>
+    </link>
+  </model>
+</sdf>
+

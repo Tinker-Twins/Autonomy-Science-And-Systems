@@ -1,0 +1,20 @@
+image_width: 320
+image_height: 240
+camera_name: arducam_8mp:_usb_camera
+camera_matrix:
+  rows: 3
+  cols: 3
+  data: [257.741562, 0.000000, 155.321298, 0.000000, 257.568341, 125.460201, 0.000000, 0.000000, 1.000000]
+distortion_model: plumb_bob
+distortion_coefficients:
+  rows: 1
+  cols: 5
+  data: [0.142780, -0.260294, 0.008702, -0.007410, 0.000000]
+rectification_matrix:
+  rows: 3
+  cols: 3
+  data: [1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000]
+projection_matrix:
+  rows: 3
+  cols: 4
+  data: [261.293579, 0.000000, 152.339266, 0.000000, 0.000000, 262.414032, 126.639855, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000]

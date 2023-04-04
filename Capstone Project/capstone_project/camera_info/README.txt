@@ -1,0 +1,1 @@
+The camera calibration `yaml` file should be placed in the `~/.ros/camera_info` directory (renamed and populated with the correct camera name if required).

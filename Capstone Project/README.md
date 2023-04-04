@@ -15,8 +15,8 @@ I certify that all the work and writing that I contributed to here is my own and
 
 <img align="left" style="padding-left: 10px; padding-right: 10px; padding-bottom: 10px" width="175" src="media/setup_environment.png">
 
-- [`lane_keeping.world`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/capstone_project/capstone_project/worlds/lane_keeping.world) file was defined to setup the base environment with lane lines on a plane.
-- [`lane_keeping.sdf`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/capstone_project/capstone_project/worlds/lane_keeping.sdf) was defined to spawn the [modified TurtleBot3 Burger with a camera](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/README.md#robot-setup) in the [`lane_keeping.world`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/capstone_project/capstone_project/worlds/lane_keeping.world) environment.
+- [`capstone_project.world`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/capstone_project/capstone_project/worlds/capstone_project.world) file was defined to setup the base environment with lane lines on a plane.
+- [`capstone_project.sdf`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/capstone_project/capstone_project/worlds/capstone_project.sdf) was defined to spawn the [modified TurtleBot3 Burger with a camera](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/README.md#robot-setup) in the [`capstone_project.world`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/capstone_project/capstone_project/worlds/capstone_project.world) environment.
 
 
 ## Description:

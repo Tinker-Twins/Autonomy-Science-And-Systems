@@ -1,4 +1,4 @@
-# Assignment 3-B: TurtleBot3 Vision Processing, Tracking and Following
+# Capstone Project: TurtleBot3 Autonomous Navigation
 **Authors:** Chinmay Samak and Tanmay Samak
 
 ## Disclaimer:

@@ -95,6 +95,12 @@ $ ros2 launch capstone_project lane_keeping.launch.py
     user@computer:~$ ros2 launch capstone_project apriltag_tracking.launch.py
     ```
 
+## Troubleshooting:
+In case [Gazebo simulator](https://gazebosim.org/home) crashes, hangs or ceases to launch properly, try killing all instances of `gzserver` and `gzclient` using the following command:
+```bash
+user@computer:~$ killall gzserver and killall gzclient
+```
+
 ## Results:
 The [`media`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Capstone%20Project/media) directory hosts pictures and videos of the implementations.
 

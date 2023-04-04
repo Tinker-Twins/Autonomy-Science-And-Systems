@@ -92,7 +92,7 @@ class RobotController(Node):
         history=QoSHistoryPolicy.RMW_QOS_POLICY_HISTORY_KEEP_LAST, # Keep/store only up to last N samples
         depth=10 # Queue size/depth of 10 (only honored if the “history” policy was set to “keep last”)
         )
-        self.robot_scan_sub = self.create_subscription(LaserScan, '/scan', self.robot_laserscan_callback, qos_profile_sensor_data) # Subscriber which will subscribe to LaserScan message on the topic '/scan' adhering to 'qos_profile' QoS profile
+        self.robot_scan_sub = self.create_subscription(LaserScan, '/scan', self.robot_laserscan_callback, qos_profile_sensor_data) # Subscriber which will subscribe to LaserScan message on the topic '/scan' adhering to 'qos_profile_sensor_data' QoS profile
         self.robot_scan_sub # Prevent unused variable warning
         self.robot_ctrl_pub = self.create_publisher(Twist, '/cmd_vel', qos_profile) # Publisher which will publish Twist message to the topic '/cmd_vel' adhering to 'qos_profile' QoS profile
         timer_period = 0.001 # Node execution time period (seconds)

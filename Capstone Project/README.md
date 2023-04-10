@@ -142,12 +142,22 @@ The [`media`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/
 
 1. Simulation:
 
-![Lane Keeping](media/lane_keeping.gif)
+![Capstone Project Sim](media/capstone_project_sim.gif)
 
 2. Real World:
 
-| ![Lane Following Robot](media/lane_following_robot.gif) | ![Lane Following RViz](media/lane_following_rviz.gif) |
-|:-------------------------------------:|:-----------------------------------------:|
-| Lane Following - TurtleBot3 | Lane Following - Remote PC |
-| ![AprilTag Tracking Robot](media/apriltag_tracking_robot.gif) | ![AprilTag Tracking RViz](media/apriltag_tracking_rviz.gif) |
-| AprilTag Tracking - TurtleBot3 | AprilTag Tracking - Remote PC |
+![Capstone Project Real](media/capstone_project_real.gif)
+
+3. Individual Tasks:
+
+| ![Wall Following Simulation](media/wall_following_sim.gif) | ![Wall Following Robot](media/wall_following_real_robot.gif) | ![Lane Following RViz](media/wall_following_real_rviz.gif) |
+|:---------------------------------:|:------------------------------------:|:------------------------------------:|
+| Wall Following - Simulation | Wall Following - TurtleBot3 | Wall Following - Remote PC |
+| ![Obstacle Avoidance Simulation](media/obstacle_avoidance_sim.gif) | ![Obstacle Avoidance Robot](media/obstacle_avoidance_real_robot.gif) | ![Obstacle Avoidance RViz](media/obstacle_avoidance_real_rviz.gif) |
+| Obstacle Avoidance - Simulation | Obstacle Avoidance - TurtleBot3 | Obstacle Avoidance - Remote PC |
+| ![Line Following Simulation](media/line_following_sim.gif) | ![Line Following Robot](media/line_following_real_robot.gif) | ![Lane Following RViz](media/line_following_real_rviz.gif) |
+| Line Following - Simulation | Line Following - TurtleBot3 | Line Following - Remote PC |
+| ![Stop Sign Detection Simulation](media/stop_sign_detection_sim.gif) | ![Stop Sign Detection Robot](media/stop_sign_detection_real_robot.gif) | ![Stop Sign Detection RViz](media/stop_sign_detection_real_rviz.gif) |
+| Stop Sign Detection - Simulation | Stop Sign Detection - TurtleBot3 | Stop Sign Detection - Remote PC |
+| ![AprilTag Tracking Simulation](media/apriltag_tracking_real_robot.gif) | ![AprilTag Tracking Robot](media/apriltag_tracking_real_robot.gif) | ![AprilTag Tracking RViz](media/apriltag_tracking_real_rviz.gif) |
+| AprilTag Tracking - Simulation | AprilTag Tracking - TurtleBot3 | AprilTag Tracking - Remote PC |

@@ -70,9 +70,30 @@ The ROS2 package [`capstone_project`](https://github.com/Tinker-Twins/Autonomy-S
 
 ## Execute:
 ### Simulation:
-```bash
-$ ros2 launch capstone_project lane_keeping.launch.py
-```
+1. Capstone Project:
+    ```bash
+    user@computer:~$ ros2 launch capstone_project capstone_project_sim.launch.py
+    ```
+2. Wall Following:
+    ```bash
+    user@computer:~$ ros2 launch capstone_project wall_following_sim.launch.py
+    ```
+3. Obstacle Avoidance:
+    ```bash
+    user@computer:~$ ros2 launch capstone_project obstacle_avoidance_sim.launch.py
+    ```
+4. Line Following:
+    ```bash
+    user@computer:~$ ros2 launch capstone_project line_following_sim.launch.py
+    ```
+5. Stop Sign Detection:
+    ```bash
+    user@computer:~$ ros2 launch capstone_project stop_sign_detection_sim.launch.py
+    ```
+6. AprilTag Tracking:
+    ```bash
+    user@computer:~$ ros2 launch capstone_project apriltag_tracking_sim.launch.py
+    ```
 
 ### Real World:
 1. Connect to the TurtleBot3 SBC via Secure Shell Protocol (SSH):
@@ -85,13 +106,29 @@ $ ros2 launch capstone_project lane_keeping.launch.py
     ubuntu@ubuntu:~$ ros2 launch turtlebot3_bringup robot.launch.py
     ubuntu@ubuntu:~$ ros2 launch v4l2_camera camera.launch.py
     ```
-3. Lane Following:
+3. Capstone Project:
     ```bash
-    user@computer:~$ ros2 launch capstone_project lane_following.launch.py
+    user@computer:~$ ros2 launch capstone_project capstone_project_real.launch.py
     ```
-4. AprilTag Tracking:
+4. Wall Following:
     ```bash
-    user@computer:~$ ros2 launch capstone_project apriltag_tracking.launch.py
+    user@computer:~$ ros2 launch capstone_project wall_following_real.launch.py
+    ```
+5. Obstacle Avoidance:
+    ```bash
+    user@computer:~$ ros2 launch capstone_project obstacle_avoidance_real.launch.py
+    ```
+6. Line Following:
+    ```bash
+    user@computer:~$ ros2 launch capstone_project line_following_real.launch.py
+    ```
+7. Stop Sign Detection:
+    ```bash
+    user@computer:~$ ros2 launch capstone_project stop_sign_detection_real.launch.py
+    ```
+8. AprilTag Tracking:
+    ```bash
+    user@computer:~$ ros2 launch capstone_project apriltag_tracking_real.launch.py
     ```
 
 ## Troubleshooting:

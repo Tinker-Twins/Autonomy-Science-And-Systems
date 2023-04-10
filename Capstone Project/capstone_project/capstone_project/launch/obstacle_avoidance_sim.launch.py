@@ -53,7 +53,7 @@ def generate_launch_description():
     return LaunchDescription([
         DeclareLaunchArgument(
             'world',
-            default_value=[os.path.join(pkg_share, 'worlds', 'wall_following.sdf')],
+            default_value=[os.path.join(pkg_share, 'worlds', 'obstacle_avoidance.sdf')],
             description='Simulation Description Format (SDFormat/SDF) for Describing Robot and Environment',
         ),
         gazebo,
@@ -66,8 +66,8 @@ def generate_launch_description():
         ),
         Node(
             package='capstone_project',
-            executable='wall_following_sim',
-            name='wall_following_sim_node',
+            executable='obstacle_avoidance_sim',
+            name='obstacle_avoidance_sim_node',
             emulate_tty=True,
             output='screen',
         ),

@@ -31,6 +31,8 @@ setup(
         'console_scripts': [
             'wall_following_sim = capstone_project.wall_following_sim:main', # Python script
             'wall_following_real = capstone_project.wall_following_real:main', # Python script
+            'obstacle_avoidance_sim = capstone_project.obstacle_avoidance_sim:main', # Python script
+            'obstacle_avoidance_real = capstone_project.obstacle_avoidance_real:main', # Python script
         ],
     },
 )

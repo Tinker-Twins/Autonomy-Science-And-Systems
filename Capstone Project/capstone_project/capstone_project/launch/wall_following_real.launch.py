@@ -43,7 +43,7 @@ def generate_launch_description():
         Node(
             package='rviz2',
             executable='rviz2',
-            name='odometry_rviz',
+            name='rviz',
             arguments=['-d', [FindPackageShare("capstone_project"), '/rviz', '/capstone_project_real.rviz',]]
         ),
     ])

@@ -22,17 +22,52 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+import os
+from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch_ros.actions import Node
+from launch.actions import DeclareLaunchArgument
+from launch.actions import IncludeLaunchDescription
+from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.substitutions import FindPackageShare
+from launch.substitutions import LaunchConfiguration
+from launch.actions import ExecuteProcess
 
 def generate_launch_description():
 
+    use_sim_time = LaunchConfiguration('use_sim_time', default='True')
+
+    pkg_gazebo_ros = get_package_share_directory('gazebo_ros')
+    pkg_share = get_package_share_directory('capstone_project')
+
+    os.environ["GAZEBO_MODEL_PATH"] = os.path.join(pkg_share, 'models')
+
+    gazebo = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(pkg_gazebo_ros, 'launch', 'gazebo.launch.py')
+        )
+    )
+
+    turtlebot3_gazebo_launch = os.path.join(get_package_share_directory('turtlebot3_gazebo'), 'launch')
+
     return LaunchDescription([
+        DeclareLaunchArgument(
+            'world',
+            default_value=[os.path.join(pkg_share, 'worlds', 'capstone_project.sdf')],
+            description='Simulation Description Format (SDFormat/SDF) for Describing Robot and Environment',
+        ),
+        gazebo,
+        ExecuteProcess(
+            cmd=['ros2', 'param', 'set', '/gazebo', 'use_sim_time', use_sim_time],
+            output='screen'),
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource([turtlebot3_gazebo_launch, '/robot_state_publisher.launch.py']),
+            launch_arguments={'use_sim_time': use_sim_time}.items(),
+        ),
         Node(
             package='capstone_project',
-            executable='obstacle_avoidance_real',
-            name='obstacle_avoidance_real_node',
+            executable='capstone_project_sim',
+            name='capstone_project_sim_node',
             emulate_tty=True,
             output='screen',
         ),
@@ -40,6 +75,6 @@ def generate_launch_description():
             package='rviz2',
             executable='rviz2',
             name='rviz',
-            arguments=['-d', [FindPackageShare("capstone_project"), '/rviz', '/capstone_project_real.rviz',]]
+            arguments=['-d', [FindPackageShare("capstone_project"), '/rviz', '/capstone_project_sim.rviz',]]
         ),
     ])

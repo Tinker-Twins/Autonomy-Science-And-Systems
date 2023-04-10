@@ -31,8 +31,8 @@ def generate_launch_description():
     return LaunchDescription([
         Node(
             package='capstone_project',
-            executable='obstacle_avoidance_real',
-            name='obstacle_avoidance_real_node',
+            executable='capstone_project_real',
+            name='capstone_project_real_node',
             emulate_tty=True,
             output='screen',
         ),

@@ -83,7 +83,7 @@ class RobotController(Node):
 
     def __init__(self):
         # Information and debugging
-        info = '\nMake the robot avoid obstacles by maintaining a safe distance from them.\n'
+        info = '\nMake the robot follow wall, avoid obstacles, follow line, detect stop sign and track AprilTag marker.\n'
         print(info)
         # ROS2 infrastructure
         super().__init__('robot_controller') # Create a node with name 'robot_controller'
@@ -103,7 +103,8 @@ class RobotController(Node):
         self.pid_lat = PIDController(0.22, 0.01, 0.3, 10) # Lateral PID controller object initialized with kP, kI, kD, kS
         self.pid_lon = PIDController(0.11, 0.001, 0.01, 10) # Longitudinal PID controller object initialized with kP, kI, kD, kS
         self.data_available = False # Initialize data available flag to false
-        
+        self.start_mode = 'outside' # Robot start mode (inside/outside wall arena)
+
     ########################
     '''Callback functions'''
     ########################
@@ -130,20 +131,28 @@ class RobotController(Node):
                 right = np.mean( self.laserscan[330-side_sector:330]) # Right DTC
                 # Control logic
                 tstamp = time.time() # Current timestamp (s)
-                if oblique_left < 0.5 or oblique_right < 0.5: # Too close to obstacle(s)
+                if (self.laserscan[90]>=2.5 and self.laserscan[270]>=2.5) and self.start_mode=='outside': # No walls on the sides
+                    LIN_VEL = 0.2 # Linear velocity (m/s)
+                    ANG_VEL = 0 # Angular velocity (rad/s)
+                    print('Wall Following Mode')
+                elif oblique_left < 0.5 or oblique_right < 0.5: # Too close to obstacle(s)
                     LIN_VEL = 0.005 # Linear velocity (m/s)
                     ANG_VEL = self.pid_lat.control(16*(left-right), tstamp) # Angular velocity (rad/s) from PID controller
+                    self.start_mode = 'inside'
+                    print('Obstacle Avoidance Mode')
                 elif (oblique_left > 0.5 and oblique_left < 1) or (oblique_right > 0.5 and oblique_right < 1): # Fairly away from walls/obstacles
                     LIN_VEL = self.pid_lon.control(front, tstamp) # Linear velocity (m/s) from PID controller
                     ANG_VEL = self.pid_lat.control(left-right, tstamp) # Angular velocity (rad/s) from PID controller
+                    self.start_mode = 'inside'
+                    print('Wall Following Mode')
                 else: # Safely away from walls/obstacles
                     LIN_VEL = 0.2 # Linear velocity (m/s)
                     ANG_VEL = self.pid_lat.control(left-right, tstamp) # Angular velocity (rad/s) from PID controller
+                    self.start_mode = 'inside'
+                    print('Wall Following Mode')
                 self.ctrl_msg.linear.x = min(0.22, LIN_VEL) # Set linear velocity
                 self.ctrl_msg.angular.z = min(2.84, ANG_VEL) # Set angular velocity
                 self.robot_ctrl_pub.publish(self.ctrl_msg) # Publish robot controls message
-                print('Distance to closest obstacle is {} m'.format(round(min(self.laserscan), 4)))
-                #print('Robot moving with {} m/s and {} rad/s'.format(LIN_VEL, ANG_VEL))
         else:
             print('Initializing...')
 

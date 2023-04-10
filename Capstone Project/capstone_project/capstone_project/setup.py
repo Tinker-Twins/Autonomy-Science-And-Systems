@@ -29,6 +29,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'capstone_project_sim = capstone_project.capstone_project_sim:main', # Python script
+            'capstone_project_real = capstone_project.capstone_project_real:main', # Python script
             'wall_following_sim = capstone_project.wall_following_sim:main', # Python script
             'wall_following_real = capstone_project.wall_following_real:main', # Python script
             'obstacle_avoidance_sim = capstone_project.obstacle_avoidance_sim:main', # Python script

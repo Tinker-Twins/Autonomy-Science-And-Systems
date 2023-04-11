@@ -132,10 +132,10 @@ class RobotController(Node):
                 if oblique_left < 0.5 or oblique_right < 0.5: # Too close to obstacle(s)
                     LIN_VEL = 0.005 # Linear velocity (m/s)
                     ANG_VEL = self.pid_lat.control(16*(left-right), tstamp) # Angular velocity (rad/s) from PID controller
-                elif (oblique_left > 0.5 and oblique_left < 1) or (oblique_right > 0.5 and oblique_right < 1): # Fairly away from walls/obstacles
+                elif (oblique_left > 0.5 and oblique_left < 1) or (oblique_right > 0.5 and oblique_right < 1): # Fairly away from obstacles
                     LIN_VEL = self.pid_lon.control(front, tstamp) # Linear velocity (m/s) from PID controller
                     ANG_VEL = self.pid_lat.control(left-right, tstamp) # Angular velocity (rad/s) from PID controller
-                else: # Safely away from walls/obstacles
+                else: # Safely away from obstacles
                     LIN_VEL = 0.2 # Linear velocity (m/s)
                     ANG_VEL = self.pid_lat.control(left-right, tstamp) # Angular velocity (rad/s) from PID controller
                 self.ctrl_msg.linear.x = min(0.22, LIN_VEL) # Set linear velocity

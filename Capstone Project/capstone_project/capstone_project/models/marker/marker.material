@@ -1,0 +1,13 @@
+material marker
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture tag36h11_0.png
+      }
+    }
+  }
+}

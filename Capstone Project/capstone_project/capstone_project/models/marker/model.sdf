@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <model name="marker">
+    <static>true</static>
+    <link name="marker_link">
+      <pose>0 0 0 0 0 0</pose>
+      <collision name="marker_collision">
+        <geometry>
+          <box>
+            <size>0.0762 0.001 0.0762</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name="marker_visual">
+        <geometry>
+          <box>
+            <size>0.0762 0.001 0.0762</size>
+          </box>
+        </geometry>
+        <material>
+          <script>
+            <uri>model://marker</uri>
+            <name>marker</name>
+          </script>
+        </material>
+      </visual>
+    </link>    
+  </model>
+</sdf>

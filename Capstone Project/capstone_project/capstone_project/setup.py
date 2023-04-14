@@ -18,13 +18,15 @@ setup(
         (os.path.join('share', package_name, 'models/obstacles'), glob('models/obstacles/*')), # Obstacles model files
         (os.path.join('share', package_name, 'models/traffic_sign'), glob('models/traffic_sign/*')), # Traffic sign model files
         (os.path.join('share', package_name, 'models/walls'), glob('models/walls/*')), # Walls model files
+        (os.path.join('share', package_name, 'models/marker'), glob('models/marker/*')), # Marker model files
+        (os.path.join('share', package_name, 'models/apriltag'), glob('models/apriltag/*')), # AprilTag (robot) model files
         (os.path.join('share', package_name, 'worlds'), glob('worlds/*')), # World files
     ],
     install_requires=['setuptools'],
     zip_safe=True,
     maintainer='Chinmay Samak' 'Tanmay Samak',
     maintainer_email='csamak@clemson.edu' 'tsamak@clemson.edu',
-    description='Assignment 3B for the course AuE-8230 "Autonomy: Science and Systems" at CU-ICAR (Spring 2023)',
+    description='Capstone Project for the course AuE-8230 "Autonomy: Science and Systems" at CU-ICAR (Spring 2023)',
     license='BSD',
     tests_require=['pytest'],
     entry_points={

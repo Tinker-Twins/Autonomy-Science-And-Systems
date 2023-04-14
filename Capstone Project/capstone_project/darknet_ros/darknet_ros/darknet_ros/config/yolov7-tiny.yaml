@@ -7,7 +7,7 @@ darknet_ros:
         name: yolov7-tiny.weights
       threshold:
         value: 0.3
-      window_name: YOLO V7 Tiny
+      window_name: Tiny-YOLO V7
       detection_classes:
         names:
           - person

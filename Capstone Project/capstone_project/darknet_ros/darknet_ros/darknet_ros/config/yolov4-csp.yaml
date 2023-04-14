@@ -7,6 +7,7 @@ darknet_ros:
         name: yolov4-csp.weights
       threshold:
         value: 0.3
+      window_name: CSP-YOLO V4
       detection_classes:
         names:
           - person

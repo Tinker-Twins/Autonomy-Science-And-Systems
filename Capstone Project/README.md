@@ -93,6 +93,7 @@ The ROS2 package [`capstone_project`](https://github.com/Tinker-Twins/Autonomy-S
 6. AprilTag Tracking:
     ```bash
     user@computer:~$ ros2 launch capstone_project apriltag_tracking_sim.launch.py
+    user@computer:~$ ros2 run capstone_project apriltag_teleop
     ```
 
 ### Real World:

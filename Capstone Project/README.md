@@ -160,5 +160,5 @@ The [`media`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/
 | Line Following - Simulation | Line Following - TurtleBot3 | Line Following - Remote PC |
 | ![Stop Sign Detection Simulation](media/stop_sign_detection_sim.gif) | ![Stop Sign Detection Robot](media/stop_sign_detection_real_robot.gif) | ![Stop Sign Detection RViz](media/stop_sign_detection_real_rviz.gif) |
 | Stop Sign Detection - Simulation | Stop Sign Detection - TurtleBot3 | Stop Sign Detection - Remote PC |
-| ![AprilTag Tracking Simulation](media/apriltag_tracking_real_robot.gif) | ![AprilTag Tracking Robot](media/apriltag_tracking_real_robot.gif) | ![AprilTag Tracking RViz](media/apriltag_tracking_real_rviz.gif) |
+| ![AprilTag Tracking Simulation](media/apriltag_tracking_sim.gif) | ![AprilTag Tracking Robot](media/apriltag_tracking_real_robot.gif) | ![AprilTag Tracking RViz](media/apriltag_tracking_real_rviz.gif) |
 | AprilTag Tracking - Simulation | AprilTag Tracking - TurtleBot3 | AprilTag Tracking - Remote PC |

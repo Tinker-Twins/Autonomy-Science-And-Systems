@@ -6,7 +6,7 @@ Panels:
       Expanded:
         - /Odometry1/Shape1
         - /LIDAR1/Topic1
-      Splitter Ratio: 0.5
+      Splitter Ratio: 0.5647059082984924
     Tree Height: 335
   - Class: rviz_common/Selection
     Name: Selection
@@ -83,8 +83,8 @@ Visualization Manager:
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
-        Max Value: 0.20510712265968323
-        Min Value: 0.1702556014060974
+        Max Value: 0.20949584245681763
+        Min Value: 0.16579735279083252
         Value: true
       Axis: Z
       Channel Name: x
@@ -126,6 +126,61 @@ Visualization Manager:
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /camera/image_raw
+      Value: true
+    - Class: rviz_default_plugins/TF
+      Enabled: true
+      Frame Timeout: 15
+      Frames:
+        All Enabled: false
+        base_footprint:
+          Value: false
+        base_link:
+          Value: false
+        base_scan:
+          Value: false
+        camera_link:
+          Value: false
+        camera_rgb_frame:
+          Value: false
+        camera_rgb_optical_frame:
+          Value: false
+        caster_back_link:
+          Value: false
+        imu_link:
+          Value: false
+        odom:
+          Value: false
+        tag36h11_0:
+          Value: true
+        wheel_left_link:
+          Value: false
+        wheel_right_link:
+          Value: false
+      Marker Scale: 2
+      Name: AprilTag
+      Show Arrows: true
+      Show Axes: true
+      Show Names: true
+      Tree:
+        odom:
+          base_footprint:
+            base_link:
+              base_scan:
+                {}
+              camera_link:
+                camera_rgb_frame:
+                  camera_rgb_optical_frame:
+                    tag36h11_0:
+                      {}
+              caster_back_link:
+                {}
+              imu_link:
+                {}
+              wheel_left_link:
+                {}
+              wheel_right_link:
+                {}
+      Update Interval: 0
       Value: true
   Enabled: true
   Global Options:

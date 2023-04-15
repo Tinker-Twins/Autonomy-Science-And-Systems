@@ -53,7 +53,7 @@ def generate_launch_description():
     return LaunchDescription([
         DeclareLaunchArgument(
             'world',
-            default_value=[os.path.join(pkg_share, 'worlds', 'apriltag_tracking.sdf')],
+            default_value=[os.path.join(pkg_share, 'worlds', 'line_following.sdf')],
             description='Simulation Description Format (SDFormat/SDF) for Describing Robot and Environment',
         ),
         gazebo,
@@ -64,14 +64,10 @@ def generate_launch_description():
             PythonLaunchDescriptionSource([turtlebot3_gazebo_launch, '/robot_state_publisher.launch.py']),
             launch_arguments={'use_sim_time': use_sim_time}.items(),
         ),
-        ExecuteProcess(
-            cmd=[['ros2 run apriltag_ros apriltag_node --ros-args -r image_rect:=/camera/image_raw -r camera_info:=/camera/camera_info --params-file `ros2 pkg prefix apriltag_ros`/share/apriltag_ros/cfg/tags_36h11.yaml']],
-            shell=True,
-        ),
         Node(
             package='capstone_project',
-            executable='apriltag_tracking_sim',
-            name='apriltag_tracking_sim_node',
+            executable='line_following_sim',
+            name='line_following_sim_node',
             emulate_tty=True,
             output='screen',
         ),

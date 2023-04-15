@@ -81,8 +81,8 @@ def get_key(settings):
 
 # Print current twist commands
 def print_twist(target_linear_velocity, target_angular_velocity):
-    print('Linear Velocity: {0}\t Angular Velocity: {1} '.format(round(target_linear_velocity, 1),
-                                                                 round(target_angular_velocity, 1),
+    print('Linear Velocity: {0}\t Angular Velocity: {1} '.format(round(target_linear_velocity, 2),
+                                                                 round(target_angular_velocity, 2),
                                                           )
     )
 

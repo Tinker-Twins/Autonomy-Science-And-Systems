@@ -99,7 +99,7 @@ class RobotController(Node):
         self.ctrl_msg = Twist() # Robot control commands (twist)
         self.start_time = self.get_clock().now() # Record current time in seconds
         self.pid_lon = PIDController(0.06, 0.001, 0.05, 10) # Longitudinal PID controller object initialized with kP, kI, kD, kS
-        self.pid_lat = PIDController(0.1, 0.01, 0.2, 10) # Lateral PID controller object initialized with kP, kI, kD, kS
+        self.pid_lat = PIDController(2.5, 0.01, 0.2, 10) # Lateral PID controller object initialized with kP, kI, kD, kS
         self.tf_buffer = Buffer() # Transform buffer
         self.tf_listener = TransformListener(self.tf_buffer, self) # Transform listener
 
@@ -110,7 +110,7 @@ class RobotController(Node):
     def robot_controller_callback(self):
         DELAY = 4.0 # Time delay (s)
         if self.get_clock().now() - self.start_time > Duration(seconds=DELAY):
-            to_frame_rel = 'camera_link'
+            to_frame_rel = 'camera_rgb_optical_frame'
             from_frame_rel = 'tag36h11_0'
             try:
                 tf2_msg = self.tf_buffer.lookup_transform(to_frame_rel, from_frame_rel, rclpy.time.Time())
@@ -121,7 +121,10 @@ class RobotController(Node):
             lon_error = tf2_msg.transform.translation.z # Calculate longitudinal error w.r.t. AprilTag marker
             lat_error = -tf2_msg.transform.translation.x # Calculate lateral error w.r.t. AprilTag marker
             tstamp = time.time() # Current timestamp (s)
-            LIN_VEL = self.pid_lon.control(lon_error, tstamp) # Linear velocity (m/s)
+            if lon_error >= 0.15: # Keep tracking if the marker is far
+                LIN_VEL = self.pid_lon.control(lon_error, tstamp) # Linear velocity (m/s)
+            else: # Stop if the marker is close enough
+                LIN_VEL = 0.0 # Linear velocity (m/s)
             ANG_VEL = self.pid_lat.control(lat_error, tstamp) # Angular velocity (rad/s)
             self.ctrl_msg.linear.x = min(0.22, LIN_VEL) # Set linear velocity
             self.ctrl_msg.angular.z = min(2.84, ANG_VEL) # Set angular velocity

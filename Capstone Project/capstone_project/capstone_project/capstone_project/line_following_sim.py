@@ -101,7 +101,7 @@ class RobotController(Node):
         self.cv_bridge = CvBridge() # Initialize object to capture and convert the image
         self.ctrl_msg = Twist() # Robot control commands (twist)
         self.start_time = self.get_clock().now() # Record current time in seconds
-        self.pid_controller = PIDController(0.3, 0.001, 0.7, 10) # PID controller object initialized with kP, kI, kD, kS
+        self.pid_controller = PIDController(0.36, 0.16, 0.14, 50) # PID controller object initialized with kP, kI, kD, kS
 
     ########################
     '''Callback functions'''

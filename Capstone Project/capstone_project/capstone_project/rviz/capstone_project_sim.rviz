@@ -83,8 +83,8 @@ Visualization Manager:
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
-        Max Value: 0.20949584245681763
-        Min Value: 0.16579735279083252
+        Max Value: 0.22280243039131165
+        Min Value: 0.17715506255626678
         Value: true
       Axis: Z
       Channel Name: x
@@ -129,7 +129,7 @@ Visualization Manager:
       Value: true
     - Class: rviz_default_plugins/TF
       Enabled: true
-      Frame Timeout: 15
+      Frame Timeout: 1
       Frames:
         All Enabled: false
         base_footprint:
@@ -225,7 +225,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 6.852341651916504
+      Distance: 6.243370532989502
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1

@@ -28,16 +28,16 @@
 import rclpy # ROS2 client library (rcl) for Python (built on rcl C API)
 from rclpy.node import Node # Node class for Python nodes
 from geometry_msgs.msg import Twist # Twist (linear and angular velocities) message class
-from sensor_msgs.msg import Image # Image (camera frame) message class
+from tf2_msgs.msg import TFMessage # Transforms message class
 from rclpy.qos import QoSProfile, QoSReliabilityPolicy, QoSHistoryPolicy # Ouality of Service (tune communication between nodes)
 from rclpy.duration import Duration # Time duration class
+from tf2_ros.transform_listener import TransformListener # Transform (tf2) listener
+from tf2_ros.buffer import Buffer # Transform buffer
+from tf2_ros import TransformException # Transform exception
 
 # Python mudule imports
 import queue # FIFO queue
 import time # Tracking time
-import cv2 # OpenCV
-from cv_bridge import CvBridge, CvBridgeError # OpenCV bridge for ROS2
-import numpy as np # Numpy
 
 # PID controller class
 class PIDController:
@@ -84,7 +84,7 @@ class RobotController(Node):
 
     def __init__(self):
         # Information and debugging
-        info = '\nMake the robot perform line following operation.\n'
+        info = '\nMake the robot detect and track AprilTag markers.\n'
         print(info)
         # ROS2 infrastructure
         super().__init__('robot_controller') # Create a node with name 'robot_controller'
@@ -93,57 +93,43 @@ class RobotController(Node):
         history=QoSHistoryPolicy.RMW_QOS_POLICY_HISTORY_KEEP_LAST, # Keep/store only up to last N samples
         depth=10 # Queue size/depth of 10 (only honored if the “history” policy was set to “keep last”)
         )
-        self.robot_image_sub = self.create_subscription(Image, '/camera/image_raw', self.robot_image_callback, qos_profile) # Subscriber which will subscribe to Image message on the topic '/camera/image_raw' adhering to 'qos_profile' QoS profile
-        self.robot_image_sub # Prevent unused variable warning
         self.robot_ctrl_pub = self.create_publisher(Twist, '/cmd_vel', qos_profile) # Publisher which will publish Twist message to the topic '/cmd_vel' adhering to 'qos_profile' QoS profile
         timer_period = 0.001 # Node execution time period (seconds)
         self.timer = self.create_timer(timer_period, self.robot_controller_callback) # Define timer to execute 'robot_controller_callback()' every 'timer_period' seconds
-        self.cv_bridge = CvBridge() # Initialize object to capture and convert the image
         self.ctrl_msg = Twist() # Robot control commands (twist)
         self.start_time = self.get_clock().now() # Record current time in seconds
-        self.pid_controller = PIDController(0.36, 0.16, 0.14, 50) # PID controller object initialized with kP, kI, kD, kS
+        self.pid_lon = PIDController(0.06, 0.001, 0.05, 10) # Longitudinal PID controller object initialized with kP, kI, kD, kS
+        self.pid_lat = PIDController(2.5, 0.01, 0.2, 10) # Lateral PID controller object initialized with kP, kI, kD, kS
+        self.tf_buffer = Buffer() # Transform buffer
+        self.tf_listener = TransformListener(self.tf_buffer, self) # Transform listener
 
-    ########################
-    '''Callback functions'''
-    ########################
-
-    def robot_image_callback(self, msg):
-        try:
-            self.cv_image = self.cv_bridge.imgmsg_to_cv2(msg, desired_encoding="bgr8") # Capture and convert most recent image 'msg' to OpenCV image with 'bgr8' encoding
-        except CvBridgeError as error:
-             print(error)
+    #######################
+    '''Callback function'''
+    #######################
 
     def robot_controller_callback(self):
         DELAY = 4.0 # Time delay (s)
         if self.get_clock().now() - self.start_time > Duration(seconds=DELAY):
-            # Perception
-            height, width, channels = self.cv_image.shape # Get image shape (height, width, channels)
-            crop = self.cv_image[int((height/2)+110):int((height/2)+120)][1:int(width)] # Crop unwanted parts of the image
-            hsv = cv2.cvtColor(crop, cv2.COLOR_BGR2HSV) # Convert from RGB to HSV color space
-            lower_yellow = np.array([20, 100, 100]) # Lower HSV threshold for yellow color
-            upper_yellow = np.array([50, 255, 255]) # Upper HSV threshold for yellow color
-            mask = cv2.inRange(hsv, lower_yellow, upper_yellow) # Threshold the HSV image to mask everything but yellow color
-            m = cv2.moments(mask, False) # Calculate moments (weighted average of image pixel intensities) of binary image
+            to_frame_rel = 'camera'
+            from_frame_rel = 'tag36h11_0'
             try:
-                cx, cy = m['m10']/m['m00'], m['m01']/m['m00'] # Calculate centroid of the blob using moments
-            except ZeroDivisionError:
-                cx, cy = height/2, width/2 # Calculate centroid of the blob as image center
-            cv2.circle(mask,(int(cx), int(cy)), 10,(0,0,255), -1) # Add centroid to masked frame
-            # cv2.imshow("Camera Frame", self.cv_image) # Show camera frame
-            # cv2.imshow("Cropped Frame", crop) # Show cropped frame
-            # cv2.imshow("Masked Frame", mask) # Show masked frame
-            cv2.imshow("Line Detection", cv2.resize(mask, (int(mask.shape[1]*5.775), int(mask.shape[0]*5.775)))) # Show enlarged masked frame
-            cv2.waitKey(1)
-            # Planning
-            error = (height/2 - cx + 10)/175 # Calculate error (deviation) from line center
+                tf2_msg = self.tf_buffer.lookup_transform(to_frame_rel, from_frame_rel, rclpy.time.Time())
+            except TransformException as e:
+                # self.get_logger().info(f'Could not transform {to_frame_rel} to {from_frame_rel}: {e}')
+                print('No AprilTag marker found, looking for one...')
+                return
+            lon_error = tf2_msg.transform.translation.z # Calculate longitudinal error w.r.t. AprilTag marker
+            lat_error = -tf2_msg.transform.translation.x # Calculate lateral error w.r.t. AprilTag marker
             tstamp = time.time() # Current timestamp (s)
-            # Control
-            LIN_VEL = 0.05 # Linear velocity (m/s)
-            ANG_VEL = self.pid_controller.control(error, tstamp) # Angular velocity (rad/s)
+            if lon_error >= 0.15: # Keep tracking if the marker is far
+                LIN_VEL = self.pid_lon.control(lon_error, tstamp) # Linear velocity (m/s)
+            else: # Stop if the marker is close enough
+                LIN_VEL = 0.0 # Linear velocity (m/s)
+            ANG_VEL = self.pid_lat.control(lat_error, tstamp) # Angular velocity (rad/s)
             self.ctrl_msg.linear.x = min(0.22, LIN_VEL) # Set linear velocity
             self.ctrl_msg.angular.z = min(2.84, ANG_VEL) # Set angular velocity
             self.robot_ctrl_pub.publish(self.ctrl_msg) # Publish robot controls message
-            print('Deviation from line center {}'.format(error))
+            print('Deviation from AprilTag marker {}, {}'.format(round(lon_error, 4), round(lat_error, 4)))
             #print('Robot moving with {} m/s and {} rad/s'.format(LIN_VEL, ANG_VEL))
         else:
             print('Initializing...')

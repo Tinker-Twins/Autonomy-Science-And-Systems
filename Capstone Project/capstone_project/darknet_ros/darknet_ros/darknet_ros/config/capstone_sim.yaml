@@ -2,7 +2,7 @@ darknet_ros:
   ros__parameters:
     subscribers:
       camera_reading:
-        topic: /image
+        topic: /camera/image_raw
         queue_size: 1
     actions:
       camera_reading:
@@ -18,9 +18,9 @@ darknet_ros:
         latch: false
       detection_image:
         topic: /darknet_ros/detection_image
-        queue_size: 1
-        latch: true
+        queue_size: 10
+        latch: false
     image_view:
-      enable_opencv: true
+      enable_opencv: false
       wait_key_delay: 3
-      enable_console_output: true
+      enable_console_output: false

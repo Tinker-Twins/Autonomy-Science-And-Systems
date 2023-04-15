@@ -51,6 +51,7 @@ def generate_launch_description():
 
     turtlebot3_gazebo_launch = os.path.join(get_package_share_directory('turtlebot3_gazebo'), 'launch')
     tiny_yolo_darknet_config = pkg_darknet_ros + '/config/yolov7-tiny.yaml'
+    darknet_ros_config = pkg_darknet_ros + '/config/capstone_sim.yaml'
 
     return LaunchDescription([
         DeclareLaunchArgument(
@@ -68,7 +69,21 @@ def generate_launch_description():
         ),
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource([pkg_darknet_ros + '/launch/darknet_ros.launch.py']),
-            launch_arguments={'network_param_file': tiny_yolo_darknet_config}.items()
+            launch_arguments={'network_param_file': tiny_yolo_darknet_config,
+                              'ros_param_file': darknet_ros_config}.items()
+        ),
+        Node(
+            package='rviz2',
+            executable='rviz2',
+            name='rviz',
+            arguments=['-d', [FindPackageShare("capstone_project"), '/rviz', '/capstone_project_sim.rviz',]]
+        ),
+        Node(
+            package='capstone_project',
+            executable='stop_sign_detection_sim',
+            name='stop_sign_detection_sim_node',
+            emulate_tty=True,
+            output='screen',
         ),
         Node(
             package='rviz2',

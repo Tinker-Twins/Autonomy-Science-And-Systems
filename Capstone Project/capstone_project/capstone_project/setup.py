@@ -38,6 +38,7 @@ setup(
             'obstacle_avoidance_sim = capstone_project.obstacle_avoidance_sim:main', # Python script
             'obstacle_avoidance_real = capstone_project.obstacle_avoidance_real:main', # Python script
             'line_following_sim = capstone_project.line_following_sim:main', # Python script
+            'stop_sign_detection_sim = capstone_project.stop_sign_detection_sim:main', # Python script
             'apriltag_teleop = capstone_project.apriltag_teleop:main', # Python script
             'apriltag_tracking_sim = capstone_project.apriltag_tracking_sim:main', # Python script
         ],

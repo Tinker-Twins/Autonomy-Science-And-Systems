@@ -13,7 +13,7 @@ setup(
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
         (os.path.join('share', package_name, 'launch'), glob('launch/*.launch.py')), # Launch files
-        (os.path.join('share', package_name, 'rviz'), glob('rviz/*.rviz')), # RViz config files
+        (os.path.join('share', package_name, 'rviz'), glob('rviz/*.rviz')), # RViz configuration files
         (os.path.join('share', package_name, 'models/ground'), glob('models/ground/*')), # Ground model files
         (os.path.join('share', package_name, 'models/obstacles'), glob('models/obstacles/*')), # Obstacles model files
         (os.path.join('share', package_name, 'models/traffic_sign'), glob('models/traffic_sign/*')), # Traffic sign model files
@@ -38,9 +38,12 @@ setup(
             'obstacle_avoidance_sim = capstone_project.obstacle_avoidance_sim:main', # Python script
             'obstacle_avoidance_real = capstone_project.obstacle_avoidance_real:main', # Python script
             'line_following_sim = capstone_project.line_following_sim:main', # Python script
+            'line_following_real = capstone_project.line_following_real:main', # Python script
             'stop_sign_detection_sim = capstone_project.stop_sign_detection_sim:main', # Python script
-            'apriltag_teleop = capstone_project.apriltag_teleop:main', # Python script
+            'stop_sign_detection_real = capstone_project.stop_sign_detection_real:main', # Python script
             'apriltag_tracking_sim = capstone_project.apriltag_tracking_sim:main', # Python script
+            'apriltag_tracking_real = capstone_project.apriltag_tracking_real:main', # Python script
+            'apriltag_teleop = capstone_project.apriltag_teleop:main', # Python script
         ],
     },
 )

@@ -25,10 +25,15 @@
 from launch import LaunchDescription
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
+from launch.actions import ExecuteProcess
 
 def generate_launch_description():
 
     return LaunchDescription([
+        ExecuteProcess(
+            cmd=[['ros2 run image_transport republish compressed raw --ros-args --remap in/compressed:=image/compressed --remap out:=image/uncompressed']],
+            shell=True,
+        ),
         Node(
             package='capstone_project',
             executable='line_following_real',

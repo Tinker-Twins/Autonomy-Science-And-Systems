@@ -28,6 +28,7 @@ from launch_ros.actions import Node
 from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.substitutions import FindPackageShare
+from launch.actions import ExecuteProcess
 
 def generate_launch_description():
 
@@ -36,6 +37,10 @@ def generate_launch_description():
     darknet_ros_config = pkg_darknet_ros + '/config/capstone_real.yaml'
 
     return LaunchDescription([
+        ExecuteProcess(
+            cmd=[['ros2 run image_transport republish compressed raw --ros-args --remap in/compressed:=image/compressed --remap out:=image/uncompressed']],
+            shell=True,
+        ),
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource([pkg_darknet_ros + '/launch/darknet_ros.launch.py']),
             launch_arguments={'network_param_file': tiny_yolo_darknet_config,

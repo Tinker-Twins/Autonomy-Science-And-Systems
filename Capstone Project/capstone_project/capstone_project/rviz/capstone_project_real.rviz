@@ -127,6 +127,55 @@ Visualization Manager:
         Reliability Policy: Reliable
         Value: /image/uncompressed
       Value: true
+    - Class: rviz_default_plugins/TF
+      Enabled: true
+      Frame Timeout: 1
+      Frames:
+        All Enabled: false
+        base_footprint:
+          Value: false
+        base_link:
+          Value: false
+        base_scan:
+          Value: false
+        camera:
+          Value: false
+        caster_back_link:
+          Value: false
+        imu_link:
+          Value: false
+        odom:
+          Value: false
+        tag36h11_0:
+          Value: true
+        wheel_left_link:
+          Value: false
+        wheel_right_link:
+          Value: false
+      Marker Scale: 2
+      Name: AprilTag
+      Show Arrows: true
+      Show Axes: true
+      Show Names: true
+      Tree:
+        odom:
+          base_footprint:
+            base_link:
+              base_scan:
+                {}
+              camera:
+                tag36h11_0:
+                  {}
+              caster_back_link:
+                {}
+              imu_link:
+                {}
+              wheel_left_link:
+                {}
+              wheel_right_link:
+                {}
+      Update Interval: 0
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48

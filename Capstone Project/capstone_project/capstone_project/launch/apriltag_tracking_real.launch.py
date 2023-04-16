@@ -39,6 +39,14 @@ def generate_launch_description():
             shell=True,
         ),
         Node(
+            package='tf2_ros',
+            executable='static_transform_publisher',
+            name='base_link_to_camera_tf',
+            arguments = ['0.055', '0.000', '0.100',
+                         '0.000', '1.571', '0.000',
+                         'base_link', 'camera']
+        ),
+        Node(
             package='capstone_project',
             executable='apriltag_tracking_real',
             name='apriltag_tracking_real_node',

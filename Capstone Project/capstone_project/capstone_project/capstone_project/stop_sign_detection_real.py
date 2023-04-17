@@ -75,7 +75,7 @@ class RobotController(Node):
         self.detection_available = True # Set YOLO detection flag to available
 
     def robot_controller_callback(self):
-        THRESH = 3000 # Stop sign threshold area to come to a complete stop (px squared)
+        THRESH = 750 # Stop sign threshold area to come to a complete stop (px squared)
         LIN_VEL = 0.05 # Linear velocity (m/s)
         ANG_VEL = 0.0 # Angular velocity (rad/s)
         DELAY = 4.0 # Time delay (s)
@@ -86,7 +86,7 @@ class RobotController(Node):
             box_height = self.detection.ymax - self.detection.ymin # Height of bounding box
             box_area = box_length*box_height # Area of bounding box
             # Stop for some time if stop sign detected within thresholded distance
-            if self.obeyed_stop_sign==False and detection=='stop sign' and probability>0.8 and box_area>THRESH:
+            if self.obeyed_stop_sign==False and detection=='stop sign' and probability>0.6 and box_area>THRESH:
                 self.ctrl_msg.linear.x = 0.0 # Set linear velocity
                 self.ctrl_msg.angular.z = 0.0 # Set angular velocity
                 self.robot_ctrl_pub.publish(self.ctrl_msg) # Publish robot controls message

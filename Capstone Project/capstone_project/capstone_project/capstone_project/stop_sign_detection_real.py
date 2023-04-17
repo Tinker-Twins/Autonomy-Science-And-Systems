@@ -76,7 +76,7 @@ class RobotController(Node):
 
     def robot_controller_callback(self):
         THRESH = 750 # Stop sign threshold area to come to a complete stop (px squared)
-        LIN_VEL = 0.05 # Linear velocity (m/s)
+        LIN_VEL = 0.1 # Linear velocity (m/s)
         ANG_VEL = 0.0 # Angular velocity (rad/s)
         DELAY = 4.0 # Time delay (s)
         if self.get_clock().now() - self.start_time > Duration(seconds=DELAY) and self.detection_available:

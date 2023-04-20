@@ -71,6 +71,21 @@ Each of the following directories has a detailed `README.md` of their own.
 </div>
 </details>
 
+<details>
+<summary> <a href="https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Group"><b>Group</a>:</b> Group details for the course during Spring 2023</summary>
+<div>
+
+<img align="left" style="padding-left: 10px; padding-right: 10px; padding-bottom: 10px" height="175px" src="Group/Chinmay_Samak.png">
+
+**Chinmay Samak:** I received the [B.Tech. degree in Mechatronics Engineering](https://www.srmist.edu.in/program/b-tech-mechatronics-engineering/) with a gold medal from [SRM Institute of Science and Technology](https://www.srmist.edu.in/) in 2021. Having worked on several research projects in the field of autonomous vehicles, complemented with a solid background in mechatronics engineering, I have joined [ARMLab at CU-ICAR](http://cecas.clemson.edu/armlab-cuicar) as a direct Ph.D. candidate under the supervision of [Dr. Venkat Krovi](https://www.linkedin.com/in/venkatnkrovi) to pursue focused research in the field of vehicle automation. My research interests lie at the intersection of real and virtual worlds to create physically and graphically accurate digital twins. I am currently contributing towards projects such as [VIPR-GS](https://cecas.clemson.edu/VIPR-GS/), [OpenCAV](https://sites.google.com/view/opencav/), [AutoDRIVE](https://autodrive-ecosystem.github.io/) and [F1Tenth](https://f1tenth.org/).
+
+<img align="left" style="padding-left: 10px; padding-right: 10px; padding-bottom: 10px" height="175px" src="Group/Tanmay_Samak.png">
+
+**Tanmay Samak:** I received the [B.Tech. degree in Mechatronics Engineering](https://www.srmist.edu.in/program/b-tech-mechatronics-engineering/) with a silver medal from [SRM Institute of Science and Technology](https://www.srmist.edu.in/) in 2021. Having worked on several research projects in the field of autonomous vehicles, complemented with a solid background in mechatronics engineering, I have joined [ARMLab at CU-ICAR](http://cecas.clemson.edu/armlab-cuicar) as a direct Ph.D. candidate under the supervision of [Dr. Venkat Krovi](https://www.linkedin.com/in/venkatnkrovi) to pursue focused research in the field of vehicle automation. My research interests lie in formulation and development of socially and situationally aware autonomous systems. I am currently contributing towards projects such as [VIPR-GS](https://cecas.clemson.edu/VIPR-GS/), [OpenCAV](https://sites.google.com/view/opencav/), [AutoDRIVE](https://autodrive-ecosystem.github.io/) and [F1Tenth](https://f1tenth.org/).
+  
+</div>
+</details>
+
 
 ![TurtleBot3 Acknowledgement](https://user-images.githubusercontent.com/40835293/233496585-8686a706-b39f-4c1f-b086-7d4f7f713e14.png)
 
@@ -82,7 +97,6 @@ Each of the following directories has a detailed `README.md` of their own.
 
 
 
-* **[Group](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Group):** Group details for the course during Spring 2023.
 
 * **[Assignment 1-C](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%201-C):** [TurtleBot3](https://emanual.robotis.com/docs/en/platform/turtlebot3/overview/) open-loop control in [Gazebo](https://gazebosim.org/home) simulator.
 

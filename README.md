@@ -58,6 +58,19 @@ Each of the following directories has a detailed `README.md` of their own.
 </div>
 </details>
 
+<details>
+<summary> <a href="https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%201-B"><b>Assignment 1-B</a>:</b> Robot open and closed-loop control in <a href="https://docs.ros.org/en/foxy/Tutorials/Beginner-CLI-Tools/Introducing-Turtlesim/Introducing-Turtlesim.html"> TurtleSim</a></summary>
+<div>
+
+| ![Go in Circle](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%201-B/Tanmay/media/go_in_circle.gif) | ![Go to Goal](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%201-B/Tanmay//media/go_to_goal.gif) |
+|:------------------:|:-------------------:|
+| Go in Circle | Go to Goal |
+| ![Open Loop Square](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%201-B/Tanmay/media/square_open_loop.gif) | ![Closed Loop Square](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%201-B/Tanmay/media/square_closed_loop.gif) |
+| Open Loop Square | Closed Loop Square |
+  
+</div>
+</details>
+
 
 ![TurtleBot3 Acknowledgement](https://user-images.githubusercontent.com/40835293/233496585-8686a706-b39f-4c1f-b086-7d4f7f713e14.png)
 

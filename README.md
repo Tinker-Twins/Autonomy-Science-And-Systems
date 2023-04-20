@@ -28,17 +28,32 @@ Each of the following directories has a detailed `README.md` of their own.
 
 <details>
 <summary> <a href="https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%201-A"><b>Assignment 1-A</a>:</b> Comparative study of <a href="https://wiki.ros.org/noetic">ROS-1</a>, <a href="https://docs.ros.org/en/foxy/"> ROS-2</a> and <a href="https://rosindustrial.org/"> ROS-I</a></summary>
-<img src="https://user-images.githubusercontent.com/40835293/233139177-aa2fc279-2fab-4f11-9bbd-c9464990e975.png" alt="ROS Variants">
+<div>  
+
+![ROS Vairants](https://user-images.githubusercontent.com/40835293/233495007-18d3afee-6fa3-4ce7-9a75-006815aa4455.png)
+  
+</div>  
+
 </details>
 
 <details>
 <summary> <a href="https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Mini%20Assignment%201"><b>Mini Assignment 1</a>:</b> Picture-proofs of <a href="http://wiki.ros.org/noetic/Installation/Ubuntu">ROS-1 Noetic</a>, <a href="https://docs.ros.org/en/foxy/Installation/Alternatives/Ubuntu-Development-Setup.html"> ROS-2 Foxy</a> installations</summary>
-<img src="https://user-images.githubusercontent.com/40835293/233139177-aa2fc279-2fab-4f11-9bbd-c9464990e975.png" alt="ROS Variants">
+<div>
+
+| ![ROS-1 Noetic](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Mini%20Assignment%201/Chinmay/ROS1.png) | ![ROS-2 Foxy](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Mini%20Assignment%201/Chinmay/ROS2.png) |
+|:-------------------------------------:|:-----------------------------------------:|
+| ROS-1 Noetic Installation | ROS-2 Foxy Installation |
+  
+</div>
 </details>
 
 <details>
 <summary> <a href="https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Mini%20Assignment%202"><b>Mini Assignment 2</a>:</b> Video-proofs of <a href="http://wiki.ros.org/noetic/Installation/Ubuntu">ROS-1 Noetic</a>, <a href="https://docs.ros.org/en/foxy/Installation/Alternatives/Ubuntu-Development-Setup.html"> ROS-2 Foxy</a> installations</summary>
-<img src="https://user-images.githubusercontent.com/40835293/233139177-aa2fc279-2fab-4f11-9bbd-c9464990e975.png" alt="ROS Variants">
+<div>
+
+* **[Assignment 1-B](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%201-B)
+  
+</div>
 </details>
 
 

@@ -105,8 +105,14 @@ Each of the following directories has a detailed `README.md` of their own.
 </div>
 </details>
 
+<details>
+<summary> <a href="https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Mini%20Assignment%203"><b>Mini Assignment 3</a>:</b> Acknowledgement of <a href="https://www.robotis.us/turtlebot-3-burger-us/"> TurtleBot3 Burger</a> robot and auxiliary components reception</summary>
+<div>
 
 ![TurtleBot3 Acknowledgement](https://user-images.githubusercontent.com/40835293/233496585-8686a706-b39f-4c1f-b086-7d4f7f713e14.png)
+  
+</div>
+</details>
 
 
 
@@ -117,9 +123,11 @@ Each of the following directories has a detailed `README.md` of their own.
 
 
 
-* **[Assignment 1-C](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%201-C):** [TurtleBot3](https://emanual.robotis.com/docs/en/platform/turtlebot3/overview/) open-loop control in [Gazebo](https://gazebosim.org/home) simulator.
 
-* **[Mini Assignment 3](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Mini%20Assignment%203):** Acknowledgement of [TurtleBot3 Burger](https://www.robotis.us/turtlebot-3-burger-us/) robot and auxiliary components reception.
+
+
+
+
 
 * **[Assignment 2-A](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%202-A):** [TurtleBot3 Burger](https://www.robotis.us/turtlebot-3-burger-us/) teardown.
 

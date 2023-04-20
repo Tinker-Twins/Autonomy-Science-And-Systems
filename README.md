@@ -31,11 +31,22 @@ Each of the following directories has a detailed `README.md` of their own.
 <img src="https://user-images.githubusercontent.com/40835293/233139177-aa2fc279-2fab-4f11-9bbd-c9464990e975.png" alt="ROS Variants">
 </details>
 
-* **[Assignment 1-A](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%201-A):** Comparative study of [ROS-1](https://wiki.ros.org/noetic), [ROS-2](https://docs.ros.org/en/foxy/) and [ROS-I](https://rosindustrial.org/).
+<details>
+<summary> <a href="https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Mini%20Assignment%201"><b>Mini Assignment 1</a>:</b> Picture-proofs of <a href="http://wiki.ros.org/noetic/Installation/Ubuntu">ROS-1 Noetic</a>, <a href="https://docs.ros.org/en/foxy/Installation/Alternatives/Ubuntu-Development-Setup.html"> ROS-2 Foxy</a> installations</summary>
+<img src="https://user-images.githubusercontent.com/40835293/233139177-aa2fc279-2fab-4f11-9bbd-c9464990e975.png" alt="ROS Variants">
+</details>
 
-* **[Mini Assignment 1](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Mini%20Assignment%201):** Picture-proofs of [ROS-1 Noetic](http://wiki.ros.org/noetic/Installation/Ubuntu) and [ROS-2 Foxy](https://docs.ros.org/en/foxy/Installation/Alternatives/Ubuntu-Development-Setup.html) installations.
+<details>
+<summary> <a href="https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Mini%20Assignment%202"><b>Mini Assignment 2</a>:</b> Video-proofs of <a href="http://wiki.ros.org/noetic/Installation/Ubuntu">ROS-1 Noetic</a>, <a href="https://docs.ros.org/en/foxy/Installation/Alternatives/Ubuntu-Development-Setup.html"> ROS-2 Foxy</a> installations</summary>
+<img src="https://user-images.githubusercontent.com/40835293/233139177-aa2fc279-2fab-4f11-9bbd-c9464990e975.png" alt="ROS Variants">
+</details>
 
-* **[Mini Assignment 2](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Mini%20Assignment%202):** Video-proofs of [ROS-1 Noetic](http://wiki.ros.org/noetic/Installation/Ubuntu) and [ROS-2 Foxy](https://docs.ros.org/en/foxy/Installation/Alternatives/Ubuntu-Development-Setup.html) installations.
+
+
+
+
+
+
 
 * **[Assignment 1-B](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%201-B):** Robot open and closed-loop control in [TurtleSim](https://docs.ros.org/en/foxy/Tutorials/Beginner-CLI-Tools/Introducing-Turtlesim/Introducing-Turtlesim.html).
 

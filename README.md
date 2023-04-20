@@ -139,7 +139,7 @@ Each of the following directories has a detailed `README.md` of their own.
 
 
 
-* **[Assignment 2-A](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%202-A):** [TurtleBot3 Burger](https://www.robotis.us/turtlebot-3-burger-us/) teardown.
+
 
 * **[Assignment 2-B](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%202-B):** [TurtleBot3](https://www.robotis.us/turtlebot-3-burger-us/) open-loop control in reality.
 

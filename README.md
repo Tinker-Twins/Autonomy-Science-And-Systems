@@ -51,10 +51,16 @@ Each of the following directories has a detailed `README.md` of their own.
 <summary> <a href="https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Mini%20Assignment%202"><b>Mini Assignment 2</a>:</b> Video-proofs of <a href="http://wiki.ros.org/noetic/Installation/Ubuntu">ROS-1 Noetic</a>, <a href="https://docs.ros.org/en/foxy/Installation/Alternatives/Ubuntu-Development-Setup.html"> ROS-2 Foxy</a> installations</summary>
 <div>
 
-* **[Assignment 1-B](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%201-B)
+| ![ROS-1 Noetic](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Mini%20Assignment%202/Chinmay/ROS1.gif) | ![ROS-2 Foxy](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Mini%20Assignment%202/Chinmay/ROS2.gif) |
+|:-------------------------------------:|:-----------------------------------------:|
+| ROS-1 Noetic Installation | ROS-2 Foxy Installation |
   
 </div>
 </details>
+
+
+![TurtleBot3 Acknowledgement](https://user-images.githubusercontent.com/40835293/233496585-8686a706-b39f-4c1f-b086-7d4f7f713e14.png)
+
 
 
 

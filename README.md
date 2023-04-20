@@ -82,8 +82,6 @@ Each of the following directories has a detailed `README.md` of their own.
 
 
 
-* **[Assignment 1-B](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%201-B):** Robot open and closed-loop control in [TurtleSim](https://docs.ros.org/en/foxy/Tutorials/Beginner-CLI-Tools/Introducing-Turtlesim/Introducing-Turtlesim.html).
-
 * **[Group](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Group):** Group details for the course during Spring 2023.
 
 * **[Assignment 1-C](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%201-C):** [TurtleBot3](https://emanual.robotis.com/docs/en/platform/turtlebot3/overview/) open-loop control in [Gazebo](https://gazebosim.org/home) simulator.

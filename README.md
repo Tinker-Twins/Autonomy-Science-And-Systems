@@ -114,6 +114,16 @@ Each of the following directories has a detailed `README.md` of their own.
 </div>
 </details>
 
+<details>
+<summary> <a href="https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%202-A"><b>Assignment 2-A</a>:</b> <a href="https://www.robotis.us/turtlebot-3-burger-us/"> TurtleBot3 Burger</a> teardown</summary>
+<div>
+
+![TurtleBot3 Teardown](https://user-images.githubusercontent.com/40835293/233501881-5f7b8dfd-055f-4f08-a76e-0d319fd81504.png)
+  
+</div>
+</details>
+
+
 
 
 

@@ -86,6 +86,25 @@ Each of the following directories has a detailed `README.md` of their own.
 </div>
 </details>
 
+<details>
+<summary> <a href="https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%201-C"><b>Assignment 1-C</a>: </b><a href="https://emanual.robotis.com/docs/en/platform/turtlebot3/overview/">TurtleBot3</a> open-loop control in <a href="https://gazebosim.org/home"> Gazebo</a> simulator</summary>
+<div>
+
+1. Open-Loop Circle:
+
+| ![Slow Circle](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%201-C/media/circle_slow.gif) | ![Medium Circle](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%201-C/media/circle_medium.gif) | ![Fast Circle](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%201-C/media/circle_fast.gif) |
+|:-------------------------------------:|:-----------------------------------------:|:-------------------------------------:|
+| Slow (`lin_vel` = 0.25, `ang_vel` = 0.25) | Medium (`lin_vel` = 0.50, `ang_vel` = 0.50) | Fast (`lin_vel` = 0.75, `ang_vel` = 0.75) |
+
+2. Open-Loop Square:
+
+| ![Slow Circle](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%201-C/media/square_slow.gif) | ![Medium Circle](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%201-C/media/square_medium.gif) | ![Fast Circle](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%201-C/media/square_fast.gif) |
+|:-------------------------------------:|:-----------------------------------------:|:-------------------------------------:|
+| Slow (`lin_vel` = 0.25, `ang_vel` = 0.25) | Medium (`lin_vel` = 0.50, `ang_vel` = 0.50) | Fast (`lin_vel` = 0.75, `ang_vel` = 0.75) |
+  
+</div>
+</details>
+
 
 ![TurtleBot3 Acknowledgement](https://user-images.githubusercontent.com/40835293/233496585-8686a706-b39f-4c1f-b086-7d4f7f713e14.png)
 

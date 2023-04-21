@@ -149,7 +149,7 @@ Each of the following directories has a detailed `README.md` of their own.
 </details>
 
 <details>
-<summary> <a href="https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%203-A"><b>Assignment 3-A</a>: </b><a href="https://emanual.robotis.com/docs/en/platform/turtlebot3/overview/">TurtleBot3</a> emergency braking, wall following & obstacle avoidance in <a href="https://gazebosim.org/home"> Gazebo</a> simulator & reality</summary>
+<summary> <a href="https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%203-A"><b>Assignment 3-A</a>: </b><a href="https://emanual.robotis.com/docs/en/platform/turtlebot3/overview/">TurtleBot3</a> emergency braking, wall following & obstacle avoidance in <a href="https://gazebosim.org/home"> simulation</a> & reality</summary>
 <div>
 
 1. Simulation:

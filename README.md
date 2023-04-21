@@ -199,7 +199,27 @@ Each of the following directories has a detailed `README.md` of their own.
 <summary> <a href="https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Capstone%20Project"><b>Capstone Project</a>: </b><a href="https://emanual.robotis.com/docs/en/platform/turtlebot3/overview/">TurtleBot3</a> autonomous navigation (gymkhana challenge) in <a href="https://gazebosim.org/home"> simulation</a> & reality</summary>
 <div>
 
+1. Simulation:
 
+![Capstone Project Sim](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/media/capstone_project_sim.gif)
+
+2. Real World:
+
+![Capstone Project Real](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/media/capstone_project_real.gif)
+
+3. Individual Tasks:
+
+| ![Wall Following Simulation](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/media/wall_following_sim.gif) | ![Wall Following Robot](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/media/wall_following_real_robot.gif) | ![Lane Following RViz](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/media/wall_following_real_rviz.gif) |
+|:---------------------------------:|:------------------------------------:|:------------------------------------:|
+| Wall Following - Simulation | Wall Following - TurtleBot3 | Wall Following - Remote PC |
+| ![Obstacle Avoidance Simulation](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/media/obstacle_avoidance_sim.gif) | ![Obstacle Avoidance Robot](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/media/obstacle_avoidance_real_robot.gif) | ![Obstacle Avoidance RViz](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/media/obstacle_avoidance_real_rviz.gif) |
+| Obstacle Avoidance - Simulation | Obstacle Avoidance - TurtleBot3 | Obstacle Avoidance - Remote PC |
+| ![Line Following Simulation](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/media/line_following_sim.gif) | ![Line Following Robot](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/media/line_following_real_robot.gif) | ![Lane Following RViz](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/media/line_following_real_rviz.gif) |
+| Line Following - Simulation | Line Following - TurtleBot3 | Line Following - Remote PC |
+| ![Stop Sign Detection Simulation](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/media/stop_sign_detection_sim.gif) | ![Stop Sign Detection Robot](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/media/stop_sign_detection_real_robot.gif) | ![Stop Sign Detection RViz](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/media/stop_sign_detection_real_rviz.gif) |
+| Stop Sign Detection - Simulation | Stop Sign Detection - TurtleBot3 | Stop Sign Detection - Remote PC |
+| ![AprilTag Tracking Simulation](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/media/apriltag_tracking_sim.gif) | ![AprilTag Tracking Robot](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/media/apriltag_tracking_real_robot.gif) | ![AprilTag Tracking RViz](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/media/apriltag_tracking_real_rviz.gif) |
+| AprilTag Tracking - Simulation | AprilTag Tracking - TurtleBot3 | AprilTag Tracking - Remote PC |
   
 </div>
 </details>

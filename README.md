@@ -195,28 +195,11 @@ Each of the following directories has a detailed `README.md` of their own.
 </div>
 </details>
 
+<details>
+<summary> <a href="https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Capstone%20Project"><b>Capstone Project</a>: </b><a href="https://emanual.robotis.com/docs/en/platform/turtlebot3/overview/">TurtleBot3</a> autonomous navigation (gymkhana challenge) in <a href="https://gazebosim.org/home"> simulation</a> & reality</summary>
+<div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-* **[Capstone Project](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Capstone%20Project):** [TurtleBot3](https://www.robotis.us/turtlebot-3-burger-us/) autonomous navigation (gymkhana challenge) in [simulation](https://gazebosim.org/home) & reality.
+  
+</div>
+</details>

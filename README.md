@@ -176,6 +176,25 @@ Each of the following directories has a detailed `README.md` of their own.
 </div>
 </details>
 
+<details>
+<summary> <a href="https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%203-B"><b>Assignment 3-B</a>: </b><a href="https://emanual.robotis.com/docs/en/platform/turtlebot3/overview/">TurtleBot3</a> vision processing, tracking & following in <a href="https://gazebosim.org/home"> simulation</a> & reality</summary>
+<div>
+
+1. Simulation:
+
+![Lane Keeping](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%203-B/media/lane_keeping.gif)
+
+2. Real World:
+
+| ![Lane Following Robot](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%203-B/media/lane_following_robot.gif) | ![Lane Following RViz](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%203-B/media/lane_following_rviz.gif) |
+|:-------------------------------------:|:-----------------------------------------:|
+| Lane Following - TurtleBot3 | Lane Following - Remote PC |
+| ![AprilTag Tracking Robot](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%203-B/media/apriltag_tracking_robot.gif) | ![AprilTag Tracking RViz](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%203-B/media/apriltag_tracking_rviz.gif) |
+| AprilTag Tracking - TurtleBot3 | AprilTag Tracking - Remote PC |
+  
+</div>
+</details>
+
 
 
 

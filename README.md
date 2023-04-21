@@ -127,12 +127,23 @@ Each of the following directories has a detailed `README.md` of their own.
 <summary> <a href="https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%202-B"><b>Assignment 2-B</a>: </b><a href="https://emanual.robotis.com/docs/en/platform/turtlebot3/overview/">TurtleBot3</a> open-loop control in reality</summary>
 <div>
 
-1. Open-Loop Circle:
+1. Teleoperation:
 
-| ![Slow Circle](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%201-C/media/circle_slow.gif) | ![Medium Circle](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%201-C/media/circle_medium.gif) | ![Fast Circle](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%201-C/media/circle_fast.gif) |
+| ![Teleop Robot](media/teleop_robot.gif) | ![Teleop Terminal](media/teleop_terminal.gif) |
+|:-------------------------------------:|:-----------------------------------------:|
+| Physical TurtleBot3 Burger | Remote PC Terminal Window |
+
+2. Open-Loop Circle:
+
+| ![Slow Circle](media/circle_slow_robot.gif) ![Slow Circle](media/circle_slow_rviz.gif) | ![Medium Circle](media/circle_medium_robot.gif) ![Medium Circle](media/circle_medium_rviz.gif) | ![Fast Circle](media/circle_fast_robot.gif) ![Fast Circle](media/circle_fast_rviz.gif) |
 |:-------------------------------------:|:-----------------------------------------:|:-------------------------------------:|
-| Slow (`lin_vel` = 0.25, `ang_vel` = 0.25) | Medium (`lin_vel` = 0.50, `ang_vel` = 0.50) | Fast (`lin_vel` = 0.75, `ang_vel` = 0.75) |
+| Slow (`lin_vel` = 0.05, `ang_vel` = 0.2) | Medium (`lin_vel` = 0.10, `ang_vel` = 0.4) | Fast (`lin_vel` = 0.15, `ang_vel` = 0.6) |
 
+3. Open-Loop Square:
+
+| ![Slow Square](media/square_slow_robot.gif) ![Slow Square](media/square_slow_rviz.gif) | ![Medium Square](media/square_medium_robot.gif) ![Medium Square](media/square_medium_rviz.gif) | ![Fast Square](media/square_fast_robot.gif) ![Fast Square](media/square_fast_rviz.gif) |
+|:-------------------------------------:|:-----------------------------------------:|:-------------------------------------:|
+| Slow (`lin_vel` = 0.05, `ang_vel` = 0.2) | Medium (`lin_vel` = 0.10, `ang_vel` = 0.4) | Fast (`lin_vel` = 0.15, `ang_vel` = 0.6) |
   
 </div>
 </details>
@@ -141,12 +152,17 @@ Each of the following directories has a detailed `README.md` of their own.
 <summary> <a href="https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%203-A"><b>Assignment 3-A</a>: </b><a href="https://emanual.robotis.com/docs/en/platform/turtlebot3/overview/">TurtleBot3</a> emergency braking, wall following and obstacle avoidance in <a href="https://gazebosim.org/home"> Gazebo</a> simulator and reality</summary>
 <div>
 
-1. Open-Loop Circle:
+1. Simulation:
 
-| ![Slow Circle](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%201-C/media/circle_slow.gif) | ![Medium Circle](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%201-C/media/circle_medium.gif) | ![Fast Circle](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%201-C/media/circle_fast.gif) |
+| ![Emergency Braking](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%203-A/media/emergency_braking.gif) | ![Wall Following](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%203-A/media/wall_following.gif) | ![Obstacle Avoidance](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%203-A/media/obstacle_avoidance.gif) |
 |:-------------------------------------:|:-----------------------------------------:|:-------------------------------------:|
-| Slow (`lin_vel` = 0.25, `ang_vel` = 0.25) | Medium (`lin_vel` = 0.50, `ang_vel` = 0.50) | Fast (`lin_vel` = 0.75, `ang_vel` = 0.75) |
+| Emergency Braking | Wall Following | Obstacle Avoidance |
 
+2. Real World:
+
+| ![Collision Avoidance Robot](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%203-A/media/collision_avoidance_robot.gif) | ![Collision Avoidance Terminal](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%203-A/media/collision_avoidance_rviz.gif) |
+|:-------------------------------------:|:-----------------------------------------:|
+| Collision Avoidance - TurtleBot3 | Collision Avoidance - Remote PC |
   
 </div>
 </details>
@@ -169,9 +185,7 @@ Each of the following directories has a detailed `README.md` of their own.
 
 
 
-* **[Assignment 2-B](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%202-B):** [TurtleBot3](https://www.robotis.us/turtlebot-3-burger-us/) open-loop control in reality.
 
-* **[Assignment 3-A](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%203-A):** [TurtleBot3](https://www.robotis.us/turtlebot-3-burger-us/) emergency braking, wall following and obstacle avoidance in [simulation](https://gazebosim.org/home) & reality.
 
 * **[Mini Assignment 4](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Mini%20Assignment%204):** Intrinsic and extrensic calibration of [Arducam BO196](https://www.arducam.com/product/b0196arducam-8mp-1080p-usb-camera-module-1-4-cmos-imx219-mini-uvc-usb2-0-webcam-board-with-1-64ft-0-5m-usb-cable-for-windows-linux-android-and-mac-os/) on [TurtleBot3 Burger](https://www.robotis.us/turtlebot-3-burger-us/).
 

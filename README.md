@@ -123,6 +123,34 @@ Each of the following directories has a detailed `README.md` of their own.
 </div>
 </details>
 
+<details>
+<summary> <a href="https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%202-B"><b>Assignment 2-B</a>: </b><a href="https://emanual.robotis.com/docs/en/platform/turtlebot3/overview/">TurtleBot3</a> open-loop control in reality</summary>
+<div>
+
+1. Open-Loop Circle:
+
+| ![Slow Circle](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%201-C/media/circle_slow.gif) | ![Medium Circle](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%201-C/media/circle_medium.gif) | ![Fast Circle](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%201-C/media/circle_fast.gif) |
+|:-------------------------------------:|:-----------------------------------------:|:-------------------------------------:|
+| Slow (`lin_vel` = 0.25, `ang_vel` = 0.25) | Medium (`lin_vel` = 0.50, `ang_vel` = 0.50) | Fast (`lin_vel` = 0.75, `ang_vel` = 0.75) |
+
+  
+</div>
+</details>
+
+<details>
+<summary> <a href="https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%203-A"><b>Assignment 3-A</a>: </b><a href="https://emanual.robotis.com/docs/en/platform/turtlebot3/overview/">TurtleBot3</a> emergency braking, wall following and obstacle avoidance in <a href="https://gazebosim.org/home"> Gazebo</a> simulator and reality</summary>
+<div>
+
+1. Open-Loop Circle:
+
+| ![Slow Circle](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%201-C/media/circle_slow.gif) | ![Medium Circle](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%201-C/media/circle_medium.gif) | ![Fast Circle](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%201-C/media/circle_fast.gif) |
+|:-------------------------------------:|:-----------------------------------------:|:-------------------------------------:|
+| Slow (`lin_vel` = 0.25, `ang_vel` = 0.25) | Medium (`lin_vel` = 0.50, `ang_vel` = 0.50) | Fast (`lin_vel` = 0.75, `ang_vel` = 0.75) |
+
+  
+</div>
+</details>
+
 
 
 

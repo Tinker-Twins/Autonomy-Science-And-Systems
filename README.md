@@ -129,19 +129,19 @@ Each of the following directories has a detailed `README.md` of their own.
 
 1. Teleoperation:
 
-| ![Teleop Robot](media/teleop_robot.gif) | ![Teleop Terminal](media/teleop_terminal.gif) |
+| ![Teleop Robot](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%202-B/media/teleop_robot.gif) | ![Teleop Terminal](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%202-B/media/teleop_terminal.gif) |
 |:-------------------------------------:|:-----------------------------------------:|
 | Physical TurtleBot3 Burger | Remote PC Terminal Window |
 
 2. Open-Loop Circle:
 
-| ![Slow Circle](media/circle_slow_robot.gif) ![Slow Circle](media/circle_slow_rviz.gif) | ![Medium Circle](media/circle_medium_robot.gif) ![Medium Circle](media/circle_medium_rviz.gif) | ![Fast Circle](media/circle_fast_robot.gif) ![Fast Circle](media/circle_fast_rviz.gif) |
+| ![Slow Circle](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%202-B/media/circle_slow_robot.gif) ![Slow Circle](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%202-B/media/circle_slow_rviz.gif) | ![Medium Circle](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%202-B/media/circle_medium_robot.gif) ![Medium Circle](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%202-B/media/circle_medium_rviz.gif) | ![Fast Circle](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%202-B/media/circle_fast_robot.gif) ![Fast Circle](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%202-B/media/circle_fast_rviz.gif) |
 |:-------------------------------------:|:-----------------------------------------:|:-------------------------------------:|
 | Slow (`lin_vel` = 0.05, `ang_vel` = 0.2) | Medium (`lin_vel` = 0.10, `ang_vel` = 0.4) | Fast (`lin_vel` = 0.15, `ang_vel` = 0.6) |
 
 3. Open-Loop Square:
 
-| ![Slow Square](media/square_slow_robot.gif) ![Slow Square](media/square_slow_rviz.gif) | ![Medium Square](media/square_medium_robot.gif) ![Medium Square](media/square_medium_rviz.gif) | ![Fast Square](media/square_fast_robot.gif) ![Fast Square](media/square_fast_rviz.gif) |
+| ![Slow Square](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%202-B/media/square_slow_robot.gif) ![Slow Square](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%202-B/media/square_slow_rviz.gif) | ![Medium Square](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%202-B/media/square_medium_robot.gif) ![Medium Square](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%202-B/media/square_medium_rviz.gif) | ![Fast Square](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%202-B/media/square_fast_robot.gif) ![Fast Square](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Assignment%202-B/media/square_fast_rviz.gif) |
 |:-------------------------------------:|:-----------------------------------------:|:-------------------------------------:|
 | Slow (`lin_vel` = 0.05, `ang_vel` = 0.2) | Medium (`lin_vel` = 0.10, `ang_vel` = 0.4) | Fast (`lin_vel` = 0.15, `ang_vel` = 0.6) |
   

@@ -73,12 +73,6 @@ def generate_launch_description():
                               'ros_param_file': darknet_ros_config}.items()
         ),
         Node(
-            package='rviz2',
-            executable='rviz2',
-            name='rviz',
-            arguments=['-d', [FindPackageShare("capstone_project"), '/rviz', '/capstone_project_sim.rviz',]]
-        ),
-        Node(
             package='capstone_project',
             executable='stop_sign_detection_sim',
             name='stop_sign_detection_sim_node',

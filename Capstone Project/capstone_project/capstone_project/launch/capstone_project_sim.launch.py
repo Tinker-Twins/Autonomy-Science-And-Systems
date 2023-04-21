@@ -38,6 +38,7 @@ def generate_launch_description():
     use_sim_time = LaunchConfiguration('use_sim_time', default='True')
 
     pkg_gazebo_ros = get_package_share_directory('gazebo_ros')
+    pkg_darknet_ros = get_package_share_directory('darknet_ros')
     pkg_share = get_package_share_directory('capstone_project')
 
     os.environ["GAZEBO_MODEL_PATH"] = os.path.join(pkg_share, 'models')
@@ -49,6 +50,8 @@ def generate_launch_description():
     )
 
     turtlebot3_gazebo_launch = os.path.join(get_package_share_directory('turtlebot3_gazebo'), 'launch')
+    tiny_yolo_darknet_config = pkg_darknet_ros + '/config/yolov7-tiny.yaml'
+    darknet_ros_config = pkg_darknet_ros + '/config/capstone_sim.yaml'
 
     return LaunchDescription([
         DeclareLaunchArgument(
@@ -63,6 +66,15 @@ def generate_launch_description():
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource([turtlebot3_gazebo_launch, '/robot_state_publisher.launch.py']),
             launch_arguments={'use_sim_time': use_sim_time}.items(),
+        ),
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource([pkg_darknet_ros + '/launch/darknet_ros.launch.py']),
+            launch_arguments={'network_param_file': tiny_yolo_darknet_config,
+                              'ros_param_file': darknet_ros_config}.items()
+        ),
+        ExecuteProcess(
+            cmd=[['ros2 run apriltag_ros apriltag_node --ros-args -r image_rect:=/camera/image_raw -r camera_info:=/camera/camera_info --params-file `ros2 pkg prefix apriltag_ros`/share/apriltag_ros/cfg/tags_36h11.yaml']],
+            shell=True,
         ),
         Node(
             package='capstone_project',

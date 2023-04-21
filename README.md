@@ -167,6 +167,15 @@ Each of the following directories has a detailed `README.md` of their own.
 </div>
 </details>
 
+<details>
+<summary> <a href="https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Mini%20Assignment%204"><b>Mini Assignment 4</a>:</b> Intrinsic and extrensic calibration of <a href="https://www.arducam.com/product/b0196arducam-8mp-1080p-usb-camera-module-1-4-cmos-imx219-mini-uvc-usb2-0-webcam-board-with-1-64ft-0-5m-usb-cable-for-windows-linux-android-and-mac-os/">Arducam BO196</a> on <a href="https://gazebosim.org/home"> TurtleBot3 Burger</a> </summary>
+<div>
+
+![Camera Calibration](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Mini%20Assignment%204/media/camera_calibration.gif)
+  
+</div>
+</details>
+
 
 
 

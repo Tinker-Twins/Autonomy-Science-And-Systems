@@ -149,7 +149,7 @@ Each of the following directories has a detailed `README.md` of their own.
 </details>
 
 <details>
-<summary> <a href="https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%203-A"><b>Assignment 3-A</a>: </b><a href="https://emanual.robotis.com/docs/en/platform/turtlebot3/overview/">TurtleBot3</a> emergency braking, wall following & obstacle avoidance in <a href="https://gazebosim.org/home"> Gazebo</a> simulator and reality</summary>
+<summary> <a href="https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%203-A"><b>Assignment 3-A</a>: </b><a href="https://emanual.robotis.com/docs/en/platform/turtlebot3/overview/">TurtleBot3</a> emergency braking, wall following & obstacle avoidance in <a href="https://gazebosim.org/home"> Gazebo</a> simulator & reality</summary>
 <div>
 
 1. Simulation:
@@ -196,7 +196,7 @@ Each of the following directories has a detailed `README.md` of their own.
 
 
 
-* **[Mini Assignment 4](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Mini%20Assignment%204):** Intrinsic and extrensic calibration of [Arducam BO196](https://www.arducam.com/product/b0196arducam-8mp-1080p-usb-camera-module-1-4-cmos-imx219-mini-uvc-usb2-0-webcam-board-with-1-64ft-0-5m-usb-cable-for-windows-linux-android-and-mac-os/) on [TurtleBot3 Burger](https://www.robotis.us/turtlebot-3-burger-us/).
+
 
 * **[Assignment 3-B](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%203-B):** [TurtleBot3](https://www.robotis.us/turtlebot-3-burger-us/) vision processing, tracking and following in [simulation](https://gazebosim.org/home) & reality.
 

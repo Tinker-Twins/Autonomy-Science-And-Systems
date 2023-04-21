@@ -217,6 +217,6 @@ Each of the following directories has a detailed `README.md` of their own.
 
 
 
-* **[Assignment 3-B](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%203-B):** [TurtleBot3](https://www.robotis.us/turtlebot-3-burger-us/) vision processing, tracking and following in [simulation](https://gazebosim.org/home) & reality.
+
 
 * **[Capstone Project](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Capstone%20Project):** [TurtleBot3](https://www.robotis.us/turtlebot-3-burger-us/) autonomous navigation (gymkhana challenge) in [simulation](https://gazebosim.org/home) & reality.

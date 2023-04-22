@@ -152,7 +152,7 @@ class RobotController(Node):
         self.detection_available = True # Set YOLO detection flag to available
 
     def robot_controller_callback(self):
-        THRESH = 835 # Stop sign threshold area to come to a complete stop (px squared)
+        THRESH = 870 # Stop sign threshold area to come to a complete stop (px squared)
         DELAY = 4.0 # Time delay (s)
         if self.get_clock().now() - self.start_time > Duration(seconds=DELAY):
             if self.lidar_available and self.camera_available: # Proceed only if required data is available

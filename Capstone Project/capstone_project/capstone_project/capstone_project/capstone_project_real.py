@@ -29,14 +29,21 @@ import rclpy # ROS2 client library (rcl) for Python (built on rcl C API)
 from rclpy.node import Node # Node class for Python nodes
 from geometry_msgs.msg import Twist # Twist (linear and angular velocities) message class
 from sensor_msgs.msg import LaserScan # LaserScan (LIDAR range measurements) message class
+from sensor_msgs.msg import Image # Image (camera frame) message class
+from darknet_ros_msgs.msg import BoundingBoxes # BoundingBoxes (Tiny-YOLO object detections) message class
 from rclpy.qos import QoSProfile, QoSReliabilityPolicy, QoSHistoryPolicy # Ouality of Service (tune communication between nodes)
 from rclpy.qos import qos_profile_sensor_data # Ouality of Service for sensor data, using best effort reliability and small queue depth
 from rclpy.duration import Duration # Time duration class
+from tf2_ros.transform_listener import TransformListener # Transform (tf2) listener
+from tf2_ros.buffer import Buffer # Transform buffer
 
 # Python mudule imports
 import numpy as np # Numpy
 import queue # FIFO queue
 import time # Tracking time
+from math import inf # Common mathematical constant
+import cv2 # OpenCV
+from cv_bridge import CvBridge, CvBridgeError # OpenCV bridge for ROS2
 
 # PID controller class
 class PIDController:
@@ -92,67 +99,188 @@ class RobotController(Node):
         history=QoSHistoryPolicy.RMW_QOS_POLICY_HISTORY_KEEP_LAST, # Keep/store only up to last N samples
         depth=10 # Queue size/depth of 10 (only honored if the “history” policy was set to “keep last”)
         )
-        self.robot_scan_sub = self.create_subscription(LaserScan, '/scan', self.robot_laserscan_callback, qos_profile_sensor_data) # Subscriber which will subscribe to LaserScan message on the topic '/scan' adhering to 'qos_profile_sensor_data' QoS profile
-        self.robot_scan_sub # Prevent unused variable warning
+        self.robot_lidar_sub = self.create_subscription(LaserScan, '/scan', self.robot_lidar_callback, qos_profile_sensor_data) # Subscriber which will subscribe to LaserScan message on the topic '/scan' adhering to 'qos_profile_sensor_data' QoS profile
+        self.robot_lidar_sub # Prevent unused variable warning
+        self.robot_camera_sub = self.create_subscription(Image, 'image/uncompressed', self.robot_camera_callback, qos_profile) # Subscriber which will subscribe to Image message on the topic '/camera/image_raw' adhering to 'qos_profile' QoS profile
+        self.robot_camera_sub # Prevent unused variable warning
+        self.robot_yolo_sub = self.create_subscription(BoundingBoxes, '/darknet_ros/bounding_boxes', self.robot_yolo_callback, qos_profile) # Subscriber which will subscribe to BoundingBoxes message on the topic '/darknet_ros/bounding_boxes' adhering to 'qos_profile' QoS profile
+        self.robot_yolo_sub # Prevent unused variable warning
+        self.tf_buffer = Buffer() # Transform buffer
+        self.tf_listener = TransformListener(self.tf_buffer, self) # Transform listener
         self.robot_ctrl_pub = self.create_publisher(Twist, '/cmd_vel', qos_profile) # Publisher which will publish Twist message to the topic '/cmd_vel' adhering to 'qos_profile' QoS profile
         timer_period = 0.001 # Node execution time period (seconds)
         self.timer = self.create_timer(timer_period, self.robot_controller_callback) # Define timer to execute 'robot_controller_callback()' every 'timer_period' seconds
+        self.pid_1_lat = PIDController(0.22, 0.01, 0.3, 10) # Lateral PID controller object initialized with kP, kI, kD, kS (for Task 1: Wall Following & Obstacle Avoidance)
+        self.pid_1_lon = PIDController(0.11, 0.001, 0.01, 10) # Longitudinal PID controller object initialized with kP, kI, kD, kS (for Task 1: Wall Following & Obstacle Avoidance)
+        self.pid_2     = PIDController(0.36, 0.16, 0.14, 50) # PID controller object initialized with kP, kI, kD, kS (for Task 2: Line Following & Stop Sign Detection)
+        self.pid_3_lon = PIDController(0.06, 0.001, 0.05, 10) # Longitudinal PID controller object initialized with kP, kI, kD, kS (for Task 3: AprilTag Tracking)
+        self.pid_3_lat = PIDController(2.5, 0.01, 0.2, 10) # Lateral PID controller object initialized with kP, kI, kD, kS (for Task 3: AprilTag Tracking)
+        self.lidar_available = False # Initialize LIDAR data available flag to false
+        self.camera_available = False # Initialize camera data available flag to false
+        self.detection_available = False # Initialize variable to capture availability of YOLO detection
         self.laserscan = None # Initialize variable to capture the laserscan
-        self.ctrl_msg = Twist() # Robot control commands (twist)
-        self.start_time = self.get_clock().now() # Record current time in seconds
-        self.pid_lat = PIDController(0.22, 0.01, 0.3, 10) # Lateral PID controller object initialized with kP, kI, kD, kS
-        self.pid_lon = PIDController(0.11, 0.001, 0.01, 10) # Longitudinal PID controller object initialized with kP, kI, kD, kS
-        self.data_available = False # Initialize data available flag to false
+        self.cv_bridge = CvBridge() # Initialize object to capture and convert the image
+        self.cv_image = None # Initialize variable to capture the image
+        self.following_line = False # Flag to indicate line following operation
+        self.detection = None # Initialize variable to capture the YOLO detection
+        self.detected_stop_sign = False # Flag to indicate detection of stop sign
+        self.obeying_stop_sign = False # Flag to indicate ongoing obedience of stop sign
+        self.obeyed_stop_sign = False # Flag to indicate successful obedience of stop sign
+        self.tracking_apriltag = False # Flag to indicate tracking of AprilTag marker
+        self.ctrl_msg = Twist() # Initialize variable to capture the control commands (twist)
+        self.stop_time = inf # Time elapsed since complete stop
         self.start_mode = 'outside' # Robot start mode (inside/outside wall arena)
+        self.start_time = self.get_clock().now() # Record current time in seconds
 
     ########################
     '''Callback functions'''
     ########################
 
-    def robot_laserscan_callback(self, msg):
+    def robot_lidar_callback(self, msg):
         self.laserscan = np.asarray(msg.ranges) # Capture most recent laserscan
         self.laserscan[self.laserscan >= 3.5] = 3.5 # Filter laserscan data based on maximum range
-        self.data_available = True # Set data available flag to true
+        self.lidar_available = True # Set data available flag to true
+
+    def robot_camera_callback(self, msg):
+        try:
+            self.cv_image = self.cv_bridge.imgmsg_to_cv2(msg, desired_encoding="bgr8") # Capture and convert most recent image 'msg' to OpenCV image with 'bgr8' encoding
+            self.camera_available = True
+        except CvBridgeError as error:
+             print(error)
+    
+    def robot_yolo_callback(self, msg):
+        self.detection = msg.bounding_boxes[0] # Capture most recent YOLO detection
+        self.detection_available = True # Set YOLO detection flag to available
 
     def robot_controller_callback(self):
+        THRESH = 870 # Stop sign threshold area to come to a complete stop (px squared)
         DELAY = 4.0 # Time delay (s)
         if self.get_clock().now() - self.start_time > Duration(seconds=DELAY):
-            if self.data_available:
-                # Front sector ranging
-                front_sector = 20 # Angular range (deg)
-                front = np.mean(self.laserscan[0:front_sector])+np.mean(self.laserscan[360-front_sector:360])/2 # Frontal distance to collision (DTC)
-                # Oblique sector ranging
-                oblique_sector = 70 # Angular range (deg)
-                oblique_left = np.mean( self.laserscan[0:oblique_sector]) # Oblique left DTC
-                oblique_right = np.mean( self.laserscan[360-oblique_sector:360])  # Oblique right DTC
-                # Side sector ranging
-                side_sector = 55 # Angular range (deg)
-                left = np.mean( self.laserscan[30:30+side_sector]) # Left DTC
-                right = np.mean( self.laserscan[330-side_sector:330]) # Right DTC
-                # Control logic
-                tstamp = time.time() # Current timestamp (s)
-                if (self.laserscan[90]>=2.5 and self.laserscan[270]>=2.5) and self.start_mode=='outside': # No walls on the sides
-                    LIN_VEL = 0.2 # Linear velocity (m/s)
-                    ANG_VEL = 0 # Angular velocity (rad/s)
-                    print('Wall Following Mode')
-                elif oblique_left < 0.5 or oblique_right < 0.5: # Too close to obstacle(s)
-                    LIN_VEL = 0.005 # Linear velocity (m/s)
-                    ANG_VEL = self.pid_lat.control(16*(left-right), tstamp) # Angular velocity (rad/s) from PID controller
-                    self.start_mode = 'inside'
-                    print('Obstacle Avoidance Mode')
-                elif (oblique_left > 0.5 and oblique_left < 1) or (oblique_right > 0.5 and oblique_right < 1): # Fairly away from walls/obstacles
-                    LIN_VEL = self.pid_lon.control(front, tstamp) # Linear velocity (m/s) from PID controller
-                    ANG_VEL = self.pid_lat.control(left-right, tstamp) # Angular velocity (rad/s) from PID controller
-                    self.start_mode = 'inside'
-                    print('Wall Following Mode')
-                else: # Safely away from walls/obstacles
-                    LIN_VEL = 0.2 # Linear velocity (m/s)
-                    ANG_VEL = self.pid_lat.control(left-right, tstamp) # Angular velocity (rad/s) from PID controller
-                    self.start_mode = 'inside'
-                    print('Wall Following Mode')
-                self.ctrl_msg.linear.x = min(0.22, LIN_VEL) # Set linear velocity
-                self.ctrl_msg.angular.z = min(2.84, ANG_VEL) # Set angular velocity
-                self.robot_ctrl_pub.publish(self.ctrl_msg) # Publish robot controls message
+            if self.lidar_available and self.camera_available: # Proceed only if required data is available
+                ###################
+                # AprilTag Tracking
+                ###################
+                if not self.obeying_stop_sign and not self.following_line:
+                    to_frame_rel = 'camera'
+                    from_frame_rel = 'tag36h11_0'
+                    try:
+                        tf2_msg = self.tf_buffer.lookup_transform(to_frame_rel, from_frame_rel, rclpy.time.Time())
+                        lon_error = tf2_msg.transform.translation.z # Calculate longitudinal error w.r.t. AprilTag marker
+                        lat_error = -tf2_msg.transform.translation.x # Calculate lateral error w.r.t. AprilTag marker
+                        tstamp = time.time() # Current timestamp (s)
+                        if lon_error >= 0.15: # Keep tracking if the marker is far
+                            LIN_VEL = self.pid_3_lon.control(lon_error, tstamp) # Linear velocity (m/s)
+                        else: # Stop if the marker is close enough
+                            LIN_VEL = 0.0 # Linear velocity (m/s)
+                        ANG_VEL = self.pid_3_lat.control(lat_error, tstamp) # Angular velocity (rad/s)
+                        self.ctrl_msg.linear.x = min(0.22, LIN_VEL) # Set linear velocity
+                        self.ctrl_msg.angular.z = min(2.84, ANG_VEL) # Set angular velocity
+                        self.robot_ctrl_pub.publish(self.ctrl_msg) # Publish robot controls message
+                        self.tracking_apriltag = True
+                        print('AprilTag Tracking Mode')
+                    except:
+                        self.tracking_apriltag = False
+                        pass
+                #####################
+                # Stop Sign Detection
+                #####################
+                if self.detection_available:
+                    # Perception
+                    detection = self.detection.class_id # Class ID (label) of YOLO object detection
+                    probability = self.detection.probability # Probability (confidence) of prediction
+                    box_length = self.detection.xmax - self.detection.xmin # Length of bounding box
+                    box_height = self.detection.ymax - self.detection.ymin # Height of bounding box
+                    box_area = box_length*box_height # Area of bounding box
+                    # Planning
+                    # Stop for some time if stop sign detected within thresholded distance
+                    if self.obeyed_stop_sign==False and detection=='stop sign' and probability>0.5 and box_area>THRESH:
+                        print('Stop Sign Detection Mode')
+                        # Control
+                        self.ctrl_msg.linear.x = 0.0 # Set linear velocity
+                        self.ctrl_msg.angular.z = 0.0 # Set angular velocity
+                        self.robot_ctrl_pub.publish(self.ctrl_msg) # Publish robot controls message
+                        # Start timer
+                        if self.detected_stop_sign==False:
+                            self.stop_time = self.get_clock().now() # Record current time in seconds
+                            self.detected_stop_sign = True
+                            self.obeying_stop_sign = True
+                        # Stop at stop sign for `DELAY` amount of seconds
+                        if self.get_clock().now() - self.stop_time > Duration(seconds=DELAY):
+                            self.obeyed_stop_sign = True
+                            self.obeying_stop_sign = False
+                ################
+                # LINE FOLLOWING
+                ################
+                # Perception
+                height, width, channels = self.cv_image.shape # Get image shape (height, width, channels)
+                crop = self.cv_image[int((height/2)+110):int((height/2)+120)][1:int(width)] # Crop unwanted parts of the image
+                hsv = cv2.cvtColor(crop, cv2.COLOR_BGR2HSV) # Convert from RGB to HSV color space
+                lower_yellow = np.array([20, 100, 100]) # Lower HSV threshold for yellow color
+                upper_yellow = np.array([50, 255, 255]) # Upper HSV threshold for yellow color
+                mask = cv2.inRange(hsv, lower_yellow, upper_yellow) # Threshold the HSV image to mask everything but yellow color
+                self.following_line = False
+                if mask.any() and not self.obeying_stop_sign:
+                    self.following_line = True
+                    m = cv2.moments(mask, False) # Calculate moments (weighted average of image pixel intensities) of binary image
+                    try:
+                        cx, cy = m['m10']/m['m00'], m['m01']/m['m00'] # Calculate centroid of the blob using moments
+                    except ZeroDivisionError:
+                        cx, cy = height/2, width/2 # Calculate centroid of the blob as image center
+                    cv2.circle(mask,(int(cx), int(cy)), 10,(0,0,255), -1) # Add centroid to masked frame
+                    # cv2.imshow("Camera Frame", self.cv_image) # Show camera frame
+                    # cv2.imshow("Cropped Frame", crop) # Show cropped frame
+                    # cv2.imshow("Masked Frame", mask) # Show masked frame
+                    # cv2.imshow("Line Detection", cv2.resize(mask, (int(mask.shape[1]*5.775), int(mask.shape[0]*5.775)))) # Show enlarged masked frame
+                    # cv2.waitKey(1)
+                    # Planning
+                    error = (height/2 - cx + 10)/175 # Calculate error (deviation) from line center
+                    tstamp = time.time() # Current timestamp (s)
+                    # Control
+                    LIN_VEL = 0.05 # Linear velocity (m/s)
+                    ANG_VEL = self.pid_2.control(error, tstamp) # Angular velocity (rad/s)
+                    print('Line Following Mode')
+                    self.ctrl_msg.linear.x = min(0.22, LIN_VEL) # Set linear velocity
+                    self.ctrl_msg.angular.z = min(2.84, ANG_VEL) # Set angular velocity
+                    self.robot_ctrl_pub.publish(self.ctrl_msg) # Publish robot controls message
+                #####################################
+                # WALL FOLLOWING & OBSTACLE AVOIDANCE
+                #####################################
+                elif not self.following_line and not self.obeying_stop_sign and not self.tracking_apriltag:
+                    # Front sector ranging
+                    front_sector = 20 # Angular range (deg)
+                    front = np.mean(self.laserscan[0:front_sector])+np.mean(self.laserscan[360-front_sector:360])/2 # Frontal distance to collision (DTC)
+                    # Oblique sector ranging
+                    oblique_sector = 70 # Angular range (deg)
+                    oblique_left = np.mean( self.laserscan[0:oblique_sector]) # Oblique left DTC
+                    oblique_right = np.mean( self.laserscan[360-oblique_sector:360])  # Oblique right DTC
+                    # Side sector ranging
+                    side_sector = 55 # Angular range (deg)
+                    left = np.mean( self.laserscan[30:30+side_sector]) # Left DTC
+                    right = np.mean( self.laserscan[330-side_sector:330]) # Right DTC
+                    # Control logic
+                    tstamp = time.time() # Current timestamp (s)
+                    if (self.laserscan[90]>=2.5 and self.laserscan[270]>=2.5) and self.start_mode=='outside': # No walls on the sides
+                        LIN_VEL = 0.2 # Linear velocity (m/s)
+                        ANG_VEL = 0 # Angular velocity (rad/s)
+                        print('Wall Following Mode')
+                    elif oblique_left < 0.5 or oblique_right < 0.5: # Too close to obstacle(s)
+                        LIN_VEL = 0.005 # Linear velocity (m/s)
+                        ANG_VEL = self.pid_1_lat.control(16*(left-right), tstamp) # Angular velocity (rad/s) from PID controller
+                        self.start_mode = 'inside'
+                        print('Obstacle Avoidance Mode')
+                    elif (oblique_left > 0.5 and oblique_left < 1) or (oblique_right > 0.5 and oblique_right < 1): # Fairly away from walls/obstacles
+                        LIN_VEL = self.pid_1_lon.control(front, tstamp) # Linear velocity (m/s) from PID controller
+                        ANG_VEL = self.pid_1_lat.control(left-right, tstamp) # Angular velocity (rad/s) from PID controller
+                        self.start_mode = 'inside'
+                        print('Wall Following Mode')
+                    else: # Safely away from walls/obstacles
+                        LIN_VEL = 0.2 # Linear velocity (m/s)
+                        ANG_VEL = self.pid_1_lat.control(left-right, tstamp) # Angular velocity (rad/s) from PID controller
+                        self.start_mode = 'inside'
+                        print('Wall Following Mode')
+                    self.ctrl_msg.linear.x = min(0.22, LIN_VEL) # Set linear velocity
+                    self.ctrl_msg.angular.z = min(2.84, ANG_VEL) # Set angular velocity
+                    self.robot_ctrl_pub.publish(self.ctrl_msg) # Publish robot controls message
         else:
             print('Initializing...')
 

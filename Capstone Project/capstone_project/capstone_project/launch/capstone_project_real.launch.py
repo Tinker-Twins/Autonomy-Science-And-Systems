@@ -22,13 +22,30 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch_ros.actions import Node
+from launch.actions import IncludeLaunchDescription
+from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.substitutions import FindPackageShare
+from launch.actions import ExecuteProcess
 
 def generate_launch_description():
 
+    pkg_darknet_ros = get_package_share_directory('darknet_ros')
+    tiny_yolo_darknet_config = pkg_darknet_ros + '/config/yolov7-tiny.yaml'
+    darknet_ros_config = pkg_darknet_ros + '/config/capstone_real.yaml'
+
     return LaunchDescription([
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource([pkg_darknet_ros + '/launch/darknet_ros.launch.py']),
+            launch_arguments={'network_param_file': tiny_yolo_darknet_config,
+                              'ros_param_file': darknet_ros_config}.items()
+        ),
+        ExecuteProcess(
+            cmd=[['ros2 run apriltag_ros apriltag_node --ros-args -r image_rect:=/camera/image_raw -r camera_info:=/camera/camera_info --params-file `ros2 pkg prefix apriltag_ros`/share/apriltag_ros/cfg/tags_36h11.yaml']],
+            shell=True,
+        ),
         Node(
             package='capstone_project',
             executable='capstone_project_real',

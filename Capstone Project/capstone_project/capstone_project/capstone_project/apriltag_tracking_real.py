@@ -28,7 +28,6 @@
 import rclpy # ROS2 client library (rcl) for Python (built on rcl C API)
 from rclpy.node import Node # Node class for Python nodes
 from geometry_msgs.msg import Twist # Twist (linear and angular velocities) message class
-from tf2_msgs.msg import TFMessage # Transforms message class
 from rclpy.qos import QoSProfile, QoSReliabilityPolicy, QoSHistoryPolicy # Ouality of Service (tune communication between nodes)
 from rclpy.duration import Duration # Time duration class
 from tf2_ros.transform_listener import TransformListener # Transform (tf2) listener

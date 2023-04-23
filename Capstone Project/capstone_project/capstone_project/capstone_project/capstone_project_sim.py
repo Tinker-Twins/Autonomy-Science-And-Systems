@@ -250,12 +250,12 @@ class RobotController(Node):
                     front = np.mean(self.laserscan[0:front_sector])+np.mean(self.laserscan[360-front_sector:360])/2 # Frontal distance to collision (DTC)
                     # Oblique sector ranging
                     oblique_sector = 70 # Angular range (deg)
-                    oblique_left = np.mean( self.laserscan[0:oblique_sector]) # Oblique left DTC
-                    oblique_right = np.mean( self.laserscan[360-oblique_sector:360])  # Oblique right DTC
+                    oblique_left = np.mean(self.laserscan[0:oblique_sector]) # Oblique left DTC
+                    oblique_right = np.mean(self.laserscan[360-oblique_sector:360])  # Oblique right DTC
                     # Side sector ranging
                     side_sector = 55 # Angular range (deg)
-                    left = np.mean( self.laserscan[30:30+side_sector]) # Left DTC
-                    right = np.mean( self.laserscan[330-side_sector:330]) # Right DTC
+                    left = np.mean(self.laserscan[30:30+side_sector]) # Left DTC
+                    right = np.mean(self.laserscan[330-side_sector:330]) # Right DTC
                     # Control logic
                     tstamp = time.time() # Current timestamp (s)
                     if (self.laserscan[90]>=2.5 and self.laserscan[270]>=2.5) and self.start_mode=='outside': # No walls on the sides

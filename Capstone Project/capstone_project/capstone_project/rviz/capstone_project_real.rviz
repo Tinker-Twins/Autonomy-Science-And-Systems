@@ -7,7 +7,7 @@ Panels:
         - /Odometry1/Shape1
         - /LIDAR1/Topic1
       Splitter Ratio: 0.5
-    Tree Height: 335
+    Tree Height: 363
   - Class: rviz_common/Selection
     Name: Selection
   - Class: rviz_common/Tool Properties
@@ -132,25 +132,9 @@ Visualization Manager:
       Frame Timeout: 1
       Frames:
         All Enabled: false
-        base_footprint:
-          Value: false
         base_link:
           Value: false
-        base_scan:
-          Value: false
         camera:
-          Value: false
-        caster_back_link:
-          Value: false
-        imu_link:
-          Value: false
-        odom:
-          Value: false
-        tag36h11_0:
-          Value: true
-        wheel_left_link:
-          Value: false
-        wheel_right_link:
           Value: false
       Marker Scale: 2
       Name: AprilTag
@@ -158,22 +142,7 @@ Visualization Manager:
       Show Axes: true
       Show Names: true
       Tree:
-        odom:
-          base_footprint:
-            base_link:
-              base_scan:
-                {}
-              camera:
-                tag36h11_0:
-                  {}
-              caster_back_link:
-                {}
-              imu_link:
-                {}
-              wheel_left_link:
-                {}
-              wheel_right_link:
-                {}
+        {}
       Update Interval: 0
       Value: true
   Enabled: true
@@ -219,7 +188,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 6.852341651916504
+      Distance: 16.697629928588867
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1

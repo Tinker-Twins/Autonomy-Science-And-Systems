@@ -120,8 +120,8 @@ class RobotController(Node):
             height, width, channels = self.cv_image.shape # Get image shape (height, width, channels)
             crop = self.cv_image[int((height/2)+110):int((height/2)+120)][1:int(width)] # Crop unwanted parts of the image
             hsv = cv2.cvtColor(crop, cv2.COLOR_BGR2HSV) # Convert from RGB to HSV color space
-            lower_yellow = np.array([20, 100, 100]) # Lower HSV threshold for yellow color
-            upper_yellow = np.array([50, 255, 255]) # Upper HSV threshold for yellow color
+            lower_yellow = np.array([0, 0, 160]) # Lower HSV threshold for light yellow color
+            upper_yellow = np.array([131, 255, 255]) # Upper HSV threshold for light yellow color
             mask = cv2.inRange(hsv, lower_yellow, upper_yellow) # Threshold the HSV image to mask everything but yellow color
             m = cv2.moments(mask, False) # Calculate moments (weighted average of image pixel intensities) of binary image
             try:

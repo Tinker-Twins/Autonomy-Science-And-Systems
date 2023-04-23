@@ -37,14 +37,26 @@ def generate_launch_description():
     darknet_ros_config = pkg_darknet_ros + '/config/capstone_real.yaml'
 
     return LaunchDescription([
+        ExecuteProcess(
+            cmd=[['ros2 run image_transport republish compressed raw --ros-args --remap in/compressed:=image/compressed --remap out:=image/uncompressed']],
+            shell=True,
+        ),
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource([pkg_darknet_ros + '/launch/darknet_ros.launch.py']),
             launch_arguments={'network_param_file': tiny_yolo_darknet_config,
                               'ros_param_file': darknet_ros_config}.items()
         ),
         ExecuteProcess(
-            cmd=[['ros2 run apriltag_ros apriltag_node --ros-args -r image_rect:=/camera/image_raw -r camera_info:=/camera/camera_info --params-file `ros2 pkg prefix apriltag_ros`/share/apriltag_ros/cfg/tags_36h11.yaml']],
+            cmd=[['ros2 run apriltag_ros apriltag_node --ros-args -r image_rect:=/image/uncompressed -r camera_info:=/camera_info --params-file `ros2 pkg prefix apriltag_ros`/share/apriltag_ros/cfg/tags_36h11.yaml']],
             shell=True,
+        ),
+        Node(
+            package='tf2_ros',
+            executable='static_transform_publisher',
+            name='base_link_to_camera_tf',
+            arguments = ['0.055', '0.000', '0.100',
+                         '0.000', '1.571', '0.000',
+                         'base_link', 'camera']
         ),
         Node(
             package='capstone_project',

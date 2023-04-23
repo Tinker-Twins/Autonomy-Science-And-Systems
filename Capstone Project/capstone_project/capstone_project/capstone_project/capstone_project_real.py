@@ -110,10 +110,10 @@ class RobotController(Node):
         self.robot_ctrl_pub = self.create_publisher(Twist, '/cmd_vel', qos_profile) # Publisher which will publish Twist message to the topic '/cmd_vel' adhering to 'qos_profile' QoS profile
         timer_period = 0.001 # Node execution time period (seconds)
         self.timer = self.create_timer(timer_period, self.robot_controller_callback) # Define timer to execute 'robot_controller_callback()' every 'timer_period' seconds
-        self.pid_1_lat = PIDController(0.22, 0.01, 0.3, 10) # Lateral PID controller object initialized with kP, kI, kD, kS (for Task 1: Wall Following & Obstacle Avoidance)
+        self.pid_1_lat = PIDController(0.36, 0.01, 0.3, 10) # Lateral PID controller object initialized with kP, kI, kD, kS (for Task 1: Wall Following & Obstacle Avoidance)
         self.pid_1_lon = PIDController(0.11, 0.001, 0.01, 10) # Longitudinal PID controller object initialized with kP, kI, kD, kS (for Task 1: Wall Following & Obstacle Avoidance)
-        self.pid_2     = PIDController(0.36, 0.16, 0.14, 50) # PID controller object initialized with kP, kI, kD, kS (for Task 2: Line Following & Stop Sign Detection)
-        self.pid_3_lon = PIDController(0.06, 0.001, 0.05, 10) # Longitudinal PID controller object initialized with kP, kI, kD, kS (for Task 3: AprilTag Tracking)
+        self.pid_2     = PIDController(0.86, 0.16, 0.14, 50) # PID controller object initialized with kP, kI, kD, kS (for Task 2: Line Following & Stop Sign Detection)
+        self.pid_3_lon = PIDController(0.14, 0.001, 0.05, 10) # Longitudinal PID controller object initialized with kP, kI, kD, kS (for Task 3: AprilTag Tracking)
         self.pid_3_lat = PIDController(2.5, 0.01, 0.2, 10) # Lateral PID controller object initialized with kP, kI, kD, kS (for Task 3: AprilTag Tracking)
         self.lidar_available = False # Initialize LIDAR data available flag to false
         self.camera_available = False # Initialize camera data available flag to false
@@ -138,6 +138,7 @@ class RobotController(Node):
 
     def robot_lidar_callback(self, msg):
         self.laserscan = np.asarray(msg.ranges) # Capture most recent laserscan
+        self.laserscan[self.laserscan == 0.0] = inf # Compensate for inf range returning 0.0
         self.laserscan[self.laserscan >= 3.5] = 3.5 # Filter laserscan data based on maximum range
         self.lidar_available = True # Set data available flag to true
 
@@ -153,7 +154,7 @@ class RobotController(Node):
         self.detection_available = True # Set YOLO detection flag to available
 
     def robot_controller_callback(self):
-        THRESH = 870 # Stop sign threshold area to come to a complete stop (px squared)
+        THRESH = 1400 # Stop sign threshold area to come to a complete stop (px squared)
         DELAY = 4.0 # Time delay (s)
         if self.get_clock().now() - self.start_time > Duration(seconds=DELAY):
             if self.lidar_available and self.camera_available: # Proceed only if required data is available
@@ -168,13 +169,13 @@ class RobotController(Node):
                         lon_error = tf2_msg.transform.translation.z # Calculate longitudinal error w.r.t. AprilTag marker
                         lat_error = -tf2_msg.transform.translation.x # Calculate lateral error w.r.t. AprilTag marker
                         tstamp = time.time() # Current timestamp (s)
-                        if lon_error >= 0.15: # Keep tracking if the marker is far
+                        if lon_error >= 0.3: # Keep tracking if the marker is far
                             LIN_VEL = self.pid_3_lon.control(lon_error, tstamp) # Linear velocity (m/s)
                         else: # Stop if the marker is close enough
                             LIN_VEL = 0.0 # Linear velocity (m/s)
                         ANG_VEL = self.pid_3_lat.control(lat_error, tstamp) # Angular velocity (rad/s)
-                        self.ctrl_msg.linear.x = min(0.22, LIN_VEL) # Set linear velocity
-                        self.ctrl_msg.angular.z = min(2.84, ANG_VEL) # Set angular velocity
+                        self.ctrl_msg.linear.x = min(0.22, float(LIN_VEL)) # Set linear velocity
+                        self.ctrl_msg.angular.z = min(2.84, float(ANG_VEL)) # Set angular velocity
                         self.robot_ctrl_pub.publish(self.ctrl_msg) # Publish robot controls message
                         self.tracking_apriltag = True
                         print('AprilTag Tracking Mode')
@@ -215,18 +216,25 @@ class RobotController(Node):
                 height, width, channels = self.cv_image.shape # Get image shape (height, width, channels)
                 crop = self.cv_image[int((height/2)+110):int((height/2)+120)][1:int(width)] # Crop unwanted parts of the image
                 hsv = cv2.cvtColor(crop, cv2.COLOR_BGR2HSV) # Convert from RGB to HSV color space
-                lower_yellow = np.array([20, 100, 100]) # Lower HSV threshold for yellow color
-                upper_yellow = np.array([50, 255, 255]) # Upper HSV threshold for yellow color
+                # Night
+                # lower_yellow = np.array([0, 0, 160]) # Lower HSV threshold for light yellow color
+                # upper_yellow = np.array([131, 255, 255]) # Upper HSV threshold for light yellow color
+                # 10 AM
+                # lower_yellow = np.array([30, 120, 120]) # Lower HSV threshold for light yellow color
+                # upper_yellow = np.array([90, 255, 255]) # Upper HSV threshold for light yellow color
+                # 12 PM
+                lower_yellow = np.array([30, 120, 100]) # Lower HSV threshold for light yellow color
+                upper_yellow = np.array([90, 255, 255]) # Upper HSV threshold for light yellow color
                 mask = cv2.inRange(hsv, lower_yellow, upper_yellow) # Threshold the HSV image to mask everything but yellow color
                 self.following_line = False
-                if mask.any() and not self.obeying_stop_sign:
+                if mask.any() and (self.laserscan[0]>=0.85 or self.laserscan[180]>=0.85) and (self.laserscan[90]>=0.85 or self.laserscan[270]>=0.85) and not self.obeying_stop_sign:
                     self.following_line = True
                     m = cv2.moments(mask, False) # Calculate moments (weighted average of image pixel intensities) of binary image
                     try:
                         cx, cy = m['m10']/m['m00'], m['m01']/m['m00'] # Calculate centroid of the blob using moments
                     except ZeroDivisionError:
                         cx, cy = height/2, width/2 # Calculate centroid of the blob as image center
-                    cv2.circle(mask,(int(cx), int(cy)), 10,(0,0,255), -1) # Add centroid to masked frame
+                    # cv2.circle(mask,(int(cx), int(cy)), 10,(0,0,255), -1) # Add centroid to masked frame
                     # cv2.imshow("Camera Frame", self.cv_image) # Show camera frame
                     # cv2.imshow("Cropped Frame", crop) # Show cropped frame
                     # cv2.imshow("Masked Frame", mask) # Show masked frame
@@ -239,8 +247,8 @@ class RobotController(Node):
                     LIN_VEL = 0.05 # Linear velocity (m/s)
                     ANG_VEL = self.pid_2.control(error, tstamp) # Angular velocity (rad/s)
                     print('Line Following Mode')
-                    self.ctrl_msg.linear.x = min(0.22, LIN_VEL) # Set linear velocity
-                    self.ctrl_msg.angular.z = min(2.84, ANG_VEL) # Set angular velocity
+                    self.ctrl_msg.linear.x = min(0.22, float(LIN_VEL)) # Set linear velocity
+                    self.ctrl_msg.angular.z = min(2.84, float(ANG_VEL)) # Set angular velocity
                     self.robot_ctrl_pub.publish(self.ctrl_msg) # Publish robot controls message
                 #####################################
                 # WALL FOLLOWING & OBSTACLE AVOIDANCE
@@ -251,35 +259,35 @@ class RobotController(Node):
                     front = np.mean(self.laserscan[0:front_sector])+np.mean(self.laserscan[360-front_sector:360])/2 # Frontal distance to collision (DTC)
                     # Oblique sector ranging
                     oblique_sector = 70 # Angular range (deg)
-                    oblique_left = np.mean( self.laserscan[0:oblique_sector]) # Oblique left DTC
-                    oblique_right = np.mean( self.laserscan[360-oblique_sector:360])  # Oblique right DTC
+                    oblique_left = np.mean(self.laserscan[0:oblique_sector]) # Oblique left DTC
+                    oblique_right = np.mean(self.laserscan[360-oblique_sector:360])  # Oblique right DTC
                     # Side sector ranging
                     side_sector = 55 # Angular range (deg)
-                    left = np.mean( self.laserscan[30:30+side_sector]) # Left DTC
-                    right = np.mean( self.laserscan[330-side_sector:330]) # Right DTC
+                    left = np.mean(self.laserscan[30:30+side_sector]) # Left DTC
+                    right = np.mean(self.laserscan[330-side_sector:330]) # Right DTC
                     # Control logic
                     tstamp = time.time() # Current timestamp (s)
-                    if (self.laserscan[90]>=2.5 and self.laserscan[270]>=2.5) and self.start_mode=='outside': # No walls on the sides
-                        LIN_VEL = 0.2 # Linear velocity (m/s)
+                    if (self.laserscan[90]>=1.0 and self.laserscan[270]>=1.0) and self.start_mode=='outside': # No walls on the sides
+                        LIN_VEL = 0.1 # Linear velocity (m/s)
                         ANG_VEL = 0 # Angular velocity (rad/s)
                         print('Wall Following Mode')
                     elif oblique_left < 0.5 or oblique_right < 0.5: # Too close to obstacle(s)
                         LIN_VEL = 0.005 # Linear velocity (m/s)
-                        ANG_VEL = self.pid_1_lat.control(16*(left-right), tstamp) # Angular velocity (rad/s) from PID controller
+                        ANG_VEL = self.pid_1_lat.control(5*(left-right), tstamp) # Angular velocity (rad/s) from PID controller
                         self.start_mode = 'inside'
                         print('Obstacle Avoidance Mode')
-                    elif (oblique_left > 0.5 and oblique_left < 1) or (oblique_right > 0.5 and oblique_right < 1): # Fairly away from walls/obstacles
+                    elif (oblique_left > 0.7 and oblique_left < 1) or (oblique_right > 0.7 and oblique_right < 1): # Fairly away from walls/obstacles
                         LIN_VEL = self.pid_1_lon.control(front, tstamp) # Linear velocity (m/s) from PID controller
                         ANG_VEL = self.pid_1_lat.control(left-right, tstamp) # Angular velocity (rad/s) from PID controller
                         self.start_mode = 'inside'
-                        print('Wall Following Mode')
+                        print('Obstacle Avoidance Mode')
                     else: # Safely away from walls/obstacles
-                        LIN_VEL = 0.2 # Linear velocity (m/s)
+                        LIN_VEL = 0.1 # Linear velocity (m/s)
                         ANG_VEL = self.pid_1_lat.control(left-right, tstamp) # Angular velocity (rad/s) from PID controller
                         self.start_mode = 'inside'
                         print('Wall Following Mode')
-                    self.ctrl_msg.linear.x = min(0.22, LIN_VEL) # Set linear velocity
-                    self.ctrl_msg.angular.z = min(2.84, ANG_VEL) # Set angular velocity
+                    self.ctrl_msg.linear.x = min(0.22, float(LIN_VEL)) # Set linear velocity
+                    self.ctrl_msg.angular.z = min(2.84, float(ANG_VEL)) # Set angular velocity
                     self.robot_ctrl_pub.publish(self.ctrl_msg) # Publish robot controls message
         else:
             print('Initializing...')

@@ -201,11 +201,11 @@ The following `collapsible sections` highlight the high-level outcomes of each t
 
 1. Simulation:
 
-![Capstone Project Sim](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/media/capstone_project_sim.gif)
+![Capstone Project Sim](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/media/capstone_project_sim_1.gif)
 
 2. Real World:
 
-![Capstone Project Real](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/media/capstone_project_real.gif)
+![Capstone Project Real](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/media/capstone_project_real_1.gif)
 
 3. Individual Tasks:
 

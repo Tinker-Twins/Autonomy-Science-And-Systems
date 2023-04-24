@@ -143,11 +143,11 @@ The [`media`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/
 
 1. Simulation:
 
-![Capstone Project Sim](media/capstone_project_sim.gif)
+![Capstone Project Sim](media/capstone_project_sim_1.gif)
 
 2. Real World:
 
-![Capstone Project Real](media/capstone_project_real.gif)
+![Capstone Project Real](media/capstone_project_real_1.gif)
 
 3. Individual Tasks:
 

@@ -178,7 +178,7 @@ class RobotController(Node):
                             lon_error = tf2_msg.transform.translation.z # Calculate longitudinal error w.r.t. AprilTag marker
                             lat_error = -tf2_msg.transform.translation.x # Calculate lateral error w.r.t. AprilTag marker
                             tstamp = time.time() # Current timestamp (s)
-                            if lon_error >= 0.3: # Keep tracking if the marker is far
+                            if lon_error >= 0.6: # Keep tracking if the marker is far
                                 LIN_VEL = self.pid_3_lon.control(lon_error, tstamp) # Linear velocity (m/s)
                             else: # Stop if the marker is close enough
                                 LIN_VEL = 0.0 # Linear velocity (m/s)
@@ -228,14 +228,14 @@ class RobotController(Node):
                 crop = self.cv_image[int((height/2)+110):int((height/2)+120)][1:int(width)] # Crop unwanted parts of the image
                 hsv = cv2.cvtColor(crop, cv2.COLOR_BGR2HSV) # Convert from RGB to HSV color space
                 # Night
-                # lower_yellow = np.array([0, 0, 160]) # Lower HSV threshold for light yellow color
-                # upper_yellow = np.array([131, 255, 255]) # Upper HSV threshold for light yellow color
+                lower_yellow = np.array([0, 0, 160]) # Lower HSV threshold for light yellow color
+                upper_yellow = np.array([131, 255, 255]) # Upper HSV threshold for light yellow color
                 # 10 AM
                 # lower_yellow = np.array([30, 120, 120]) # Lower HSV threshold for light yellow color
                 # upper_yellow = np.array([90, 255, 255]) # Upper HSV threshold for light yellow color
                 # 12 PM
-                lower_yellow = np.array([30, 120, 100]) # Lower HSV threshold for light yellow color
-                upper_yellow = np.array([90, 255, 255]) # Upper HSV threshold for light yellow color
+                # lower_yellow = np.array([30, 120, 100]) # Lower HSV threshold for light yellow color
+                # upper_yellow = np.array([90, 255, 255]) # Upper HSV threshold for light yellow color
                 mask = cv2.inRange(hsv, lower_yellow, upper_yellow) # Threshold the HSV image to mask everything but yellow color
                 self.following_line = False
                 if mask.any() and (self.laserscan[0]>=0.85 or self.laserscan[180]>=0.85) and (self.laserscan[90]>=0.85 or self.laserscan[270]>=0.85) and not self.obeying_stop_sign:

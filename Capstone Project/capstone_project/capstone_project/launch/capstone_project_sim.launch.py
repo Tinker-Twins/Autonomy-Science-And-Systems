@@ -56,7 +56,7 @@ def generate_launch_description():
     return LaunchDescription([
         DeclareLaunchArgument(
             'world',
-            default_value=[os.path.join(pkg_share, 'worlds', 'capstone_project.sdf')],
+            default_value=[os.path.join(pkg_share, 'worlds', 'apriltag_tracking.sdf')],
             description='Simulation Description Format (SDFormat/SDF) for Describing Robot and Environment',
         ),
         gazebo,

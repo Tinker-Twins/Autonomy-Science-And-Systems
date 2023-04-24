@@ -31,6 +31,7 @@ from geometry_msgs.msg import Twist # Twist (linear and angular velocities) mess
 from sensor_msgs.msg import LaserScan # LaserScan (LIDAR range measurements) message class
 from sensor_msgs.msg import Image # Image (camera frame) message class
 from darknet_ros_msgs.msg import BoundingBoxes # BoundingBoxes (Tiny-YOLO object detections) message class
+from apriltag_msgs.msg import AprilTagDetectionArray # AprilTagDetectionArray (AprilTag detections) message class
 from rclpy.qos import QoSProfile, QoSReliabilityPolicy, QoSHistoryPolicy # Ouality of Service (tune communication between nodes)
 from rclpy.duration import Duration # Time duration class
 from tf2_ros.transform_listener import TransformListener # Transform (tf2) listener
@@ -104,6 +105,8 @@ class RobotController(Node):
         self.robot_camera_sub # Prevent unused variable warning
         self.robot_yolo_sub = self.create_subscription(BoundingBoxes, '/darknet_ros/bounding_boxes', self.robot_yolo_callback, qos_profile) # Subscriber which will subscribe to BoundingBoxes message on the topic '/darknet_ros/bounding_boxes' adhering to 'qos_profile' QoS profile
         self.robot_yolo_sub # Prevent unused variable warning
+        self.robot_marker_sub = self.create_subscription(AprilTagDetectionArray, '/detections', self.robot_marker_callback, qos_profile) # Subscriber which will subscribe to AprilTagDetectionArray message on the topic '/detections' adhering to 'qos_profile' QoS profile
+        self.robot_marker_sub # Prevent unused variable warning
         self.tf_buffer = Buffer() # Transform buffer
         self.tf_listener = TransformListener(self.tf_buffer, self) # Transform listener
         self.robot_ctrl_pub = self.create_publisher(Twist, '/cmd_vel', qos_profile) # Publisher which will publish Twist message to the topic '/cmd_vel' adhering to 'qos_profile' QoS profile
@@ -117,6 +120,7 @@ class RobotController(Node):
         self.lidar_available = False # Initialize LIDAR data available flag to false
         self.camera_available = False # Initialize camera data available flag to false
         self.detection_available = False # Initialize variable to capture availability of YOLO detection
+        self.marker_available = False # Initialize variable to capture availability of marker detection
         self.laserscan = None # Initialize variable to capture the laserscan
         self.cv_bridge = CvBridge() # Initialize object to capture and convert the image
         self.cv_image = None # Initialize variable to capture the image
@@ -150,6 +154,10 @@ class RobotController(Node):
     def robot_yolo_callback(self, msg):
         self.detection = msg.bounding_boxes[0] # Capture most recent YOLO detection
         self.detection_available = True # Set YOLO detection flag to available
+    
+    def robot_marker_callback(self, msg):
+        self.marker = msg.detections # Capture most recent marker detection
+        self.marker_available = True # Set marker detection flag to available
 
     def robot_controller_callback(self):
         THRESH = 870 # Stop sign threshold area to come to a complete stop (px squared)
@@ -159,27 +167,30 @@ class RobotController(Node):
                 ###################
                 # AprilTag Tracking
                 ###################
-                if not self.obeying_stop_sign and not self.following_line:
+                if self.marker_available and not self.obeying_stop_sign and not self.following_line:
                     to_frame_rel = 'camera_rgb_optical_frame'
                     from_frame_rel = 'tag36h11_0'
-                    try:
-                        tf2_msg = self.tf_buffer.lookup_transform(to_frame_rel, from_frame_rel, rclpy.time.Time())
-                        lon_error = tf2_msg.transform.translation.z # Calculate longitudinal error w.r.t. AprilTag marker
-                        lat_error = -tf2_msg.transform.translation.x # Calculate lateral error w.r.t. AprilTag marker
-                        tstamp = time.time() # Current timestamp (s)
-                        if lon_error >= 0.15: # Keep tracking if the marker is far
-                            LIN_VEL = self.pid_3_lon.control(lon_error, tstamp) # Linear velocity (m/s)
-                        else: # Stop if the marker is close enough
-                            LIN_VEL = 0.0 # Linear velocity (m/s)
-                        ANG_VEL = self.pid_3_lat.control(lat_error, tstamp) # Angular velocity (rad/s)
-                        self.ctrl_msg.linear.x = min(0.22, LIN_VEL) # Set linear velocity
-                        self.ctrl_msg.angular.z = min(2.84, ANG_VEL) # Set angular velocity
-                        self.robot_ctrl_pub.publish(self.ctrl_msg) # Publish robot controls message
-                        self.tracking_apriltag = True
-                        print('AprilTag Tracking Mode')
-                    except:
+                    if len(self.marker) is not 0:
+                        try:
+                            tf2_msg = self.tf_buffer.lookup_transform(to_frame_rel, from_frame_rel, rclpy.time.Time(), timeout=Duration(seconds=1.0))
+                            lon_error = tf2_msg.transform.translation.z # Calculate longitudinal error w.r.t. AprilTag marker
+                            lat_error = -tf2_msg.transform.translation.x # Calculate lateral error w.r.t. AprilTag marker
+                            tstamp = time.time() # Current timestamp (s)
+                            if lon_error >= 0.15: # Keep tracking if the marker is far
+                                LIN_VEL = self.pid_3_lon.control(lon_error, tstamp) # Linear velocity (m/s)
+                            else: # Stop if the marker is close enough
+                                LIN_VEL = 0.0 # Linear velocity (m/s)
+                            ANG_VEL = self.pid_3_lat.control(lat_error, tstamp) # Angular velocity (rad/s)
+                            self.ctrl_msg.linear.x = min(0.22, float(LIN_VEL)) # Set linear velocity
+                            self.ctrl_msg.angular.z = min(2.84, float(ANG_VEL)) # Set angular velocity
+                            self.robot_ctrl_pub.publish(self.ctrl_msg) # Publish robot controls message
+                            self.tracking_apriltag = True
+                            print('AprilTag Tracking Mode')
+                        except:
+                            self.tracking_apriltag = False
+                            pass
+                    else:
                         self.tracking_apriltag = False
-                        pass
                 #####################
                 # Stop Sign Detection
                 #####################
@@ -238,8 +249,8 @@ class RobotController(Node):
                     LIN_VEL = 0.05 # Linear velocity (m/s)
                     ANG_VEL = self.pid_2.control(error, tstamp) # Angular velocity (rad/s)
                     print('Line Following Mode')
-                    self.ctrl_msg.linear.x = min(0.22, LIN_VEL) # Set linear velocity
-                    self.ctrl_msg.angular.z = min(2.84, ANG_VEL) # Set angular velocity
+                    self.ctrl_msg.linear.x = min(0.22, float(LIN_VEL)) # Set linear velocity
+                    self.ctrl_msg.angular.z = min(2.84, float(ANG_VEL)) # Set angular velocity
                     self.robot_ctrl_pub.publish(self.ctrl_msg) # Publish robot controls message
                 #####################################
                 # WALL FOLLOWING & OBSTACLE AVOIDANCE
@@ -277,8 +288,8 @@ class RobotController(Node):
                         ANG_VEL = self.pid_1_lat.control(left-right, tstamp) # Angular velocity (rad/s) from PID controller
                         self.start_mode = 'inside'
                         print('Wall Following Mode')
-                    self.ctrl_msg.linear.x = min(0.22, LIN_VEL) # Set linear velocity
-                    self.ctrl_msg.angular.z = min(2.84, ANG_VEL) # Set angular velocity
+                    self.ctrl_msg.linear.x = min(0.22, float(LIN_VEL)) # Set linear velocity
+                    self.ctrl_msg.angular.z = min(2.84, float(ANG_VEL)) # Set angular velocity
                     self.robot_ctrl_pub.publish(self.ctrl_msg) # Publish robot controls message
         else:
             print('Initializing...')

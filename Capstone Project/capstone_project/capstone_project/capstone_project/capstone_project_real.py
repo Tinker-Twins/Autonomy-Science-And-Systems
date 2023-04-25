@@ -248,12 +248,12 @@ class RobotController(Node):
                         cx, cy = m['m10']/m['m00'], m['m01']/m['m00'] # Calculate centroid of the blob using moments
                     except ZeroDivisionError:
                         cx, cy = height/2, width/2 # Calculate centroid of the blob as image center
-                    cv2.circle(mask,(int(cx), int(cy)), 10,(0,0,255), -1) # Add centroid to masked frame
+                    # cv2.circle(mask,(int(cx), int(cy)), 10,(0,0,255), -1) # Add centroid to masked frame
                     # cv2.imshow("Camera Frame", self.cv_image) # Show camera frame
                     # cv2.imshow("Cropped Frame", crop) # Show cropped frame
                     # cv2.imshow("Masked Frame", mask) # Show masked frame
-                    cv2.imshow("Line Detection", cv2.resize(mask, (int(mask.shape[1]*5.775), int(mask.shape[0]*5.775)))) # Show enlarged masked frame
-                    cv2.waitKey(1)
+                    # cv2.imshow("Line Detection", cv2.resize(mask, (int(mask.shape[1]*5.775), int(mask.shape[0]*5.775)))) # Show enlarged masked frame
+                    # cv2.waitKey(1)
                     # Planning
                     error = (height/2 - cx + 10)/175 # Calculate error (deviation) from line center
                     tstamp = time.time() # Current timestamp (s)

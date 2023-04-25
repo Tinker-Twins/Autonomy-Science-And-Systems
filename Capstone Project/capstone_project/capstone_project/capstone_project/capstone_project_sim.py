@@ -170,7 +170,7 @@ class RobotController(Node):
                 if self.marker_available and not self.obeying_stop_sign and not self.following_line:
                     to_frame_rel = 'camera_rgb_optical_frame'
                     from_frame_rel = 'tag36h11_0'
-                    if len(self.marker) is not 0:
+                    if len(self.marker) != 0:
                         try:
                             tf2_msg = self.tf_buffer.lookup_transform(to_frame_rel, from_frame_rel, rclpy.time.Time(), timeout=Duration(seconds=1.0))
                             lon_error = tf2_msg.transform.translation.z # Calculate longitudinal error w.r.t. AprilTag marker

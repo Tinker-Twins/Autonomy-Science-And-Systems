@@ -228,8 +228,8 @@ class RobotController(Node):
                 crop = self.cv_image[int((height/2)+110):int((height/2)+120)][1:int(width)] # Crop unwanted parts of the image
                 hsv = cv2.cvtColor(crop, cv2.COLOR_BGR2HSV) # Convert from RGB to HSV color space
                 # Night
-                lower_yellow = np.array([0, 0, 160]) # Lower HSV threshold for light yellow color
-                upper_yellow = np.array([131, 255, 255]) # Upper HSV threshold for light yellow color
+                # lower_yellow = np.array([0, 0, 160]) # Lower HSV threshold for light yellow color
+                # upper_yellow = np.array([131, 255, 255]) # Upper HSV threshold for light yellow color
                 # 10:00 AM
                 # lower_yellow = np.array([30, 120, 120]) # Lower HSV threshold for light yellow color
                 # upper_yellow = np.array([90, 255, 255]) # Upper HSV threshold for light yellow color
@@ -237,8 +237,8 @@ class RobotController(Node):
                 # lower_yellow = np.array([30, 120, 100]) # Lower HSV threshold for light yellow color
                 # upper_yellow = np.array([90, 255, 255]) # Upper HSV threshold for light yellow color
                 # 12:30 PM
-                # lower_yellow = np.array([30, 120, 80]) # Lower HSV threshold for light yellow color
-                # upper_yellow = np.array([90, 255, 255]) # Upper HSV threshold for light yellow color
+                lower_yellow = np.array([30, 100, 70]) # Lower HSV threshold for light yellow color
+                upper_yellow = np.array([90, 255, 255]) # Upper HSV threshold for light yellow color
                 mask = cv2.inRange(hsv, lower_yellow, upper_yellow) # Threshold the HSV image to mask everything but yellow color
                 self.following_line = False
                 if mask.any() and (self.laserscan[0]>=1.0 or self.laserscan[180]>=1.0) and (self.laserscan[90]>=1.0 or self.laserscan[270]>=1.0) and not self.obeying_stop_sign:
@@ -248,12 +248,12 @@ class RobotController(Node):
                         cx, cy = m['m10']/m['m00'], m['m01']/m['m00'] # Calculate centroid of the blob using moments
                     except ZeroDivisionError:
                         cx, cy = height/2, width/2 # Calculate centroid of the blob as image center
-                    # cv2.circle(mask,(int(cx), int(cy)), 10,(0,0,255), -1) # Add centroid to masked frame
+                    cv2.circle(mask,(int(cx), int(cy)), 10,(0,0,255), -1) # Add centroid to masked frame
                     # cv2.imshow("Camera Frame", self.cv_image) # Show camera frame
                     # cv2.imshow("Cropped Frame", crop) # Show cropped frame
                     # cv2.imshow("Masked Frame", mask) # Show masked frame
-                    # cv2.imshow("Line Detection", cv2.resize(mask, (int(mask.shape[1]*5.775), int(mask.shape[0]*5.775)))) # Show enlarged masked frame
-                    # cv2.waitKey(1)
+                    cv2.imshow("Line Detection", cv2.resize(mask, (int(mask.shape[1]*5.775), int(mask.shape[0]*5.775)))) # Show enlarged masked frame
+                    cv2.waitKey(1)
                     # Planning
                     error = (height/2 - cx + 10)/175 # Calculate error (deviation) from line center
                     tstamp = time.time() # Current timestamp (s)

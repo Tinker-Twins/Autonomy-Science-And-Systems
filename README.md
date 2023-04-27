@@ -203,11 +203,19 @@ The following `collapsible sections` highlight the high-level outcomes of each t
 
 ![Capstone Project Sim](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/media/capstone_project_sim_1.gif)
 
-2. Real World:
+2. Real-World:
 
 ![Capstone Project Real](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/media/capstone_project_real_1.gif)
 
-3. Individual Tasks:
+5. Robustness Testing:
+
+| ![Wall Following Simulation](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/media/capstone_project_sim_1.gif) | ![Wall Following Robot](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/media/capstone_project_sim_2.gif) | ![Lane Following RViz](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/media/capstone_project_sim_3.gif) | ![Lane Following RViz](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/media/capstone_project_sim_4.gif) |
+|:---------------------------------:|:------------------------------------:|:------------------------------------:|:-----------------------------------:|
+| Simulation: forward direction; start with wall following | Simulation: forward direction; start with line following | Simulation: forward direction; start with AprilTag tracking | Simulation: inverse direction; start with line following |
+| ![Wall Following Simulation](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/media/capstone_project_real_1.gif) | ![Wall Following Robot](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/media/capstone_project_real_2.gif) | ![Lane Following RViz](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/media/capstone_project_real_3.gif) | ![Lane Following RViz](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/media/capstone_project_real_4.gif) |
+| Real-world: forward direction; day; start with wall following | Real-world: forward direction; night; start with line following | Real-world: forward direction; night; start with AprilTag tracking | Real-world: inverse direction; night; start with line following |
+  
+4. Individual Tasks:
 
 | ![Wall Following Simulation](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/media/wall_following_sim.gif) | ![Wall Following Robot](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/media/wall_following_real_robot.gif) | ![Lane Following RViz](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/media/wall_following_real_rviz.gif) |
 |:---------------------------------:|:------------------------------------:|:------------------------------------:|

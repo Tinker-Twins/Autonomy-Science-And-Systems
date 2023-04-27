@@ -149,7 +149,15 @@ The [`media`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/
 
 ![Capstone Project Real](media/capstone_project_real_1.gif)
 
-3. Individual Tasks:
+3. Robustness Testing:
+
+| ![Wall Following Simulation](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/media/capstone_project_sim_1.gif) | ![Wall Following Robot](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/media/capstone_project_sim_2.gif) | ![Lane Following RViz](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/media/capstone_project_sim_3.gif) | ![Lane Following RViz](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/media/capstone_project_sim_4.gif) |
+|:---------------------------------:|:------------------------------------:|:------------------------------------:|:-----------------------------------:|
+| Simulation: forward direction; start with wall following task | Simulation: forward direction; start with line following task | Simulation: forward direction; start with AprilTag tracking task | Simulation: inverse direction; start with line following task |
+| ![Wall Following Simulation](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/media/capstone_project_real_1.gif) | ![Wall Following Robot](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/media/capstone_project_real_2.gif) | ![Lane Following RViz](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/media/capstone_project_real_3.gif) | ![Lane Following RViz](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/media/capstone_project_real_4.gif) |
+| Real-world: forward direction; day; start with wall following task | Real-world: forward direction; night; start with line following task | Real-world: forward direction; night; start with AprilTag tracking task | Real-world: inverse direction; night; start with line following task |
+
+4. Individual Tasks:
 
 | ![Wall Following Simulation](media/wall_following_sim.gif) | ![Wall Following Robot](media/wall_following_real_robot.gif) | ![Lane Following RViz](media/wall_following_real_rviz.gif) |
 |:---------------------------------:|:------------------------------------:|:------------------------------------:|

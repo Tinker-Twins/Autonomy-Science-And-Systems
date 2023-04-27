@@ -207,7 +207,7 @@ The following `collapsible sections` highlight the high-level outcomes of each t
 
 ![Capstone Project Real](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/media/capstone_project_real_1.gif)
 
-5. Robustness Testing:
+3. Robustness Testing:
 
 | ![Wall Following Simulation](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/media/capstone_project_sim_1.gif) | ![Wall Following Robot](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/media/capstone_project_sim_2.gif) | ![Lane Following RViz](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/media/capstone_project_sim_3.gif) | ![Lane Following RViz](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/media/capstone_project_sim_4.gif) |
 |:---------------------------------:|:------------------------------------:|:------------------------------------:|:-----------------------------------:|

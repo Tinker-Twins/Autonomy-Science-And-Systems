@@ -2,6 +2,7 @@
 **Authors:** Chinmay Samak and Tanmay Samak
 
 ## Disclaimer:
+
 I certify that all the work and writing that I contributed to here is my own and not acquired from external sources. I have cited sources appropriately and paraphrased correctly. I have not shared my writing with other students (for individual assignments) and other students outside my group (for group assignments), nor have I acquired any written portion of this document from past or present students.
 
 ## Robot Setup:
@@ -19,6 +20,7 @@ I certify that all the work and writing that I contributed to here is my own and
 - [`capstone_project.sdf`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/capstone_project/capstone_project/worlds/capstone_project.sdf) was defined to spawn the [modified TurtleBot3 Burger with a camera](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/README.md#robot-setup) in the [`capstone_project.world`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/capstone_project/capstone_project/worlds/capstone_project.world) environment.&nbsp;
 
 ## Description:
+
 The workspace for [`capstone_project`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Capstone%20Project/capstone_project) includes multiple ROS2 packages for accessing camera frames, vision processing, AprilTag detection, etc. that act as "helper packages" to the main [`capstone_project`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Capstone%20Project/capstone_project/capstone_project) package.
 
 The ROS2 package [`capstone_project`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Capstone%20Project/capstone_project/capstone_project) for this assignment hosts the following [Python scripts](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Capstone%20Project/capstone_project/capstone_project/capstone_project):
@@ -49,20 +51,26 @@ The ROS2 package [`capstone_project`](https://github.com/Tinker-Twins/Autonomy-S
 - [`line_following_real.launch.py`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/capstone_project/capstone_project/launch/line_following_real.launch.py) republishes incomming [compressed images](http://docs.ros.org/en/melodic/api/sensor_msgs/html/msg/CompressedImage.html) (used for reducing on-board computational burden significantly) on `image/compressed` topic to `image/uncompressed` topic as [uncompressed images](http://docs.ros.org/en/noetic/api/sensor_msgs/html/msg/Image.html), launches the [`line_following_real.py`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/capstone_project/capstone_project/capstone_project/line_following_real.py) script as well as an [RViz](https://github.com/ros2/rviz) window to visualize the camera feed, laserscan and odometry estimates of the robot as well as a relative transformation between robot and AprilTag marker(s).
 - [`stop_sign_detection_real.launch.py`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/capstone_project/capstone_project/launch/stop_sign_detection_real.launch.py) republishes incomming [compressed images](http://docs.ros.org/en/melodic/api/sensor_msgs/html/msg/CompressedImage.html) (used for reducing on-board computational burden significantly) on `image/compressed` topic to `image/uncompressed` topic as [uncompressed images](http://docs.ros.org/en/noetic/api/sensor_msgs/html/msg/Image.html), launches the [`darknet_ros.launch.py`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/capstone_project/darknet_ros/darknet_ros/darknet_ros/launch/darknet_ros.launch.py) with [`capstone_real.yaml`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/capstone_project/darknet_ros/darknet_ros/darknet_ros/config/capstone_real.yaml) configuration, the [`stop_sign_detection_real.py`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/capstone_project/capstone_project/capstone_project/stop_sign_detection_real.py) script as well as an [RViz](https://github.com/ros2/rviz) window to visualize the camera feed, laserscan and odometry estimates of the robot as well as a relative transformation between robot and AprilTag marker(s).
 - [`apriltag_tracking_real.launch.py`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/capstone_project/capstone_project/launch/apriltag_tracking_real.launch.py) republishes incomming [compressed images](http://docs.ros.org/en/melodic/api/sensor_msgs/html/msg/CompressedImage.html) (used for reducing on-board computational burden significantly) on `image/compressed` topic to `image/uncompressed` topic as [uncompressed images](http://docs.ros.org/en/noetic/api/sensor_msgs/html/msg/Image.html), launches the [`apriltag_node`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/capstone_project/apriltag_ros/src/AprilTagNode.cpp) with [tags_36h11.yaml](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/capstone_project/apriltag_ros/cfg/tags_36h11.yaml) configuration, the [static_transform_publisher](https://github.com/ros2/geometry2/blob/rolling/tf2_ros/src/static_transform_broadcaster_program.cpp) to define relative transform between camera and robot, the [`apriltag_tracking_real.py`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/capstone_project/capstone_project/capstone_project/apriltag_tracking_real.py) script as well as an [RViz](https://github.com/ros2/rviz) window to visualize the camera feed, laserscan and odometry estimates of the robot as well as a relative transformation between robot and AprilTag marker(s).
-
-
-
 - [`capstone_project_real.launch.py`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/capstone_project/capstone_project/launch/capstone_project_real.launch.py) republishes incomming [compressed images](http://docs.ros.org/en/melodic/api/sensor_msgs/html/msg/CompressedImage.html) (used for reducing on-board computational burden significantly) on `image/compressed` topic to `image/uncompressed` topic as [uncompressed images](http://docs.ros.org/en/noetic/api/sensor_msgs/html/msg/Image.html), launches the [`darknet_ros.launch.py`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/capstone_project/darknet_ros/darknet_ros/darknet_ros/launch/darknet_ros.launch.py) with [`capstone_real.yaml`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/capstone_project/darknet_ros/darknet_ros/darknet_ros/config/capstone_real.yaml) configuration, the [`apriltag_node`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/capstone_project/apriltag_ros/src/AprilTagNode.cpp) with [tags_36h11.yaml](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/capstone_project/apriltag_ros/cfg/tags_36h11.yaml) configuration,  the [`capstone_project_real.py`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/blob/main/Capstone%20Project/capstone_project/capstone_project/capstone_project/capstone_project_real.py) script as well as an [RViz](https://github.com/ros2/rviz) window to visualize the camera feed, laserscan and odometry estimates of the robot as well as a relative transformation between robot and AprilTag marker(s).
 
+## Practical Considerations:
 
-
-## Practical Considerations
 - With TurtleBot3, it is either possible to subscribe to sensor data or publish actuator commands (but NOT both) when interfaced with ROS-2 over a single [`Quality of Service (QoS)`](https://docs.ros.org/en/foxy/Concepts/About-Quality-of-Service-Settings.html) profile of the underlying [Data Distribution Service (DDS) or Real-Time Publish Subscribe (RTPS)](https://design.ros2.org/articles/ros_on_dds.html) implementation (also, [ROS-2 supports multiple DDS/RTPS implementations](https://docs.ros.org/en/foxy/Concepts/About-Different-Middleware-Vendors.html)). Hence, we have created different QoS profiles for subscribing to sensor data (using `best effort` communication and small queue depth) and publishing actuator commands (using `reliable` communication and relatively large queue depth).
 - PID controller gains will be different for simulation and real-world deployments since [Gazebo](https://gazebosim.org/home) simulator does not capture "truely" realistic dynamics of the robot and its environment.
-- Compressed/uncompressed image transport for simulation versus real-world deployments
-- Initial data availability on topics is considered (recursion is observed to be a computational burden), however, intermittent data losses and undiscoverable topics pose major issues in wireless ROS-2 framework (specifically due to stringent QoS requirements).
+- Although uncompressed image transport might be acceptable for simulation, compressed image transport is highly recommended for real-world deployments in order to reduce on-board computational burden and over-the-air image transport latency significantly.
+- Initial (first-instance) data availability on subscribed topics is verified (recursion is observed to be a computational burden), however, intermittent data losses and undiscoverable topics pose major issues in wireless ROS-2 framework (specifically due to stringent QoS requirements for sensors and actuators).
+- Robot motion constraints (`max_lin_vel = 0.22 m/s` and `max_ang_vel = 2.84 rad/s`) need to be imposed on the controller to ensure bounded control input publication (especially for simulations since [Gazebo simulator](https://gazebosim.org/home) does not impose any such constraints on the robot).
+
+## Troubleshooting Tips:
+
+- In case [Gazebo simulator](https://gazebosim.org/home) crashes, hangs or ceases to launch properly, try killing all instances of `gzserver` and `gzclient` using the following command:
+    ```bash
+    user@computer:~$ killall gzserver and killall gzclient
+    ```
+- Problem of inavailability of data on topics or undiscoverable topics itself (mostly the case with distributed-networked real-world deployment) can be potentially tackled by using a dedicated network isolated of any other open access points in proximity (to avoid wireless overlap and interference from other networks or devices).
 
 ## Dependencies:
+
 - [TurtleBot3 Burger Robot Hardware](https://www.robotis.us/turtlebot-3-burger-us/) with [TurtleBot3 SBC Image](https://emanual.robotis.com/docs/en/platform/turtlebot3/sbc_setup/)
 - [ROS2 Foxy Fitzroy](https://docs.ros.org/en/foxy/Installation/Alternatives/Ubuntu-Development-Setup.html) on [Ubuntu 20.04 Focal Fossa](https://releases.ubuntu.com/focal/)
 - [TurtleBot3 Packages](https://github.com/ROBOTIS-GIT/turtlebot3/tree/foxy-devel) - Included with this repository
@@ -100,6 +108,7 @@ The ROS2 package [`capstone_project`](https://github.com/Tinker-Twins/Autonomy-S
     ```
 
 ## Execute:
+
 ### Simulation:
 1. Capstone Project:
     ```bash
@@ -163,14 +172,8 @@ The ROS2 package [`capstone_project`](https://github.com/Tinker-Twins/Autonomy-S
     user@computer:~$ ros2 launch capstone_project apriltag_tracking_real.launch.py
     ```
 
-## Troubleshooting:
-- In case [Gazebo simulator](https://gazebosim.org/home) crashes, hangs or ceases to launch properly, try killing all instances of `gzserver` and `gzclient` using the following command:
-    ```bash
-    user@computer:~$ killall gzserver and killall gzclient
-    ```
-- Inavailability of data on topics (mostly the case with distributed real-world deployment)
-
 ## Results:
+
 The [`media`](https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Capstone%20Project/media) directory hosts pictures and videos of the implementations.
 
 1. Simulation:

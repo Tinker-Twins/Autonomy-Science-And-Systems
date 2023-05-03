@@ -230,13 +230,13 @@ class RobotController(Node):
                 # Night
                 # lower_yellow = np.array([0, 0, 160]) # Lower HSV threshold for light yellow color
                 # upper_yellow = np.array([131, 255, 255]) # Upper HSV threshold for light yellow color
-                # 10:00 AM
+                # Morning (10:00 AM)
                 # lower_yellow = np.array([30, 120, 120]) # Lower HSV threshold for light yellow color
                 # upper_yellow = np.array([90, 255, 255]) # Upper HSV threshold for light yellow color
-                # 12:00 PM
+                # Noon (12:00 PM)
                 # lower_yellow = np.array([30, 120, 100]) # Lower HSV threshold for light yellow color
                 # upper_yellow = np.array([90, 255, 255]) # Upper HSV threshold for light yellow color
-                # 12:30 PM
+                # Robust
                 lower_yellow = np.array([30, 100, 70]) # Lower HSV threshold for light yellow color
                 upper_yellow = np.array([90, 255, 255]) # Upper HSV threshold for light yellow color
                 mask = cv2.inRange(hsv, lower_yellow, upper_yellow) # Threshold the HSV image to mask everything but yellow color

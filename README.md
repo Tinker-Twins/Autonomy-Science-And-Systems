@@ -24,7 +24,7 @@ This repository is a part of course AuE-8230 "Autonomy: Science and Systems" at 
 
 ## Repository Structure
 
-The following `collapsible sections` highlight the high-level outcomes of each task. Furthermore, `dedicated directory` for each of the milestones has a detailed `README.md` of their own.
+The following `collapsible sections` highlight the high-level outcomes of each task. Furthermore, `dedicated directory` for each of the milestones has a detailed `README.md` of its own.
 
 <details>
 <summary> <a href="https://github.com/Tinker-Twins/Autonomy-Science-And-Systems/tree/main/Assignment%201-A"><b>Assignment 1-A</a>:</b> Comparative study of <a href="https://wiki.ros.org/noetic">ROS-1</a>, <a href="https://docs.ros.org/en/foxy/"> ROS-2</a> and <a href="https://rosindustrial.org/"> ROS-I</a></summary>

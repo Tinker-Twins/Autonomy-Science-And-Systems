@@ -68,7 +68,7 @@ The ROS2 package [`capstone_project`](https://github.com/Tinker-Twins/Autonomy-S
     ```bash
     user@computer:~$ killall gzserver and killall gzclient
     ```
-- Problem of inavailability of data on topics or undiscoverable topics itself (mostly the case with distributed-networked real-world deployment) can be potentially tackled by using a dedicated network isolated of any other open access points in proximity (to avoid wireless overlap and interference from other networks or devices).
+- [Problem of inavailability of data on topics or undiscoverable nodes](https://answers.ros.org/question/372464/ros2-foxy-cant-discover-nodes-from-other-machines) itself (mostly the case with distributed-networked real-world deployment) can be potentially tackled by using a dedicated network isolated of any other open access points in proximity (to avoid [wireless overlap and interference](https://www.makeuseof.com/tag/fix-slow-unstable-wi-fi-connection) from other networks or devices).
 
 ## Dependencies:
 

@@ -117,8 +117,8 @@ class RobotController(Node):
         DELAY = 4.0 # Time delay (s)
         if self.get_clock().now() - self.start_time > Duration(seconds=DELAY):
             # Perception
-            height, width, channels = self.cv_image.shape # Get image shape (height, width, channels)
-            crop = self.cv_image[int((height/2)+50):int((height/2)+60)][1:int(width)] # Crop unwanted parts of the image
+            width, height, channels = self.cv_image.shape # Get image shape (width, height, channels)
+            crop = self.cv_image[int((width/2)+50):int((width/2)+60)][1:int(height)] # Crop unwanted parts of the image
             hsv = cv2.cvtColor(crop, cv2.COLOR_BGR2HSV) # Convert from RGB to HSV color space
             lower_yellow = np.array([20, 100, 100]) # Lower HSV threshold for yellow color
             upper_yellow = np.array([50, 255, 255]) # Upper HSV threshold for yellow color
@@ -127,14 +127,14 @@ class RobotController(Node):
             try:
                 cx, cy = m['m10']/m['m00'], m['m01']/m['m00'] # Calculate centroid of the blob using moments
             except ZeroDivisionError:
-                cx, cy = height/2, width/2 # Calculate centroid of the blob as image center
+                cx, cy = width/2, height/2 # Calculate centroid of the blob as image center
             # cv2.circle(mask,(int(cx), int(cy)), 10,(0,0,255), -1) # Add centroid to masked frame
             # cv2.imshow("Camera Frame", self.cv_image) # Show camera frame
             # cv2.imshow("Cropped Frame", crop) # Show cropped frame
             # cv2.imshow("Masked Frame", mask) # Show masked frame
             # cv2.waitKey(1)
             # Planning
-            error = (height/2 - cx + 10)/175 # Calculate error (deviation) from lane center
+            error = (width/2 - cx + 10)/175 # Calculate error (deviation) from lane center
             tstamp = time.time() # Current timestamp (s)
             # Control
             LIN_VEL = 0.22 # Linear velocity (m/s)

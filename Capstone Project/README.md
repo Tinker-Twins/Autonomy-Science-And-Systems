@@ -91,7 +91,7 @@ The ROS2 package [`capstone_project`](https://github.com/Tinker-Twins/Autonomy-S
     ```
 3. Move `capstone_project` directory with required ROS2 packages to the source space (`src`) of your `ROS2_WS`.
     ```bash
-    $ mv ~/Autonomy-Science-And-Systems/Assignment\ 3-B/capstone_project/ ~/ROS2_WS/src/
+    $ mv ~/Autonomy-Science-And-Systems/Capstone\ Project/capstone_project/ ~/ROS2_WS/src/
     ```
 4. [Optional] Remove the unnecessary files.
     ```bash

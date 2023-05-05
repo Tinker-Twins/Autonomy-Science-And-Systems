@@ -4,7 +4,7 @@ This repository is a part of course AuE-8230 "Autonomy: Science and Systems" at 
 
 ## Course Description:
 
-**AuE-8230:** Autonomy: Science and Systems, as the name suggests, introduces students to scientific (formulations) as well as technological (ROS-based implementation) advances in the field of autonomous systems. This course is handled by [Dr. Venkat Krovi](https://www.linkedin.com/in/venkatnkrovi), Michelin SmartState Chair Professor of Vehicle Automation at [Clemson University International Center for Automotive Research (CU-ICAR)](https://cuicar.com/) and director of [Automation, Robotics and Mechatronics Laboratory (ARMLab)](http://cecas.clemson.edu/armlab-cuicar).
+**AuE-8230:** Autonomy: Science and Systems, as the name suggests, introduces students to scientific (formulations) as well as technological (ROS-based implementation) advances in the field of autonomous systems. This course is handled by [Dr. Venkat Krovi](https://www.linkedin.com/in/venkatnkrovi), Michelin Endowed SmartState Chair Professor of Vehicle Automation at [Clemson University International Center for Automotive Research (CU-ICAR)](https://cuicar.com/) and director of [Automation, Robotics and Mechatronics Laboratory (ARMLab)](http://cecas.clemson.edu/armlab-cuicar).
 
 ## Group Name:
 

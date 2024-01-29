@@ -22,10 +22,10 @@ Radial distortion causes straight lines to appear curved. Radial distortion beco
 </p>
 
 <p align="center">
-<img src="https://render.githubusercontent.com/render/math?math=x_%7Bdistorted%7D%20%3D%20x(%201%20%2B%20k_1%20r%5E2%20%2B%20k_2%20r%5E4%20%2B%20k_3%20r%5E6)">
+$x_{distorted} = x( 1 + k_1 r^2 + k_2 r^4 + k_3 r^6)$
 </p>
 <p align="center">
-<img src="https://render.githubusercontent.com/render/math?math=y_%7Bdistorted%7D%20%3D%20y(%201%20%2B%20k_1%20r%5E2%20%2B%20k_2%20r%5E4%20%2B%20k_3%20r%5E6)">
+$y_{distorted} = y( 1 + k_1 r^2 + k_2 r^4 + k_3 r^6)$
 </p>
 
 <p align="justify">
@@ -33,10 +33,10 @@ Similarly, tangential distortion occurs because the image-taking lense is not al
 </p>
 
 <p align="center">
-<img src="https://render.githubusercontent.com/render/math?math=x_%7Bdistorted%7D%20%3D%20x%20%2B%20%5B%202p_1xy%20%2B%20p_2(r%5E2%2B2x%5E2)%5D">
+$x_{distorted} = x + [ 2p_1xy + p_2(r^2+2x^2)]$
 </p>
 <p align="center">
-<img src="https://render.githubusercontent.com/render/math?math=y_%7Bdistorted%7D%20%3D%20y%20%2B%20%5B%20p_1(r%5E2%2B%202y%5E2)%2B%202p_2xy%5D">
+$y_{distorted} = y + [ p_1(r^2+ 2y^2)+ 2p_2xy]$
 </p>
 
 <p align="justify">
@@ -44,27 +44,29 @@ In short, we need to find five parameters, known as distortion coefficients give
 </p>
 
 <p align="center">
-<img src="https://latex.codecogs.com/svg.image?D&space;=&space;\begin{bmatrix}&space;k_1&space;&&space;k_2&space;&&space;p_1&space;&&space;p_2&space;&&space;k_3&space;\\&space;\end{bmatrix}">
+$D = [k_1 \hspace{10pt} k_2 \hspace{10pt} p_1 \hspace{10pt} p_2 \hspace{10pt} k_3]$
 </p>
 
 #### Camera Intrinsic Parameters
+
 <p align="justify">
-Intrinsic parameters are specific to a camera. They include information like focal length <img src="https://render.githubusercontent.com/render/math?math=(f_x%2Cf_y)"> and optical center <img src="https://render.githubusercontent.com/render/math?math=(c_x%2Cc_y)">. The focal length and optical center can be used to create a camera matrix, which can be used to remove distortion due to the lens of a specific camera. The camera matrix is unique to a specific camera, so once calculated, it can be reused on other images captured by the same camera. It is expressed as a <img src="https://render.githubusercontent.com/render/math?math=3%20%5Ctimes%203"> matrix:
+Intrinsic parameters are specific to a camera. They include information like focal length $(f_x,f_y)$ and optical center $(c_x,c_y)$. The focal length and optical center can be used to create a camera matrix, which can be used to remove distortion due to the lens of a specific camera. The camera matrix is unique to a specific camera, so once calculated, it can be reused on other images captured by the same camera. It is expressed as a $3 \times 3$ matrix:
 </p>
 
 <p align="center">
-<img src="https://latex.codecogs.com/svg.image?K&space;=&space;\begin{bmatrix}f_x&space;&&space;0&space;&&space;c_x&space;\\0&space;&&space;f_y&space;&&space;c_y&space;\\0&space;&&space;0&space;&&space;1&space;\\\end{bmatrix}">
+   $$K=\left[\begin{matrix} f_x & 0 & c_x \\ 0 & f_y & c_y \\ 0 & 0 & 1 \end{matrix}\right]$$
 </p>
 
 #### Camera Extrinsic Parameters
+
 <p align="justify">
-Extrinsic parameters correspond to rotation matrix and translation vector, <img src="https://latex.codecogs.com/svg.image?R"> and <img src="https://latex.codecogs.com/svg.image?T"> respectively, which transform 3D coordinates of a point in world frame to camera coordinate system.
-    
-The resultant projective mapping <img src="https://latex.codecogs.com/svg.image?M"> from world coordinates <img src="https://latex.codecogs.com/svg.image?\begin{bmatrix}x&space;&&space;y&space;&&space;z&space;\\\end{bmatrix}^T"> to image (pixel) coordinates <img src="https://latex.codecogs.com/svg.image?\begin{bmatrix}u&space;&&space;v&space;\\\end{bmatrix}^T"> can be ultimately described by:
+Extrinsic parameters correspond to rotation matrix and translation vector, $R$ and $T$ respectively, which transform 3D coordinates of a point in world frame to camera coordinate system.
+
+The resultant projective mapping $M$ from world coordinates $[x \hspace{10pt} y \hspace{10pt} z]^T$ to image (pixel) coordinates $[u \hspace{10pt} v]^T$ can be ultimately described by:
+</p>
 
 <p align="center">
-<img src="https://latex.codecogs.com/svg.image?\begin{bmatrix}u&space;\\v&space;\\\end{bmatrix}&space;=&space;K\begin{bmatrix}R&space;&&space;T&space;\\\end{bmatrix}\begin{bmatrix}x&space;\\y&space;\\z&space;\\\end{bmatrix}&space;=M\begin{bmatrix}x&space;\\y&space;\\z&space;\\\end{bmatrix}">
-</p>
+   $$\left[\begin{matrix} u \\ v \end{matrix}\right] = K [R \hspace{10pt} T] \left[\begin{matrix} x \\ y \\ z \end{matrix}\right] = M \left[\begin{matrix} x \\ y \\ z \end{matrix}\right]$$
 </p>
 
 #### Resources
